@@ -153,4 +153,5 @@ def export_report():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
     print(f"Starting SeqLit bioinformatics server on http://127.0.0.1:{port}")
-    app.run(host="0.0.0.0", port=port, debug=True)
+    # Run with use_reloader=False for clean, deterministic background daemon execution
+    app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
