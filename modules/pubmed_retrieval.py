@@ -1,12 +1,8 @@
 """
 PubMed literature retrieval & rule-based topic categorization module for SeqLit.
-Uses Entrez esearch & esummary/efetch to find relevant articles by gene and organism,
-de-duplicates by PMID, and assigns papers to one of five key research categories:
-  1. Structure / Crystallography
-  2. Drug / Pharmacology
-  3. Disease / Pathology
-  4. Function / Mechanism
-  5. Interaction / Complex
+Uses Entrez esearch & esummary/efetch to find real articles by gene and organism,
+de-duplicates by PMID, and assigns papers to one of five key research categories.
+Never returns fake or fabricated articles if no real publications exist.
 """
 
 import time
@@ -23,7 +19,6 @@ except ImportError:
 logger = logging.getLogger(__name__)
 DEFAULT_EMAIL = "seqlit.student@academic.edu"
 
-# Rule-based category regex keywords
 CATEGORY_RULES = {
     "Structure / Crystallography": re.compile(
         r"\b(crystal|structure|structural|pdb|x-ray|cryo-em|nmr|conformation|folding|domain|atomic)\b",
@@ -47,10 +42,9 @@ CATEGORY_RULES = {
     )
 }
 
-def categorize_article(title: str, abstract: str) -> str:
+def categorize_article(title: str, abstract: str = "") -> str:
     """
     Applies rule-based regex keyword matching against title and abstract text.
-    Returns the category with the highest match score, or 'Function / Mechanism' as default.
     """
     text = f"{title} {abstract}"
     scores = {}
@@ -63,48 +57,44 @@ def categorize_article(title: str, abstract: str) -> str:
     if not scores:
         return "General / Uncategorized"
 
-    # Return category with highest count
-    best_category = max(scores, key=scores.get)
-    return best_category
+    return max(scores, key=scores.get)
 
 def fetch_pubmed_literature(gene_name: str, organism: str = "", max_results: int = 15, email: str = DEFAULT_EMAIL) -> List[Dict[str, Any]]:
     """
-    Retrieves PubMed articles for given gene and organism, de-duplicates by PMID,
-    and returns a structured list of categorized articles.
+    Retrieves real PubMed articles for given gene and organism.
+    Returns empty list if gene name is empty, invalid, or no papers are found.
     """
-    if not gene_name or gene_name == "N/A":
-        return _get_mock_articles(gene_name or "Hemoglobin", organism or "Homo sapiens")
+    if not gene_name or gene_name.strip() in ("", "N/A", "Unknown", "Candidate Gene"):
+        return []
 
     if not ENTREZ_AVAILABLE:
-        return _get_mock_articles(gene_name, organism)
+        return []
 
     Entrez.email = email
     articles = []
     seen_pmids = set()
 
-    # Build search query
     query_parts = [f"{gene_name}[Title/Abstract]"]
-    if organism and organism != "Unknown":
+    if organism and organism not in ("Unknown", "Not found", "Homo sapiens (estimated)"):
         query_parts.append(f"{organism}[Organism]")
     term = " AND ".join(query_parts)
 
     try:
         time.sleep(0.35)
-        # Search PubMed
         search_handle = Entrez.esearch(db="pubmed", term=term, retmax=max_results, sort="relevance")
         search_results = Entrez.read(search_handle)
         search_handle.close()
 
         id_list = search_results.get("IdList", [])
         if not id_list:
-            # Try broader search with just gene name
-            search_handle = Entrez.esearch(db="pubmed", term=gene_name, retmax=max_results, sort="pub_date")
+            # Fallback to search without organism restriction if too narrow
+            search_handle = Entrez.esearch(db="pubmed", term=f"{gene_name}[Title/Abstract]", retmax=max_results, sort="pub_date")
             search_results = Entrez.read(search_handle)
             search_handle.close()
             id_list = search_results.get("IdList", [])
 
         if not id_list:
-            return _get_mock_articles(gene_name, organism)
+            return []
 
         time.sleep(0.35)
         summary_handle = Entrez.esummary(db="pubmed", id=",".join(id_list))
@@ -126,8 +116,6 @@ def fetch_pubmed_literature(gene_name: str, organism: str = "", max_results: int
             journal = record.get("Source", "Unknown Journal")
             pub_date = record.get("PubDate", "")
             year = pub_date[:4] if pub_date else "N/A"
-
-            # Use title and source as available text for categorization
             category = categorize_article(title, "")
 
             articles.append({
@@ -140,57 +128,8 @@ def fetch_pubmed_literature(gene_name: str, organism: str = "", max_results: int
                 "pubmed_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
             })
 
-        return articles if articles else _get_mock_articles(gene_name, organism)
+        return articles
 
     except Exception as e:
         logger.warning(f"PubMed retrieval error: {e}")
-        return _get_mock_articles(gene_name, organism)
-
-def _get_mock_articles(gene: str, organism: str) -> List[Dict[str, Any]]:
-    return [
-        {
-            "pmid": "31089643",
-            "title": f"Structural insights into the macromolecular assembly of {gene}",
-            "authors": "Smith J, Miller A, Watson D et al.",
-            "journal": "Nature Structural & Molecular Biology",
-            "year": "2021",
-            "category": "Structure / Crystallography",
-            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/31089643/"
-        },
-        {
-            "pmid": "29765412",
-            "title": f"Targeting {gene} regulation with small-molecule inhibitors in disease pathways",
-            "authors": "Chen L, Patel R, Kumar S",
-            "journal": "Journal of Medicinal Chemistry",
-            "year": "2020",
-            "category": "Drug / Pharmacology",
-            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29765412/"
-        },
-        {
-            "pmid": "32145890",
-            "title": f"Clinical significance of pathogenic mutations in human {gene}",
-            "authors": "Garcia M, Taylor E, Evans B et al.",
-            "journal": "The New England Journal of Medicine",
-            "year": "2022",
-            "category": "Disease / Pathology",
-            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32145890/"
-        },
-        {
-            "pmid": "28541239",
-            "title": f"Molecular mechanism of signaling cascades controlled by {gene} in {organism}",
-            "authors": "Tanaka K, Sato H, Takahashi N",
-            "journal": "Cell Reports",
-            "year": "2019",
-            "category": "Function / Mechanism",
-            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28541239/"
-        },
-        {
-            "pmid": "30459812",
-            "title": f"Direct protein-protein interaction network and binding interface of {gene}",
-            "authors": "O'Connor D, Murphy F, Kelly G",
-            "journal": "Journal of Biological Chemistry",
-            "year": "2020",
-            "category": "Interaction / Complex",
-            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/30459812/"
-        }
-    ]
+        return []

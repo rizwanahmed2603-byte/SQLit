@@ -1,7 +1,6 @@
 import unittest
 from modules.cache_manager import get_cached_result, set_cached_result, compute_hash
 from modules.pubmed_retrieval import categorize_article
-from modules.blast_search import execute_blast
 
 class TestPipeline(unittest.TestCase):
     def test_cache_storage_and_retrieval(self):
@@ -26,13 +25,6 @@ class TestPipeline(unittest.TestCase):
 
         title_complex = "Direct binding interaction of the regulatory subunit in yeast"
         self.assertEqual(categorize_article(title_complex, ""), "Interaction / Complex")
-
-    def test_blast_mock_fallback(self):
-        dna_seq = "ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCC"
-        res = execute_blast(dna_seq, "DNA", use_mock_fallback=True)
-        self.assertTrue(res["success"])
-        self.assertGreater(len(res["hits"]), 0)
-        self.assertGreater(res["hits"][0]["identity_percent"], 0)
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,9 +1,9 @@
 """
-BLAST search and hit parsing module for SeqLit.
-Wraps NCBIWWW.qblast with tenacity exponential backoff retries,
-parses NCBIXML output, and extracts ranked candidate homologs with
-e-value, % identity, query coverage, and alignment metrics.
-Includes resilient fallback mock hits for offline development or network rate-limits.
+BLAST similarity search and hit parsing module for SeqLit.
+Executes real remote similarity search via NCBIWWW.qblast and parses
+the resulting XML output.
+If a sequence has no significant biological matches in NCBI nr/nt databases,
+it accurately returns zero hits rather than fabricating fake homologs.
 """
 
 import io
@@ -18,91 +18,12 @@ except ImportError:
     BIOPYTHON_AVAILABLE = False
 
 try:
-    from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+    from tenacity import retry, stop_after_attempt, wait_exponential
     TENACITY_AVAILABLE = True
 except ImportError:
     TENACITY_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
-
-# Fallback mock hits for quick offline testing or when NCBI is down
-MOCK_HITS_DNA = [
-    {
-        "rank": 1,
-        "accession": "NM_000518.5",
-        "title": "Homo sapiens hemoglobin subunit beta (HBB), mRNA",
-        "organism": "Homo sapiens",
-        "identity_percent": 100.0,
-        "e_value": 0.0,
-        "bit_score": 1150.0,
-        "alignment_length": 626,
-        "query_coverage": 100.0,
-        "definition": "Homo sapiens hemoglobin subunit beta (HBB), mRNA"
-    },
-    {
-        "rank": 2,
-        "accession": "NM_000559.3",
-        "title": "Homo sapiens hemoglobin subunit alpha 1 (HBA1), mRNA",
-        "organism": "Homo sapiens",
-        "identity_percent": 86.4,
-        "e_value": 2e-45,
-        "bit_score": 420.0,
-        "alignment_length": 420,
-        "query_coverage": 72.0,
-        "definition": "Homo sapiens hemoglobin subunit alpha 1 (HBA1), mRNA"
-    },
-    {
-        "rank": 3,
-        "accession": "XM_001148851.3",
-        "title": "Pan troglodytes hemoglobin subunit beta (HBB), mRNA",
-        "organism": "Pan troglodytes",
-        "identity_percent": 99.2,
-        "e_value": 1e-120,
-        "bit_score": 980.0,
-        "alignment_length": 600,
-        "query_coverage": 98.5,
-        "definition": "Pan troglodytes hemoglobin subunit beta (HBB), mRNA"
-    }
-]
-
-MOCK_HITS_PROTEIN = [
-    {
-        "rank": 1,
-        "accession": "P01308",
-        "title": "RecName: Full=Insulin; Contains: Insulin B chain; Insulin A chain [Homo sapiens]",
-        "organism": "Homo sapiens",
-        "identity_percent": 100.0,
-        "e_value": 3e-64,
-        "bit_score": 230.0,
-        "alignment_length": 110,
-        "query_coverage": 100.0,
-        "definition": "Insulin preproprotein [Homo sapiens]"
-    },
-    {
-        "rank": 2,
-        "accession": "P01315",
-        "title": "RecName: Full=Insulin [Sus scrofa]",
-        "organism": "Sus scrofa",
-        "identity_percent": 93.6,
-        "e_value": 8e-58,
-        "bit_score": 210.0,
-        "alignment_length": 110,
-        "query_coverage": 100.0,
-        "definition": "Insulin precursor [Sus scrofa]"
-    },
-    {
-        "rank": 3,
-        "accession": "P01317",
-        "title": "RecName: Full=Insulin [Bos taurus]",
-        "organism": "Bos taurus",
-        "identity_percent": 90.9,
-        "e_value": 2e-55,
-        "bit_score": 204.0,
-        "alignment_length": 110,
-        "query_coverage": 100.0,
-        "definition": "Insulin precursor [Bos taurus]"
-    }
-]
 
 def parse_blast_xml(xml_handle, query_length: int, e_value_cutoff: float = 1e-5) -> List[Dict[str, Any]]:
     """
@@ -120,16 +41,13 @@ def parse_blast_xml(xml_handle, query_length: int, e_value_cutoff: float = 1e-5)
         for hsp in alignment.hsps:
             if hsp.expect <= e_value_cutoff:
                 identity_percent = round((hsp.identities / hsp.align_length) * 100, 2)
-                # Query coverage calculation
                 q_len = query_length if query_length > 0 else (hsp.query_end - hsp.query_start + 1)
                 coverage = round(((hsp.query_end - hsp.query_start + 1) / q_len) * 100, 2)
                 coverage = min(100.0, coverage)
 
-                # Extract a clean accession
                 raw_title = alignment.title
                 accession = alignment.accession
                 if not accession:
-                    # attempt parse from title (e.g. gi|...|gb|ACCESSION| or ref|ACCESSION|)
                     parts = raw_title.split("|")
                     if len(parts) >= 4:
                         accession = parts[3]
@@ -153,38 +71,34 @@ def parse_blast_xml(xml_handle, query_length: int, e_value_cutoff: float = 1e-5)
                 }
                 hits.append(hit)
                 rank += 1
-                break  # take top HSP per alignment
-        if rank > 25:  # Cap at top 25 hits
+                break
+        if rank > 25:
             break
 
     return hits
 
-def execute_blast(sequence: str, seq_type: str, e_value_cutoff: float = 1e-5, use_mock_fallback: bool = True) -> Dict[str, Any]:
+def execute_blast(sequence: str, seq_type: str, e_value_cutoff: float = 1e-5) -> Dict[str, Any]:
     """
-    Executes similarity search. Chooses program:
-      - 'blastn' with database 'nt' for DNA/RNA
-      - 'blastp' with database 'nr' for Protein
-    Returns { "success": bool, "program": str, "hits": list, "message": str }
+    Executes real similarity search via NCBI BLAST.
+    Returns real hits or empty list if no matches exist.
+    Never returns fake/mock results.
     """
     program = "blastn" if seq_type in ("DNA", "RNA") else "blastp"
     database = "nt" if program == "blastn" else "nr"
     q_len = len(sequence)
 
     if not BIOPYTHON_AVAILABLE:
-        if use_mock_fallback:
-            mock = MOCK_HITS_DNA if seq_type in ("DNA", "RNA") else MOCK_HITS_PROTEIN
-            return {
-                "success": True,
-                "program": program,
-                "database": database,
-                "hits": mock,
-                "warning": "Biopython not installed; returning resilient benchmark mock hits."
-            }
-        return {"success": False, "error": "Biopython is not installed."}
+        return {
+            "success": False,
+            "program": program,
+            "database": database,
+            "hits": [],
+            "error": "Biopython is not installed on the server."
+        }
 
-    # Internal runner with retry decorator if tenacity available
-    def _run_qblast():
-        return NCBIWWW.qblast(
+    try:
+        logger.info(f"Submitting real {program} query ({q_len} bp/aa) to NCBI...")
+        result_handle = NCBIWWW.qblast(
             program=program,
             database=database,
             sequence=sequence,
@@ -192,34 +106,31 @@ def execute_blast(sequence: str, seq_type: str, e_value_cutoff: float = 1e-5, us
             hitlist_size=20,
             format_type="XML"
         )
-
-    try:
-        # Wrap execution
-        logger.info(f"Submitting {program} query (len={q_len}) to NCBI...")
-        result_handle = _run_qblast()
         hits = parse_blast_xml(result_handle, query_length=q_len, e_value_cutoff=e_value_cutoff)
+        
+        if not hits:
+            return {
+                "success": True,
+                "program": program,
+                "database": database,
+                "hits": [],
+                "message": "No significant similarity hits found in NCBI database for this sequence."
+            }
+
         return {
             "success": True,
             "program": program,
             "database": database,
             "hits": hits,
-            "message": f"Successfully retrieved {len(hits)} BLAST hits."
+            "message": f"Successfully retrieved {len(hits)} significant BLAST hits from NCBI."
         }
+
     except Exception as e:
-        logger.warning(f"Remote NCBI BLAST failed or timed out: {e}")
-        if use_mock_fallback:
-            mock = MOCK_HITS_DNA if seq_type in ("DNA", "RNA") else MOCK_HITS_PROTEIN
-            return {
-                "success": True,
-                "program": program,
-                "database": database,
-                "hits": mock,
-                "warning": f"Remote NCBI BLAST unreachable ({str(e)}). Displaying fallback benchmark hits."
-            }
+        logger.error(f"NCBI BLAST request failed: {e}")
         return {
             "success": False,
             "program": program,
             "database": database,
             "hits": [],
-            "error": f"BLAST search failed: {str(e)}"
+            "error": f"NCBI BLAST service error: {str(e)}"
         }

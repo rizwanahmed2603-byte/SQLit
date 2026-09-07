@@ -1,7 +1,8 @@
 """
 NCBI Annotation module for SeqLit.
-Uses Entrez E-utilities (efetch / esummary) to retrieve organism, taxonomy,
-gene name, and sequence metadata for top candidate hits.
+Uses Entrez E-utilities (efetch / esummary) to retrieve real organism, taxonomy,
+gene name, and sequence metadata for confirmed hits.
+If no hit or invalid accession is provided, returns empty/not-found status.
 """
 
 import time
@@ -16,37 +17,38 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-# Default etiquette email for NCBI Entrez
 DEFAULT_EMAIL = "seqlit.student@academic.edu"
 
 def fetch_ncbi_annotation(accession: str, seq_type: str, email: str = DEFAULT_EMAIL, api_key: Optional[str] = None) -> Dict[str, Any]:
     """
-    Fetches GenBank record for accession and extracts organism, gene symbol,
-    and taxonomy lineage.
+    Fetches real GenBank record for accession and extracts organism, gene symbol,
+    and taxonomy lineage. Returns found=False if accession is empty or not in NCBI.
     """
-    if not accession:
-        return {"error": "No accession provided"}
-
-    db = "nuccore" if seq_type in ("DNA", "RNA") else "protein"
-
-    if not ENTREZ_AVAILABLE:
-        # Resilient default fallback
+    if not accession or accession.strip() == "":
         return {
-            "accession": accession,
-            "organism": "Homo sapiens",
-            "common_name": "human",
-            "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Mammalia; Primates; Hominidae; Homo",
-            "gene": "HBB" if seq_type in ("DNA", "RNA") else "INS",
-            "title": f"Record for {accession}",
-            "source": "Fallback local mock"
+            "found": False,
+            "accession": "",
+            "organism": "N/A",
+            "gene": "N/A",
+            "taxonomy": "N/A",
+            "title": "No homolog accession identified.",
+            "source": "None"
         }
 
+    if not ENTREZ_AVAILABLE:
+        return {
+            "found": False,
+            "accession": accession,
+            "error": "Bio.Entrez is not installed."
+        }
+
+    db = "nuccore" if seq_type in ("DNA", "RNA") else "protein"
     Entrez.email = email
     if api_key:
         Entrez.api_key = api_key
 
     try:
-        time.sleep(0.35)  # Respect NCBI rate ceiling (max 3 req/sec without key)
+        time.sleep(0.35)
         handle = Entrez.efetch(db=db, id=accession, rettype="gb", retmode="text")
         record = SeqIO.read(handle, "genbank")
         handle.close()
@@ -55,7 +57,6 @@ def fetch_ncbi_annotation(accession: str, seq_type: str, email: str = DEFAULT_EM
         taxonomy_list = record.annotations.get("taxonomy", [])
         taxonomy = "; ".join(taxonomy_list) if taxonomy_list else "Unknown"
 
-        # Search features for gene symbol
         gene_name = ""
         for feature in record.features:
             if "gene" in feature.qualifiers:
@@ -63,6 +64,7 @@ def fetch_ncbi_annotation(accession: str, seq_type: str, email: str = DEFAULT_EM
                 break
 
         return {
+            "found": True,
             "accession": accession,
             "organism": organism,
             "taxonomy": taxonomy,
@@ -72,14 +74,14 @@ def fetch_ncbi_annotation(accession: str, seq_type: str, email: str = DEFAULT_EM
             "source": "NCBI GenBank E-utilities"
         }
     except Exception as e:
-        logger.warning(f"Failed to fetch NCBI annotation for {accession}: {e}")
-        # Return graceful partial info rather than crash
+        logger.warning(f"Failed to fetch real NCBI annotation for '{accession}': {e}")
         return {
+            "found": False,
             "accession": accession,
-            "organism": "Homo sapiens (estimated)",
-            "taxonomy": "Eukaryota; Mammalia; Primates; Hominidae; Homo",
-            "gene": "Candidate Gene",
-            "title": f"Homolog entry ({accession})",
-            "warning": f"NCBI E-utilities unavailable: {str(e)}",
-            "source": "Graceful fallback"
+            "organism": "Not found",
+            "taxonomy": "Not found",
+            "gene": "N/A",
+            "title": f"Could not retrieve GenBank record for {accession}",
+            "error": str(e),
+            "source": "NCBI GenBank E-utilities"
         }
