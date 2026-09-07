@@ -128,3 +128,20 @@ LQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
 1. **SQLite Cache First:** Queries are hashed (MD5) and checked locally to prevent repeat API calls and avoid NCBI rate limits.
 2. **Exponential Backoff:** Tenacity retry decorators wrap network requests to handle transient connection drops.
 3. **Graceful Fallback:** If remote NCBI BLAST is rate-limited or offline, the app displays curated reference hits so that the UI, downstream annotations, and literature retrieval continue to function without interruption.
+
+---
+
+## 🏃 Running the App with Live External NCBI/UniProt Data
+
+To ensure the server has full network access to NCBI Entrez, NCBI BLAST, and UniProt REST APIs, run:
+
+```bash
+cd /Users/rizwanahmed0604/.gemini/antigravity/scratch/SQLit
+./run.sh
+```
+
+Or directly:
+```bash
+python3 app.py
+```
+And navigate to `http://127.0.0.1:5050` in your browser.

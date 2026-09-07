@@ -63,9 +63,9 @@
           <div class="d-flex align-items-center justify-content-between mb-2">
             <span class="fw-bold d-flex align-items-center gap-2 text-azure">
               <div class="spinner-border spinner-border-sm text-azure" role="status"></div>
-              <span id="pipelineStatusText">Validating sequence...</span>
+              <span id="pipelineStatusText">Submitting sequence to NCBI BLAST... (this can take 20–60s)</span>
             </span>
-            <span class="badge bg-azure text-white" id="progressPercent">25%</span>
+            <span class="badge bg-azure text-white" id="progressPercent">Processing</span>
           </div>
           <div class="progress progress-sm">
             <div class="progress-bar bg-azure progress-bar-indeterminate" id="pipelineProgressBar"></div>
@@ -84,6 +84,19 @@
       <div>
         <h4 class="alert-title">Processing Error</h4>
         <div class="text-secondary" id="errorMessage">Invalid sequence detected.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notice Alert for No Hits / Non-existent sequence -->
+  <div class="alert alert-warning alert-dismissible shadow-sm d-none mb-4" role="alert" id="noHitsAlert">
+    <div class="d-flex">
+      <div>
+        <i data-lucide="info" class="alert-icon"></i>
+      </div>
+      <div>
+        <h4 class="alert-title">No Homologs Found in Biological Databases</h4>
+        <div class="text-secondary" id="noHitsMessage">The submitted sequence did not match any known biological organisms or genes in NCBI GenBank. Basic statistics have been computed below.</div>
       </div>
     </div>
   </div>

@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     clearBtn.addEventListener("click", () => {
       document.getElementById("sequenceInput").value = "";
       hideError();
+      hideNoHitsAlert();
       document.getElementById("resultsDashboard").classList.add("d-none");
       exportPdfBtn.classList.add("d-none");
     });
@@ -47,7 +48,6 @@ async function loadSampleSequence() {
       document.getElementById("sequenceInput").value = data.fasta || data.sequence;
     }
   } catch (err) {
-    // Default fallback sample: Human HBB fragment
     document.getElementById("sequenceInput").value =
 `>Human_HBB_hemoglobin_beta_segment
 ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA`;
@@ -57,6 +57,7 @@ ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGA
 async function handleSequenceSubmit(e) {
   e.preventDefault();
   hideError();
+  hideNoHitsAlert();
 
   const seqText = document.getElementById("sequenceInput").value.trim();
   if (!seqText) {
@@ -64,7 +65,7 @@ async function handleSequenceSubmit(e) {
     return;
   }
 
-  showProgress("Validating sequence and inspecting type...", 15);
+  showProgress("Querying NCBI BLAST similarity database (can take 15–45s)...", 30);
 
   try {
     const response = await fetch("/api/analyze", {
@@ -121,6 +122,18 @@ function hideError() {
   document.getElementById("errorAlert").classList.add("d-none");
 }
 
+function showNoHitsAlert(msg) {
+  const alertEl = document.getElementById("noHitsAlert");
+  if (msg) {
+    document.getElementById("noHitsMessage").textContent = msg;
+  }
+  alertEl.classList.remove("d-none");
+}
+
+function hideNoHitsAlert() {
+  document.getElementById("noHitsAlert").classList.add("d-none");
+}
+
 function renderDashboard(data) {
   const dashboard = document.getElementById("resultsDashboard");
   dashboard.classList.remove("d-none");
@@ -138,8 +151,15 @@ function renderDashboard(data) {
 
   // Panel 2: BLAST Identification
   const blast = data.blast || {};
+  const hits = blast.hits || [];
   document.getElementById("blastProgramBadge").textContent = blast.program || "blastn";
-  renderBlastTable(blast.hits || []);
+  renderBlastTable(hits);
+
+  if (hits.length === 0) {
+    showNoHitsAlert("No significant biological homologs were found in NCBI nr/nt databases for this sequence. Real sequence stats are calculated, but no annotations or literature exist for unrecorded sequences.");
+  } else {
+    hideNoHitsAlert();
+  }
 
   // Panel 3: Annotations
   const ncbi = data.ncbi || {};
@@ -154,6 +174,9 @@ function renderDashboard(data) {
   document.getElementById("uniprotFunction").textContent = uniprot.function || "No functional annotation.";
   if (uniprot.entry_url) {
     document.getElementById("uniprotLink").href = uniprot.entry_url;
+    document.getElementById("uniprotLink").classList.remove("d-none");
+  } else {
+    document.getElementById("uniprotLink").classList.add("d-none");
   }
 
   // GO Terms
@@ -183,12 +206,10 @@ function renderDashboard(data) {
   renderLiteratureTable(literature);
   renderLiteratureChart(literature);
 
-  // Refresh icons for dynamically added contents
   if (window.lucide) {
     lucide.createIcons();
   }
 
-  // Smooth scroll down to dashboard
   dashboard.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -236,7 +257,7 @@ function renderBlastTable(hits) {
   tbody.innerHTML = "";
 
   if (!hits || hits.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-3">No significant hits found.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-3">No significant biological hits found in NCBI database.</td></tr>`;
     return;
   }
 
@@ -266,7 +287,7 @@ function renderLiteratureTable(articles) {
   tbody.innerHTML = "";
 
   if (!articles || articles.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-3">No PubMed articles retrieved.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-3">No PubMed articles retrieved for this sequence.</td></tr>`;
     return;
   }
 
