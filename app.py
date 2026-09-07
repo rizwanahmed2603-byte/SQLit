@@ -8,11 +8,19 @@ it displays zero hits and indicates that no matching biological homolog exists.
 """
 
 import os
+import ssl
 import json
 import logging
 from flask import Flask, render_template, request, jsonify, Response
 
-# Ensure matplotlib writes to local writable directory
+# 1. Configure robust SSL certificate validation with certifi for macOS Python
+try:
+    import certifi
+    ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    pass
+
+# 2. Ensure matplotlib writes to local writable directory
 os.environ["MPLCONFIGDIR"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "matplotlib")
 os.makedirs(os.environ["MPLCONFIGDIR"], exist_ok=True)
 
