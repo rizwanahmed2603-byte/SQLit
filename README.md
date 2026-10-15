@@ -81,6 +81,14 @@ Downloadable HTML / PDF Report (Jinja2 + embedded Matplotlib charts)
 
 ---
 
+## 📚 Project Documentation & References
+
+- 📋 **[Product Requirements Document (PRD)](./SeqLit_PRD.md):** Complete specifications, functional requirements (FR-1 to FR-11), acceptance criteria, and system architecture.
+- 🛠️ **[Project Execution Guide](./SeqLit_Project_Execution_Guide.md):** Week-by-week build plan, tech stack analysis, macOS setup instructions, and fallback layers.
+- 🧪 **[Test Log & Ground Truth Verification](./TEST_LOG.md):** Comprehensive test report covering benchmark test sequences (HBB, EBNA-1, INS, TP53), edge cases, and bug fix logs.
+
+---
+
 ## 📁 Repository Structure
 
 ```
@@ -88,6 +96,9 @@ SQLit/
 ├── app.py                     # Flask entry point and pipeline API routing
 ├── requirements.txt           # Python dependencies
 ├── run.sh                     # Launch script with port clearing & SSL certifi bundle
+├── SeqLit_PRD.md              # Product Requirements Document
+├── SeqLit_Project_Execution_Guide.md # Execution Guide & architecture roadmap
+├── TEST_LOG.md                # Comprehensive testing & validation log
 ├── README.md                  # Comprehensive project documentation
 ├── modules/
 │   ├── validation.py          # Sequence cleaning, type detection, stats calculation
