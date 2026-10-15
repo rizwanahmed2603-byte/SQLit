@@ -1,10 +1,10 @@
 """
 SeqLit Flask Web Application Entrypoint.
-Orchestrates real sequence validation, NCBI BLAST search, NCBI & UniProt annotation,
-PubMed retrieval with rule-based topic categorization, SQLite caching,
-and report generation.
-Authentic results only: if a sequence is synthetic or does not exist,
-it displays zero hits and indicates that no matching biological homolog exists.
+Orchestrates sequence validation, BLAST search with intelligent homolog ranking,
+NCBI GenBank & UniProt functional annotation, PubMed literature retrieval with
+5-topic rule-based categorization, interactive candidate hit exploration,
+SQLite caching, and report generation.
+Authentic results only: non-existent sequences return zero hits and clear notifications.
 """
 
 import os
@@ -29,7 +29,7 @@ from modules.blast_search import execute_blast
 from modules.ncbi_annotation import fetch_ncbi_annotation
 from modules.uniprot_annotation import fetch_uniprot_annotation
 from modules.pubmed_retrieval import fetch_pubmed_literature
-from modules.cache_manager import get_cached_result, set_cached_result
+from modules.cache_manager import get_cached_result, set_cached_result, get_cached_hit, set_cached_hit
 from modules.report_generator import render_html_report
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -38,21 +38,59 @@ logger = logging.getLogger("seqlit")
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "seqlit-secret-dev-key-2026")
 
-# Real benchmark sequence from NCBI GenBank: Human Hemoglobin Subunit Beta (HBB) mRNA
-SAMPLE_DATA = {
-    "name": "Human Hemoglobin Subunit Beta (HBB)",
-    "type": "DNA",
-    "fasta": ">NM_000518.5 Homo sapiens hemoglobin subunit beta (HBB), mRNA\nATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA",
-    "sequence": "ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA"
-}
+# Curated benchmark sequences covering DNA and Protein
+SAMPLE_DATASETS = [
+    {
+        "id": "hbb",
+        "name": "Human Hemoglobin Subunit Beta (HBB)",
+        "type": "DNA",
+        "desc": "Canonical mRNA coding sequence for human beta-globin",
+        "fasta": ">NM_000518.5 Homo sapiens hemoglobin subunit beta (HBB), mRNA\nATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA",
+        "sequence": "ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA"
+    },
+    {
+        "id": "ebna1",
+        "name": "Epstein-Barr Nuclear Antigen 1 (EBNA-1)",
+        "type": "Protein",
+        "desc": "Viral sequence-specific DNA-binding and episome maintenance protein",
+        "fasta": ">sp|P03211|EBNA1_EBVB9 Epstein-Barr nuclear antigen 1 OS=Epstein-Barr virus (strain B95-8) OX=10377 GN=EBNA1 PE=1 SV=1\nMSDEGPGTGPGNGLGEKGDTSGPEGSGGSGPQRRGGDNHGRGRGRGRGRGGGRPGAPGGSGSGPRHRDGVRRPQKRPSCIGCKGTHGGTGAGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGGAGAGGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAG",
+        "sequence": "MSDEGPGTGPGNGLGEKGDTSGPEGSGGSGPQRRGGDNHGRGRGRGRGRGGGRPGAPGGSGSGPRHRDGVRRPQKRPSCIGCKGTHGGTGAGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGAGGGAGAGGAGGAGGAGAGGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGAGGAGAGGAGAGGAGGAGAGGGAGAGGAGGAGAGGAGAGGAGGAGAGGAGAGGAGGAGAG"
+    },
+    {
+        "id": "ins",
+        "name": "Human Insulin (INS)",
+        "type": "DNA",
+        "desc": "Canonical mRNA coding sequence for human preproinsulin",
+        "fasta": ">NM_000207.3 Homo sapiens insulin (INS), mRNA\nATGGCCCTGTGGATGCGCCTCCTGCCCCTGCTGGCGCTGCTGGCCCTCTGGGGACCTGACCCAGCCGCAGCCTTTGTGAACCAACACCTGTGCGGCTCACACCTGGTGGAAGCTCTCTACCTAGTGTGCGGGGAACGAGGCTTCTTCTACACACCCAAGACCCGCCGGGAGGCAGAGGACCTGCAGGTGGGGCAGGTGGAGCTGGGCGGGGGCCCTGGTGCAGGCAGCCTGCAGCCCTTGGCCCTGGAGGGGTCCCTGCAGAAGCGTGGCATTGTGGAACAATGCTGTACCAGCATCTGCTCCCTCTACCAGCTGGAGAACTACTGCAACTAG",
+        "sequence": "ATGGCCCTGTGGATGCGCCTCCTGCCCCTGCTGGCGCTGCTGGCCCTCTGGGGACCTGACCCAGCCGCAGCCTTTGTGAACCAACACCTGTGCGGCTCACACCTGGTGGAAGCTCTCTACCTAGTGTGCGGGGAACGAGGCTTCTTCTACACACCCAAGACCCGCCGGGAGGCAGAGGACCTGCAGGTGGGGCAGGTGGAGCTGGGCGGGGGCCCTGGTGCAGGCAGCCTGCAGCCCTTGGCCCTGGAGGGGTCCCTGCAGAAGCGTGGCATTGTGGAACAATGCTGTACCAGCATCTGCTCCCTCTACCAGCTGGAGAACTACTGCAACTAG"
+    },
+    {
+        "id": "tp53",
+        "name": "Human Tumor Protein P53 (TP53)",
+        "type": "DNA",
+        "desc": "Coding sequence for the human cellular tumor suppressor p53",
+        "fasta": ">NM_000546.6 Homo sapiens tumor protein p53 (TP53), mRNA\nATGGAGGAGCCGCAGTCAGATCCTAGCGTCGAGCCCCCTCTGAGTCAGGAAACATTTTCAGACCTATGGAAACTACTTCCTGAAAACAACGTTCTGTCCCCCTTGCCGTCCCAAGCAATGGATGATTTGATGCTGTCCCCGGACGATATTGAACAATGGTTCACTGAAGACCCAGGTCCAGATGAAGCTCCCAGAATGCCAGAGGCTGCTCCCCGCGTGGCCCCTGCACCAGCAGCTCCTACACCGGCGGCCCCTGCACCAGCCCCCTCCTGGCCCCTGTCATCTTCTGTCCCTTCCCAGAAAACCTACCAGGGCAGCTACGGTTTCCGTCTGGGCTTCTTGCATTCTGGGACAGCCAAGTCTGTGACTTGCACGTACTCCCCTGCCCTCAACAAGATGTTTTGCCAACTGGCCAAGACCTGCCCTGTGCAGCTGTGGGTTGATTCCACACCCCCGCCCGGCACCCGCGTCCGCGCCATGGCCATCTACAAGCAGTCACAGCACATGACGGAGGTTGTGAGGCGCTGCCCCCACCATGAGCGCTGCTCAGATAGCGATGGTCTGGCCCCTCCTCAGCATCTTATCCGAGTGGAAGGAAATTTGCGTGTGGAGTATTTGGATGACAGAAACACTTTTCGACATAGTGTGGTGGTGCCCTATGAGCCGCCTGAGGTTGGCTCTGACTGTACCACCATCCACTACAACTACATGTGTAACAGTTCCTGCATGGGCGGCATGAACCGGAGGCCCATCCTCACCATCATCACACTGGAAGACTCCAGTGGTAATCTACTGGGACGGAACAGCTTTGAGGTGCGTGTTTGTGCCTGTCCTGGGAGAGACCGGCGCACAGAGGAAGAGAATCTCCGCAAGAAAGGGGAGCCTCACCACGAGCTGCCCCCAGGGAGCACTAAGCGAGCACTGCCCAACAACACCAGCTCCTCTCCCCAGCCAAAGAAGAAACCACTGGATGGAGAATATTTCACCCTTCAGATCCGTGGGCGTGAGCGCTTCGAGATGTTCCGAGAGCTGAATGAGGCCTTGGAACTCAAGGATGCCCAGGCTGGGAAGGAGCCAGGGGGGAGCAGGGCTCACTCCAGCCACCTGAAGTCCAAAAAGGGTCAGTCTACCTCCCGCCATAAAAAACTCATGTTCAAGACAGAAGGGCCTGACTCAGACTGA",
+        "sequence": "ATGGAGGAGCCGCAGTCAGATCCTAGCGTCGAGCCCCCTCTGAGTCAGGAAACATTTTCAGACCTATGGAAACTACTTCCTGAAAACAACGTTCTGTCCCCCTTGCCGTCCCAAGCAATGGATGATTTGATGCTGTCCCCGGACGATATTGAACAATGGTTCACTGAAGACCCAGGTCCAGATGAAGCTCCCAGAATGCCAGAGGCTGCTCCCCGCGTGGCCCCTGCACCAGCAGCTCCTACACCGGCGGCCCCTGCACCAGCCCCCTCCTGGCCCCTGTCATCTTCTGTCCCTTCCCAGAAAACCTACCAGGGCAGCTACGGTTTCCGTCTGGGCTTCTTGCATTCTGGGACAGCCAAGTCTGTGACTTGCACGTACTCCCCTGCCCTCAACAAGATGTTTTGCCAACTGGCCAAGACCTGCCCTGTGCAGCTGTGGGTTGATTCCACACCCCCGCCCGGCACCCGCGTCCGCGCCATGGCCATCTACAAGCAGTCACAGCACATGACGGAGGTTGTGAGGCGCTGCCCCCACCATGAGCGCTGCTCAGATAGCGATGGTCTGGCCCCTCCTCAGCATCTTATCCGAGTGGAAGGAAATTTGCGTGTGGAGTATTTGGATGACAGAAACACTTTTCGACATAGTGTGGTGGTGCCCTATGAGCCGCCTGAGGTTGGCTCTGACTGTACCACCATCCACTACAACTACATGTGTAACAGTTCCTGCATGGGCGGCATGAACCGGAGGCCCATCCTCACCATCATCACACTGGAAGACTCCAGTGGTAATCTACTGGGACGGAACAGCTTTGAGGTGCGTGTTTGTGCCTGTCCTGGGAGAGACCGGCGCACAGAGGAAGAGAATCTCCGCAAGAAAGGGGAGCCTCACCACGAGCTGCCCCCAGGGAGCACTAAGCGAGCACTGCCCAACAACACCAGCTCCTCTCCCCAGCCAAAGAAGAAACCACTGGATGGAGAATATTTCACCCTTCAGATCCGTGGGCGTGAGCGCTTCGAGATGTTCCGAGAGCTGAATGAGGCCTTGGAACTCAAGGATGCCCAGGCTGGGAAGGAGCCAGGGGGGAGCAGGGCTCACTCCAGCCACCTGAAGTCCAAAAAGGGTCAGTCTACCTCCCGCCATAAAAAACTCATGTTCAAGACAGAAGGGCCTGACTCAGACTGA"
+    }
+]
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+@app.route("/api/samples", methods=["GET"])
+def get_samples():
+    """Returns all available curated benchmark sample options."""
+    return jsonify(SAMPLE_DATASETS)
+
 @app.route("/api/sample", methods=["GET"])
 def get_sample():
-    return jsonify(SAMPLE_DATA)
+    """Returns requested sample (defaults to HBB)."""
+    sample_id = request.args.get("id", "hbb").lower()
+    for s in SAMPLE_DATASETS:
+        if s["id"] == sample_id:
+            return jsonify(s)
+    return jsonify(SAMPLE_DATASETS[0])
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze_sequence():
@@ -77,19 +115,50 @@ def analyze_sequence():
             logger.info("Found existing analysis in SQLite cache.")
             return jsonify({"success": True, "cached": True, "data": cached})
 
-        # Step 3: Real BLAST Similarity search
+        # Step 3: BLAST Similarity search with intelligent homolog ranking
         blast_res = execute_blast(clean_seq, seq_type)
         hits = blast_res.get("hits", [])
-        
-        # Only query downstream annotations if real hits were found
+
+        # Step 4: Downstream annotation for top candidate homolog
         if hits:
+            # Primary candidate is the top-ranked hit from intelligent ranking
             top_hit = hits[0]
             top_accession = top_hit.get("accession", "")
-            ncbi_res = fetch_ncbi_annotation(top_accession, seq_type)
-            gene_term = ncbi_res.get("gene") or top_accession
-            uniprot_res = fetch_uniprot_annotation(gene_term)
-            organism = ncbi_res.get("organism") or ""
-            literature = fetch_pubmed_literature(gene_term, organism)
+            hit_title = top_hit.get("title", "")
+            gene_hint = top_hit.get("gene_symbol", "")
+            org_hint = top_hit.get("organism", "")
+            uniprot_hint = top_hit.get("uniprot_id", "")
+
+            # 4a. NCBI Annotation with deep entity resolution
+            ncbi_res = fetch_ncbi_annotation(
+                top_accession,
+                seq_type,
+                hit_title=hit_title,
+                gene_hint=gene_hint,
+                organism_hint=org_hint,
+                uniprot_hint=uniprot_hint
+            )
+
+            # Resolved gene symbol and product description
+            gene_term = ncbi_res.get("gene") or gene_hint or top_accession
+            product_term = ncbi_res.get("product") or hit_title
+            organism = ncbi_res.get("organism") or org_hint or ""
+            uniprot_id = ncbi_res.get("uniprot_id") or uniprot_hint or ""
+
+            # 4b. UniProt Functional Annotation
+            uniprot_res = fetch_uniprot_annotation(
+                query_term=gene_term,
+                organism=organism,
+                product=product_term,
+                uniprot_id=uniprot_id
+            )
+
+            # 4c. PubMed Literature Retrieval & 5-Topic Categorization
+            literature = fetch_pubmed_literature(
+                gene_name=gene_term,
+                organism=organism,
+                product=product_term
+            )
         else:
             # Sequence has no homologs in biological databases
             ncbi_res = {
@@ -97,12 +166,15 @@ def analyze_sequence():
                 "accession": "None",
                 "organism": "None detected",
                 "gene": "None",
+                "product": "N/A",
                 "taxonomy": "No matching biological record",
                 "title": "No sequence homologs found in NCBI databases."
             }
             uniprot_res = {
                 "found": False,
                 "protein_name": "No matching protein",
+                "gene": "N/A",
+                "organism": "N/A",
                 "function": "No candidate homolog identified in databases for functional profiling.",
                 "go_terms": {"biological_process": [], "molecular_function": [], "cellular_component": []},
                 "features": [],
@@ -115,7 +187,8 @@ def analyze_sequence():
             "blast": blast_res,
             "ncbi": ncbi_res,
             "uniprot": uniprot_res,
-            "literature": literature
+            "literature": literature,
+            "active_hit_rank": 1
         }
 
         # Cache only if search ran successfully
@@ -127,6 +200,74 @@ def analyze_sequence():
     except Exception as e:
         logger.exception("Pipeline execution error")
         return jsonify({"success": False, "error": f"Server pipeline error: {str(e)}"}), 500
+
+@app.route("/api/annotate_hit", methods=["POST"])
+def annotate_hit():
+    """
+    Dynamically fetches or retrieves cached NCBI, UniProt, and PubMed annotations
+    when the user clicks on ANY hit in the BLAST table.
+    """
+    try:
+        data = request.get_json() or {}
+        accession = data.get("accession", "").strip()
+        seq_type = data.get("seq_type", "DNA")
+        hit_title = data.get("title", "")
+        gene_hint = data.get("gene_symbol", "")
+        org_hint = data.get("organism", "")
+        uniprot_hint = data.get("uniprot_id", "")
+
+        if not accession:
+            return jsonify({"success": False, "error": "Accession required."}), 400
+
+        # Check hit cache first
+        cached_hit = get_cached_hit(accession)
+        if cached_hit:
+            return jsonify({"success": True, "cached": True, "data": cached_hit})
+
+        # Fetch NCBI Annotation
+        ncbi_res = fetch_ncbi_annotation(
+            accession,
+            seq_type,
+            hit_title=hit_title,
+            gene_hint=gene_hint,
+            organism_hint=org_hint,
+            uniprot_hint=uniprot_hint
+        )
+
+        gene_term = ncbi_res.get("gene") or gene_hint or accession
+        product_term = ncbi_res.get("product") or hit_title
+        organism = ncbi_res.get("organism") or org_hint or ""
+        uniprot_id = ncbi_res.get("uniprot_id") or uniprot_hint or ""
+
+        # Fetch UniProt Functional Annotation
+        uniprot_res = fetch_uniprot_annotation(
+            query_term=gene_term,
+            organism=organism,
+            product=product_term,
+            uniprot_id=uniprot_id
+        )
+
+        # Fetch PubMed Literature
+        literature = fetch_pubmed_literature(
+            gene_name=gene_term,
+            organism=organism,
+            product=product_term
+        )
+
+        hit_data = {
+            "ncbi": ncbi_res,
+            "uniprot": uniprot_res,
+            "literature": literature
+        }
+
+        # Save to hit cache
+        set_cached_hit(accession, hit_data)
+
+        return jsonify({"success": True, "cached": False, "data": hit_data})
+
+    except Exception as e:
+        logger.exception("Failed to annotate hit")
+        return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route("/api/export/report", methods=["POST"])
 def export_report():
@@ -153,5 +294,4 @@ def export_report():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
     print(f"Starting SeqLit bioinformatics server on http://127.0.0.1:{port}")
-    # Run with use_reloader=False for clean, deterministic background daemon execution
     app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)

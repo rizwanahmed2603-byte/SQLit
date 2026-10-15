@@ -1,6 +1,7 @@
 """
 SQLite caching module for SeqLit.
-Prevents redundant BLAST, Entrez, and UniProt requests by caching results by sequence MD5 hash.
+Prevents redundant BLAST, Entrez, and UniProt requests by caching results by sequence MD5 hash,
+and caches individual candidate hit annotations for instant interactive exploration.
 """
 
 import sqlite3
@@ -25,6 +26,13 @@ def init_db():
             sequence_hash TEXT PRIMARY KEY,
             sequence_type TEXT,
             sequence_length INTEGER,
+            result_json TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS hit_cache (
+            accession TEXT PRIMARY KEY,
             result_json TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
@@ -57,6 +65,33 @@ def set_cached_result(sequence: str, seq_type: str, result: Dict[str, Any]):
         INSERT OR REPLACE INTO analysis_cache (sequence_hash, sequence_type, sequence_length, result_json)
         VALUES (?, ?, ?, ?)
     """, (seq_hash, seq_type, len(sequence), json.dumps(result)))
+    conn.commit()
+    conn.close()
+
+def get_cached_hit(accession: str) -> Optional[Dict[str, Any]]:
+    if not accession:
+        return None
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT result_json FROM hit_cache WHERE accession = ?", (accession.strip(),))
+    row = cursor.fetchone()
+    conn.close()
+    if row:
+        try:
+            return json.loads(row["result_json"])
+        except Exception:
+            return None
+    return None
+
+def set_cached_hit(accession: str, result: Dict[str, Any]):
+    if not accession:
+        return
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT OR REPLACE INTO hit_cache (accession, result_json)
+        VALUES (?, ?)
+    """, (accession.strip(), json.dumps(result)))
     conn.commit()
     conn.close()
 

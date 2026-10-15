@@ -1,13 +1,13 @@
-// Client-side interactions, AJAX execution, Chart.js updates and filter logic for SeqLit
+// Client-side interactions, AJAX execution, Chart.js updates, candidate hit inspection, and report export for SeqLit
 
 let compositionChartInstance = null;
 let literatureChartInstance = null;
 let lastAnalysisResult = null;
+let currentActiveHitRank = 1;
 
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("sequenceForm");
   const clearBtn = document.getElementById("clearBtn");
-  const loadSampleBtn = document.getElementById("loadSampleBtn");
   const exportPdfBtn = document.getElementById("exportPdfBtn");
   const categoryFilter = document.getElementById("categoryFilter");
 
@@ -22,12 +22,18 @@ document.addEventListener("DOMContentLoaded", function() {
       hideNoHitsAlert();
       document.getElementById("resultsDashboard").classList.add("d-none");
       exportPdfBtn.classList.add("d-none");
+      document.getElementById("activeSampleBadge").textContent = "Ready";
     });
   }
 
-  if (loadSampleBtn) {
-    loadSampleBtn.addEventListener("click", loadSampleSequence);
-  }
+  // Setup benchmark sample options
+  document.querySelectorAll(".sample-option").forEach(item => {
+    item.addEventListener("click", function(e) {
+      e.preventDefault();
+      const sampleId = this.dataset.id || "hbb";
+      loadSampleSequence(sampleId);
+    });
+  });
 
   if (exportPdfBtn) {
     exportPdfBtn.addEventListener("click", downloadReport);
@@ -40,17 +46,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-async function loadSampleSequence() {
+async function loadSampleSequence(sampleId = "hbb") {
   try {
-    const res = await fetch("/api/sample");
+    const res = await fetch(`/api/sample?id=${sampleId}`);
     const data = await res.json();
-    if (data && data.sequence) {
+    if (data && (data.fasta || data.sequence)) {
       document.getElementById("sequenceInput").value = data.fasta || data.sequence;
+      const badge = document.getElementById("activeSampleBadge");
+      if (badge) {
+        badge.textContent = data.name || sampleId.toUpperCase();
+      }
     }
   } catch (err) {
-    document.getElementById("sequenceInput").value =
-`>Human_HBB_hemoglobin_beta_segment
-ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA`;
+    console.error("Could not load sample:", err);
   }
 }
 
@@ -65,7 +73,7 @@ async function handleSequenceSubmit(e) {
     return;
   }
 
-  showProgress("Querying NCBI BLAST similarity database (can take 15–45s)...", 30);
+  showProgress("Querying NCBI BLAST similarity database (or local aligner fallback)...", 30);
 
   try {
     const response = await fetch("/api/analyze", {
@@ -83,6 +91,7 @@ async function handleSequenceSubmit(e) {
     }
 
     lastAnalysisResult = result.data;
+    currentActiveHitRank = 1;
     renderDashboard(result.data);
     hideProgress();
 
@@ -143,7 +152,7 @@ function renderDashboard(data) {
   const stats = val.stats || {};
   document.getElementById("statSeqType").textContent = val.type || "Unknown";
   document.getElementById("statSeqLength").innerHTML = `${stats.length || 0} <span class="fs-5 fw-normal text-muted">${val.type === 'Protein' ? 'aa' : 'bp'}</span>`;
-  document.getElementById("statGcPercent").textContent = stats.gc_percent !== null && stats.gc_percent !== undefined ? `${stats.gc_percent}%` : "N/A";
+  document.getElementById("statGcPercent").textContent = (stats.gc_percent !== null && stats.gc_percent !== undefined) ? `${stats.gc_percent}%` : "N/A";
   document.getElementById("statMolWeight").innerHTML = `${(stats.molecular_weight || 0).toLocaleString()} <span class="fs-5 fw-normal text-muted">Da</span>`;
 
   // Render Composition Chart
@@ -153,30 +162,44 @@ function renderDashboard(data) {
   const blast = data.blast || {};
   const hits = blast.hits || [];
   document.getElementById("blastProgramBadge").textContent = blast.program || "blastn";
-  renderBlastTable(hits);
+  document.getElementById("blastHitCountBadge").textContent = `${hits.length} hit${hits.length === 1 ? '' : 's'}`;
+  renderBlastTable(hits, currentActiveHitRank);
 
   if (hits.length === 0) {
-    showNoHitsAlert("No significant biological homologs were found in NCBI nr/nt databases for this sequence. Real sequence stats are calculated, but no annotations or literature exist for unrecorded sequences.");
+    showNoHitsAlert("No significant biological homologs were found in NCBI nr/nt databases for this sequence. Real sequence stats have been computed, but no annotations or literature exist for unrecorded sequences.");
   } else {
     hideNoHitsAlert();
   }
 
-  // Panel 3: Annotations
-  const ncbi = data.ncbi || {};
+  // Panel 3 & 4: Annotations & Literature for current candidate
+  renderAnnotationsAndLiterature(data.ncbi || {}, data.uniprot || {}, data.literature || [], currentActiveHitRank);
+
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+
+  dashboard.scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderAnnotationsAndLiterature(ncbi, uniprot, literature, rank) {
+  // NCBI Card
+  document.getElementById("ncbiCandidateBadge").textContent = `Candidate #${rank}`;
   document.getElementById("ncbiAccession").textContent = ncbi.accession || "N/A";
   document.getElementById("ncbiOrganism").textContent = ncbi.organism || "N/A";
   document.getElementById("ncbiGene").textContent = ncbi.gene || "N/A";
+  document.getElementById("ncbiProduct").textContent = ncbi.product || "N/A";
   document.getElementById("ncbiTaxonomy").textContent = ncbi.taxonomy || "N/A";
   document.getElementById("ncbiTitle").textContent = ncbi.title || "N/A";
 
-  const uniprot = data.uniprot || {};
+  // UniProt Card
   document.getElementById("uniprotProteinName").textContent = uniprot.protein_name || "Uncharacterized";
-  document.getElementById("uniprotFunction").textContent = uniprot.function || "No functional annotation.";
+  document.getElementById("uniprotFunction").textContent = uniprot.function || "No functional annotation recorded.";
+  const uniprotLink = document.getElementById("uniprotLink");
   if (uniprot.entry_url) {
-    document.getElementById("uniprotLink").href = uniprot.entry_url;
-    document.getElementById("uniprotLink").classList.remove("d-none");
+    uniprotLink.href = uniprot.entry_url;
+    uniprotLink.classList.remove("d-none");
   } else {
-    document.getElementById("uniprotLink").classList.add("d-none");
+    uniprotLink.classList.add("d-none");
   }
 
   // GO Terms
@@ -190,27 +213,21 @@ function renderDashboard(data) {
   ];
 
   if (allGo.length > 0) {
-    allGo.slice(0, 8).forEach(go => {
+    allGo.slice(0, 10).forEach(go => {
       const span = document.createElement("span");
       span.className = "badge-go";
       span.title = go.id;
-      span.textContent = go.name;
+      span.textContent = `${go.name} (${go.id})`;
       goContainer.appendChild(span);
     });
   } else {
     goContainer.innerHTML = '<span class="text-muted small">No direct GO terms mapped.</span>';
   }
 
-  // Panel 4: Literature
-  const literature = data.literature || [];
+  // PubMed Literature
+  document.getElementById("literatureCountBadge").textContent = `${literature.length} paper${literature.length === 1 ? '' : 's'}`;
   renderLiteratureTable(literature);
   renderLiteratureChart(literature);
-
-  if (window.lucide) {
-    lucide.createIcons();
-  }
-
-  dashboard.scrollIntoView({ behavior: 'smooth' });
 }
 
 function renderCompositionChart(frequencies) {
@@ -252,34 +269,101 @@ function renderCompositionChart(frequencies) {
   });
 }
 
-function renderBlastTable(hits) {
+function renderBlastTable(hits, activeRank = 1) {
   const tbody = document.getElementById("blastHitsTableBody");
   tbody.innerHTML = "";
 
   if (!hits || hits.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-3">No significant biological hits found in NCBI database.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-4">No significant biological hits found in NCBI database.</td></tr>`;
     return;
   }
 
   hits.forEach(hit => {
     const tr = document.createElement("tr");
+    const isActive = (hit.rank === activeRank);
+    if (isActive) {
+      tr.className = "table-primary fw-medium";
+    }
+
     tr.innerHTML = `
-      <td><span class="badge bg-light text-dark">${hit.rank}</span></td>
-      <td><span class="badge bg-blue-lt fw-bold">${hit.accession}</span></td>
-      <td class="text-truncate" style="max-width: 320px;" title="${hit.title}">${hit.title}</td>
-      <td><span class="fw-bold text-success">${hit.identity_percent}%</span></td>
+      <td><span class="badge ${isActive ? 'bg-primary text-white' : 'bg-light text-dark'}">${hit.rank}</span></td>
+      <td>
+        <span class="badge bg-blue-lt fw-bold font-monospace">${hit.accession}</span>
+        ${hit.is_primary ? '<span class="badge bg-green text-white ms-1" style="font-size: 10px;">Primary</span>' : ''}
+      </td>
+      <td class="text-truncate" style="max-width: 300px;" title="${hit.title}">${hit.title}</td>
+      <td><span class="fw-bold ${hit.identity_percent >= 98 ? 'text-success' : 'text-primary'}">${hit.identity_percent}%</span></td>
       <td class="font-monospace small">${hit.e_value}</td>
       <td>
         <div class="d-flex align-items-center gap-2">
           <span>${hit.query_coverage}%</span>
-          <div class="progress progress-xs w-100">
+          <div class="progress progress-xs" style="width: 50px;">
             <div class="progress-bar bg-success" style="width: ${hit.query_coverage}%"></div>
           </div>
         </div>
       </td>
+      <td>
+        <button class="btn btn-sm ${isActive ? 'btn-primary' : 'btn-outline-primary'} py-0 px-2 inspect-btn" data-rank="${hit.rank}">
+          ${isActive ? 'Active' : 'Inspect'}
+        </button>
+      </td>
     `;
+
+    const inspectBtn = tr.querySelector(".inspect-btn");
+    inspectBtn.addEventListener("click", () => inspectHit(hit));
+
     tbody.appendChild(tr);
   });
+}
+
+async function inspectHit(hit) {
+  if (!hit || !lastAnalysisResult) return;
+
+  currentActiveHitRank = hit.rank;
+  lastAnalysisResult.active_hit_rank = hit.rank;
+
+  // Re-render table to update active row styling
+  renderBlastTable(lastAnalysisResult.blast.hits, currentActiveHitRank);
+
+  // If this hit's annotation is already in lastAnalysisResult and rank == 1
+  if (hit.rank === 1 && lastAnalysisResult.ncbi && lastAnalysisResult.ncbi.accession === hit.accession) {
+    renderAnnotationsAndLiterature(
+      lastAnalysisResult.ncbi,
+      lastAnalysisResult.uniprot,
+      lastAnalysisResult.literature,
+      hit.rank
+    );
+    return;
+  }
+
+  // Fetch annotation for selected hit via API
+  try {
+    const res = await fetch("/api/annotate_hit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        accession: hit.accession,
+        seq_type: lastAnalysisResult.validation.type || "DNA",
+        title: hit.title,
+        gene_symbol: hit.gene_symbol || "",
+        organism: hit.organism || "",
+        uniprot_id: hit.uniprot_id || ""
+      })
+    });
+
+    const resData = await res.json();
+    if (resData.success && resData.data) {
+      const d = resData.data;
+      lastAnalysisResult.ncbi = d.ncbi;
+      lastAnalysisResult.uniprot = d.uniprot;
+      lastAnalysisResult.literature = d.literature;
+
+      renderAnnotationsAndLiterature(d.ncbi, d.uniprot, d.literature, hit.rank);
+      if (window.lucide) lucide.createIcons();
+    }
+  } catch (err) {
+    console.error("Failed to inspect hit:", err);
+  }
 }
 
 function renderLiteratureTable(articles) {
@@ -287,7 +371,7 @@ function renderLiteratureTable(articles) {
   tbody.innerHTML = "";
 
   if (!articles || articles.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-3">No PubMed articles retrieved for this sequence.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No PubMed articles retrieved for this sequence.</td></tr>`;
     return;
   }
 
@@ -295,7 +379,7 @@ function renderLiteratureTable(articles) {
     const tr = document.createElement("tr");
     tr.dataset.category = art.category;
     tr.innerHTML = `
-      <td><a href="${art.pubmed_url}" target="_blank" class="fw-bold">${art.pmid}</a></td>
+      <td><a href="${art.pubmed_url}" target="_blank" class="fw-bold font-monospace text-primary">${art.pmid}</a></td>
       <td>
         <div class="fw-medium">${art.title}</div>
         <div class="text-muted small">${art.authors}</div>
@@ -317,7 +401,7 @@ function renderLiteratureChart(articles) {
 
   const catCounts = {};
   articles.forEach(a => {
-    const c = a.category || "General";
+    const c = a.category || "General / Biology";
     catCounts[c] = (catCounts[c] || 0) + 1;
   });
 
