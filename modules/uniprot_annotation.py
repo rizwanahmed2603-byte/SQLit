@@ -149,16 +149,128 @@ CURATED_UNIPROT_FALLBACKS = {
         ],
         "entry_url": "https://www.uniprot.org/uniprotkb/P04637",
         "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P69905": {
+        "found": True,
+        "accession": "P69905",
+        "protein_name": "Hemoglobin subunit alpha",
+        "gene": "HBA1, HBA2",
+        "organism": "Homo sapiens",
+        "function": "Involved in oxygen transport from the lung to the various peripheral tissues. Hemoglobin A is a heterotetramer composed of two alpha and two beta chains.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0015671", "name": "oxygen transport"},
+                {"id": "GO:0006810", "name": "transport"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0020037", "name": "heme binding"},
+                {"id": "GO:0019825", "name": "oxygen binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005833", "name": "hemoglobin complex"},
+                {"id": "GO:0005829", "name": "cytosol"}
+            ]
+        },
+        "features": [
+            {"type": "Chain", "description": "Hemoglobin subunit alpha", "start": "2", "end": "142"},
+            {"type": "Binding site", "description": "Heme (iron)", "start": "59", "end": "59"},
+            {"type": "Binding site", "description": "Heme (iron)", "start": "88", "end": "88"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P69905",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P42212": {
+        "found": True,
+        "accession": "P42212",
+        "protein_name": "Green fluorescent protein",
+        "gene": "GFP",
+        "organism": "Aequorea victoria",
+        "function": "Energy-transfer acceptor that converts blue chemiluminescence of the photoprotein aequorin into green light by resonance energy transfer.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0006091", "name": "generation of precursor metabolites and energy"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0005515", "name": "protein binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005737", "name": "cytoplasm"}
+            ]
+        },
+        "features": [
+            {"type": "Site", "description": "Chromophore (Thr-66, Tyr-67, Gly-68)", "start": "66", "end": "68"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P42212",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P00698": {
+        "found": True,
+        "accession": "P00698",
+        "protein_name": "Lysozyme C",
+        "gene": "LYZ",
+        "organism": "Gallus gallus",
+        "function": "Lysozymes have catalytic activity hydrolyzing 1,4-beta-linkages between N-acetyl-D-glucosamine and N-acetylmuramic acid in peptidoglycan heteropolymers of bacterial cell walls.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0016998", "name": "cell wall catabolic process"},
+                {"id": "GO:0045087", "name": "innate immune response"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0003796", "name": "lysozyme activity"},
+                {"id": "GO:0004553", "name": "hydrolase activity"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005615", "name": "extracellular space"},
+                {"id": "GO:0005764", "name": "lysosome"}
+            ]
+        },
+        "features": [
+            {"type": "Active site", "description": "Proton donor (Glu-53)", "start": "53", "end": "53"},
+            {"type": "Active site", "description": "Nucleophile (Asp-70)", "start": "70", "end": "70"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P00698",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P02185": {
+        "found": True,
+        "accession": "P02185",
+        "protein_name": "Myoglobin",
+        "gene": "MB",
+        "organism": "Physeter catodon",
+        "function": "Serves as an intracellular oxygen storage protein in vertebrate muscle tissues, releasing oxygen to mitochondria when cellular pO2 falls.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0015671", "name": "oxygen transport"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0020037", "name": "heme binding"},
+                {"id": "GO:0019825", "name": "oxygen binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005829", "name": "cytosol"}
+            ]
+        },
+        "features": [
+            {"type": "Binding site", "description": "Heme (iron)", "start": "65", "end": "65"},
+            {"type": "Binding site", "description": "Heme (iron)", "start": "94", "end": "94"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P02185",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
     }
 }
 
 # Gene to accession mapping for fast local resolution
 GENE_TO_ACCESSION = {
     "HBB": "P68871",
+    "HBA1": "P69905",
+    "HBA": "P69905",
     "EBNA1": "P03211",
     "EBNA-1": "P03211",
     "INS": "P01308",
-    "TP53": "P04637"
+    "TP53": "P04637",
+    "GFP": "P42212",
+    "LYZ": "P00698",
+    "MB": "P02185"
 }
 
 def _parse_uniprot_entry(entry: Dict[str, Any]) -> Dict[str, Any]:

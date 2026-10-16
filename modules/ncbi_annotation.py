@@ -116,6 +116,78 @@ CURATED_NCBI_FALLBACKS = {
         "seq_length": 393,
         "uniprot_id": "P04637",
         "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000558": {
+        "found": True,
+        "accession": "NM_000558",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBA1",
+        "product": "hemoglobin subunit alpha 1",
+        "title": "Homo sapiens hemoglobin subunit alpha 1 (HBA1), mRNA",
+        "seq_length": 576,
+        "uniprot_id": "P69905",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P69905": {
+        "found": True,
+        "accession": "P69905",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBA1",
+        "product": "Hemoglobin subunit alpha",
+        "title": "Hemoglobin subunit alpha [Homo sapiens]",
+        "seq_length": 142,
+        "uniprot_id": "P69905",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P42212": {
+        "found": True,
+        "accession": "P42212",
+        "organism": "Aequorea victoria",
+        "taxonomy": "Eukaryota; Metazoa; Cnidaria; Hydrozoa; Hydroidolina; Leptothecata; Aequoreidae; Aequorea",
+        "gene": "GFP",
+        "product": "Green fluorescent protein",
+        "title": "Green fluorescent protein [Aequorea victoria]",
+        "seq_length": 238,
+        "uniprot_id": "P42212",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P00698": {
+        "found": True,
+        "accession": "P00698",
+        "organism": "Gallus gallus",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Archosauria; Aves; Neognathae; Galliformes; Phasianidae; Phasianinae; Gallus",
+        "gene": "LYZ",
+        "product": "Lysozyme C",
+        "title": "Lysozyme C [Gallus gallus]",
+        "seq_length": 147,
+        "uniprot_id": "P00698",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P02185": {
+        "found": True,
+        "accession": "P02185",
+        "organism": "Physeter catodon",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Laurasiatheria; Artiodactyla; Whippomorpha; Cetacea; Odontoceti; Physeteridae; Physeter",
+        "gene": "MB",
+        "product": "Myoglobin",
+        "title": "Myoglobin [Physeter catodon]",
+        "seq_length": 154,
+        "uniprot_id": "P02185",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NR_024570": {
+        "found": True,
+        "accession": "NR_024570",
+        "organism": "Escherichia coli",
+        "taxonomy": "Bacteria; Pseudomonadota; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia",
+        "gene": "rrsA",
+        "product": "16S ribosomal RNA",
+        "title": "Escherichia coli strain U 5/41 16S ribosomal RNA, partial sequence",
+        "seq_length": 1542,
+        "uniprot_id": "",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
     }
 }
 

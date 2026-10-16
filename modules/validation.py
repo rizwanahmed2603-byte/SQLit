@@ -1,7 +1,8 @@
 """
 Sequence validation and statistics module for SeqLit.
 Handles raw sequence and FASTA cleaning, sequence type detection (DNA, RNA, Protein),
-and computation of basic metrics (GC%, molecular weight, composition frequency).
+degenerate IUPAC alphabet support, and computation of basic metrics
+(GC%, molecular weight, composition frequency).
 """
 
 import re
@@ -14,16 +15,22 @@ PROTEIN_WEIGHTS = {
     'A': 89.09, 'R': 174.20, 'N': 132.12, 'D': 133.10, 'C': 121.16,
     'E': 147.13, 'Q': 146.15, 'G': 75.07, 'H': 155.16, 'I': 131.18,
     'L': 131.18, 'K': 146.19, 'M': 149.21, 'F': 165.19, 'P': 115.13,
-    'S': 105.09, 'T': 119.12, 'W': 204.23, 'Y': 181.19, 'V': 117.15
+    'S': 105.09, 'T': 119.12, 'W': 204.23, 'Y': 181.19, 'V': 117.15,
+    'X': 110.0, 'B': 132.6, 'Z': 146.6, 'U': 168.05, 'O': 255.31
 }
 
+# Standard & degenerate IUPAC character sets
 DNA_CHARS = set("ATCGN")
+DNA_DEGENERATE = set("ATCGNRYKMSWBDHVX")
 RNA_CHARS = set("AUCGN")
+RNA_DEGENERATE = set("AUCGNRYKMSWBDHVX")
 PROTEIN_CHARS = set("ACDEFGHIKLMNPQRSTVWY")
+PROTEIN_EXTENDED = set("ACDEFGHIKLMNPQRSTVWYXBZJUO")
 
 def clean_sequence(raw_input: str) -> Tuple[str, str]:
     """
-    Strips FASTA header if present and removes all whitespace/numbers.
+    Strips FASTA header if present, removes whitespace, line numbers,
+    and strips trailing stop codons (*).
     Returns (cleaned_sequence_upper, header_or_empty).
     """
     if not raw_input or not raw_input.strip():
@@ -46,37 +53,37 @@ def clean_sequence(raw_input: str) -> Tuple[str, str]:
             seq_lines.append(cleaned_line)
 
     sequence = "".join(seq_lines).upper()
+    # Strip terminal stop codon if present e.g. from translation output
+    sequence = sequence.rstrip("*")
     return sequence, header
 
 def detect_sequence_type(seq: str) -> str:
     """
     Detects whether the sequence is DNA, RNA, Protein, or Invalid.
+    Supports standard and degenerate IUPAC codes.
     """
     if not seq:
         return "Unknown"
 
     unique_chars = set(seq)
 
-    # Check for RNA strictly before DNA if 'U' is present without 'T'
+    # 1. RNA detection: 'U' present and no 'T'
     if 'U' in unique_chars and 'T' not in unique_chars:
-        if unique_chars.issubset(RNA_CHARS):
+        if unique_chars.issubset(RNA_DEGENERATE):
             return "RNA"
 
-    # Check for DNA: only ATCGN
-    if unique_chars.issubset(DNA_CHARS):
+    # 2. DNA detection: ATCGN or degenerate DNA
+    if unique_chars.issubset(DNA_CHARS) or unique_chars.issubset(DNA_DEGENERATE):
         return "DNA"
 
-    # If both T and U are present, it's ambiguous/invalid
+    # 3. If both T and U are present, check if it fits protein
     if 'T' in unique_chars and 'U' in unique_chars:
-        # Check if it fits protein
-        if unique_chars.issubset(PROTEIN_CHARS):
+        if unique_chars.issubset(PROTEIN_EXTENDED):
             return "Protein"
         return "Invalid"
 
-    # Check for Protein: standard 20 amino acids
-    if unique_chars.issubset(PROTEIN_CHARS):
-        # Even if made of A, C, G, T it fell into DNA above.
-        # So reaching here means it contains non-DNA amino acids.
+    # 4. Standard and extended Protein
+    if unique_chars.issubset(PROTEIN_CHARS) or unique_chars.issubset(PROTEIN_EXTENDED):
         return "Protein"
 
     return "Invalid"
@@ -109,9 +116,7 @@ def calculate_stats(seq: str, seq_type: str) -> Dict[str, Any]:
         g_count = composition.get('G', 0)
         c_count = composition.get('C', 0)
         gc_percent = round(((g_count + c_count) / length) * 100, 2)
-        # Approximate MW: sum of dNTPs minus water loss in phosphodiester bonds
         weight = sum(DNA_WEIGHTS.get(base, 308.0) * count for base, count in composition.items())
-        # Subtract water (18.015) for each internucleotide linkage + add end groups
         if length > 1:
             weight -= (length - 1) * 18.015
         molecular_weight = round(weight, 2)
@@ -126,7 +131,6 @@ def calculate_stats(seq: str, seq_type: str) -> Dict[str, Any]:
         molecular_weight = round(weight, 2)
 
     elif seq_type == "Protein":
-        # Sum residue weights minus water for each peptide bond
         weight = sum(PROTEIN_WEIGHTS.get(aa, 110.0) * count for aa, count in composition.items())
         if length > 1:
             weight -= (length - 1) * 18.015
@@ -140,9 +144,43 @@ def calculate_stats(seq: str, seq_type: str) -> Dict[str, Any]:
         "frequencies": frequencies
     }
 
+def extract_header_hints(header: str) -> Dict[str, str]:
+    """
+    Extracts biological hints (accession, gene symbol, organism) from FASTA header.
+    """
+    hints = {"accession": "", "gene": "", "organism": ""}
+    if not header:
+        return hints
+
+    # Match Swiss-Prot accession: sp|P01308|
+    sp_m = re.search(r"sp\|([A-Z0-9]{6,10})", header)
+    if sp_m:
+        hints["accession"] = sp_m.group(1)
+
+    # Match RefSeq accession: NM_000518, NP_000509
+    ref_m = re.search(r"\b([A-Z]{1,2}_\d{5,9})\b", header)
+    if ref_m and not hints["accession"]:
+        hints["accession"] = ref_m.group(1)
+
+    # Match Organism: OS=... or [Homo sapiens]
+    org_os = re.search(r"OS=([^=]+?)(?:\s+[A-Z]{2}=|$)", header)
+    if org_os:
+        hints["organism"] = org_os.group(1).strip()
+    else:
+        org_bracket = re.search(r"\[([A-Za-z0-9_.\s-]+)\]", header)
+        if org_bracket:
+            hints["organism"] = org_bracket.group(1).strip()
+
+    # Match Gene: GN=HBB or (HBB)
+    gn_m = re.search(r"(?:GN=|\()([A-Za-z0-9_-]{2,12})(?:\)|\s|$)", header)
+    if gn_m:
+        hints["gene"] = gn_m.group(1).strip()
+
+    return hints
+
 def validate_and_analyze(raw_input: str) -> Dict[str, Any]:
     """
-    Top-level function for Week 1 validation & statistics.
+    Top-level validation and statistics function for SeqLit.
     """
     cleaned_seq, header = clean_sequence(raw_input)
     if not cleaned_seq:
@@ -155,8 +193,8 @@ def validate_and_analyze(raw_input: str) -> Dict[str, Any]:
 
     seq_type = detect_sequence_type(cleaned_seq)
     if seq_type == "Invalid":
-        # Identify invalid characters
-        invalid_chars = sorted(list(set(cleaned_seq) - (DNA_CHARS | RNA_CHARS | PROTEIN_CHARS)))
+        all_allowed = DNA_DEGENERATE | RNA_DEGENERATE | PROTEIN_EXTENDED
+        invalid_chars = sorted(list(set(cleaned_seq) - all_allowed))
         return {
             "valid": False,
             "error": f"Sequence contains unrecognized or invalid characters: {', '.join(invalid_chars)}",
@@ -166,11 +204,13 @@ def validate_and_analyze(raw_input: str) -> Dict[str, Any]:
         }
 
     stats = calculate_stats(cleaned_seq, seq_type)
+    header_hints = extract_header_hints(header)
 
     return {
         "valid": True,
         "header": header or "User Sequence",
         "sequence": cleaned_seq,
         "type": seq_type,
-        "stats": stats
+        "stats": stats,
+        "hints": header_hints
     }

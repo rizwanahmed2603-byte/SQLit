@@ -212,6 +212,77 @@ CURATED_PUBMED_FALLBACKS = {
             "category": "Disease / Pathology",
             "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/30154174/"
         }
+    ],
+    "HBA1": [
+        {
+            "pmid": "28854178",
+            "title": "Structure of human deoxyhemoglobin at 1.25 A resolution",
+            "authors": "Park SY, Yokoyama T, Shibayama N, et al.",
+            "journal": "J Mol Biol",
+            "year": "2017",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28854178/"
+        },
+        {
+            "pmid": "28416738",
+            "title": "Alpha-thalassemia: molecular insights and clinical manifestations",
+            "authors": "Farashi S, Harteveld CL",
+            "journal": "Orphanet J Rare Dis",
+            "year": "2018",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28416738/"
+        }
+    ],
+    "GFP": [
+        {
+            "pmid": "8700225",
+            "title": "Crystal structure of the Aequorea victoria green fluorescent protein",
+            "authors": "Ormo M, Cubitt AB, Kallio K, Gross LA, Tsien RY, Remington SJ",
+            "journal": "Science",
+            "year": "1996",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8700225/"
+        },
+        {
+            "pmid": "8303295",
+            "title": "Green fluorescent protein as a marker for gene expression",
+            "authors": "Chalfie M, Tu Y, Euskirchen G, Ward WW, Prasher DC",
+            "journal": "Science",
+            "year": "1994",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8303295/"
+        }
+    ],
+    "LYZ": [
+        {
+            "pmid": "14170634",
+            "title": "Structure of Hen Egg-White Lysozyme: A Three-dimensional Fourier Synthesis at 2 A Resolution",
+            "authors": "Blake CC, Koenig DF, Mair GA, North AC, Phillips DC, Sarma VR",
+            "journal": "Nature",
+            "year": "1965",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14170634/"
+        },
+        {
+            "pmid": "11983058",
+            "title": "Structural and mechanistic basis of lysozyme catalysis",
+            "authors": "Vocadlo DJ, Davies GJ, Laine R, Withers SG",
+            "journal": "Nature",
+            "year": "2001",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11983058/"
+        }
+    ],
+    "MB": [
+        {
+            "pmid": "14040162",
+            "title": "A three-dimensional model of the myoglobin molecule obtained by x-ray analysis",
+            "authors": "Kendrew JC, Bodo G, Dintzis HM, Parrish RG, Wyckoff H, Phillips DC",
+            "journal": "Nature",
+            "year": "1958",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14040162/"
+        }
     ]
 }
 

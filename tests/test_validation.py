@@ -48,5 +48,34 @@ class TestValidation(unittest.TestCase):
         self.assertEqual(result["type"], "DNA")
         self.assertEqual(result["stats"]["length"], 4)
 
+    def test_degenerate_dna(self):
+        degen = "ATGCYRWSKMDVHBXN"
+        result = validate_and_analyze(degen)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["type"], "DNA")
+
+    def test_degenerate_rna(self):
+        rna_degen = "AUGCRYWSKMDVHBXN"
+        result = validate_and_analyze(rna_degen)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["type"], "RNA")
+
+    def test_protein_trailing_stop_codon(self):
+        prot_stop = "MVHLTPEEKSAVTALW*"
+        cleaned, _ = clean_sequence(prot_stop)
+        self.assertEqual(cleaned, "MVHLTPEEKSAVTALW")
+        result = validate_and_analyze(prot_stop)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["type"], "Protein")
+
+    def test_fasta_header_hints(self):
+        fasta = ">sp|P03211|EBNA1_EBVB9 Epstein-Barr nuclear antigen 1 OS=Epstein-Barr virus OX=10377 GN=EBNA1 PE=1 SV=1\nMSDEGPGTGPGN"
+        result = validate_and_analyze(fasta)
+        self.assertTrue(result["valid"])
+        hints = result.get("hints", {})
+        self.assertEqual(hints.get("accession"), "P03211")
+        self.assertEqual(hints.get("gene"), "EBNA1")
+        self.assertIn("Epstein-Barr virus", hints.get("organism", ""))
+
 if __name__ == "__main__":
     unittest.main()

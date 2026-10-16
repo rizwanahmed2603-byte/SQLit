@@ -20,6 +20,8 @@
             <li><a class="dropdown-item sample-option" href="#" data-id="ebna1"><strong>EBNA-1</strong> (Protein, 641 aa) — Epstein-Barr Virus</a></li>
             <li><a class="dropdown-item sample-option" href="#" data-id="ins"><strong>Human Insulin</strong> (DNA, 333 bp) — Preproinsulin</a></li>
             <li><a class="dropdown-item sample-option" href="#" data-id="tp53"><strong>Human TP53</strong> (DNA, 1182 bp) — Tumor Suppressor</a></li>
+            <li><a class="dropdown-item sample-option" href="#" data-id="gfp"><strong>GFP</strong> (Protein, 238 aa) — Aequorea victoria</a></li>
+            <li><a class="dropdown-item sample-option" href="#" data-id="rrna16s"><strong>16S rRNA</strong> (RNA, 1542 nt) — E. coli Ribosomal</a></li>
           </ul>
         </div>
         <button type="button" class="btn btn-primary d-flex align-items-center gap-1 d-none" id="exportPdfBtn">
@@ -55,7 +57,7 @@
                 <button type="button" class="btn btn-ghost-secondary" id="clearBtn">Clear</button>
               </div>
               <div class="col-md-6 text-md-end text-muted small">
-                Supports standard DNA (ATCG), RNA (AUCG), and 20 Amino Acids. Automatic type detection & validation.
+                Supports DNA, RNA (uracil), and Protein sequences including IUPAC degenerate bases and extended amino acids. Automatic type detection & validation.
               </div>
             </div>
           </form>

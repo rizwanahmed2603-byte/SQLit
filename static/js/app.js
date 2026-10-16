@@ -104,6 +104,9 @@ async function handleSequenceSubmit(e) {
   }
 }
 
+let progressTimer = null;
+let progressStartTime = null;
+
 function showProgress(text, pct) {
   const pSection = document.getElementById("progressSection");
   const pText = document.getElementById("pipelineStatusText");
@@ -111,12 +114,25 @@ function showProgress(text, pct) {
   const submitBtn = document.getElementById("submitBtn");
 
   pSection.classList.remove("d-none");
-  pText.textContent = text;
   pPct.textContent = pct + "%";
   submitBtn.disabled = true;
+
+  if (progressTimer) clearInterval(progressTimer);
+  progressStartTime = Date.now();
+
+  const updateStatus = () => {
+    const elapsed = Math.floor((Date.now() - progressStartTime) / 1000);
+    pText.textContent = `${text} (elapsed: ${elapsed}s)`;
+  };
+  updateStatus();
+  progressTimer = setInterval(updateStatus, 1000);
 }
 
 function hideProgress() {
+  if (progressTimer) {
+    clearInterval(progressTimer);
+    progressTimer = null;
+  }
   document.getElementById("progressSection").classList.add("d-none");
   document.getElementById("submitBtn").disabled = false;
 }

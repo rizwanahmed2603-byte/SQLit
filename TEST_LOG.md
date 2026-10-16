@@ -8,11 +8,11 @@ This document records the empirical testing, edge case evaluations, identified a
 
 | Test Category | Suite / File | Test Count | Result |
 |---|---|---|---|
-| Sequence Validation & Typing | `tests/test_validation.py` | 8 | ✅ All Passed |
-| Pipeline Logic & Curation Ranking | `tests/test_pipeline.py` | 7 | ✅ All Passed |
+| Sequence Validation & IUPAC Typing | `tests/test_validation.py` | 12 | ✅ All Passed |
+| Pipeline Logic, Alignment & Fallback | `tests/test_pipeline.py` | 9 | ✅ All Passed |
 | Non-Existent Sequence Authenticity | `tests/test_nonexistent_sequence.py` | 3 | ✅ All Passed |
 | End-to-End Flask API & Web Routes | `tests/test_app.py` | 8 | ✅ All Passed |
-| **Total Test Suite** | **All Tests** | **26 Tests** | **✅ 100% Passing** |
+| **Total Test Suite** | **All Tests** | **32 Tests** | **✅ 100% Passing** |
 
 ---
 
@@ -75,6 +75,9 @@ This document records the empirical testing, edge case evaluations, identified a
 | Synthetic non-existent sequence | `"ATGCTAGCTAGCTAGCTGATCGATCGATCGAT"` | Authentic zero-hits notification; no fake biological entities fabricated | Identified 0 hits, returned clear notification: "The submitted sequence did not match any known biological organisms" | Passed |
 | Multi-line FASTA with comments | `">Header\nATGC\nATGC"` | Header stripped, sequence cleaned and concatenated | Cleaned to `ATGCATGC`, header preserved | Passed |
 | RNA detection | `"AUGCGAUCGAUCGAUC"` | Auto-detected as RNA | Correctly detected as `RNA`, GC% calculated | Passed |
+| Degenerate IUPAC DNA | `"ATGCYRWSKMDVHBXN"` | Auto-detected as DNA with IUPAC bases | Correctly detected as `DNA`, stats calculated | Passed |
+| Degenerate IUPAC RNA | `"AUGCRYWSKMDVHBXN"` | Auto-detected as RNA with IUPAC bases | Correctly detected as `RNA`, GC% calculated | Passed |
+| Protein trailing stop codon | `"MVHLTPEEKSAVTALW*"` | Terminal `*` stripped, typed as Protein | Correctly cleaned and typed as `Protein` | Passed |
 
 ---
 
