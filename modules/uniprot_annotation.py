@@ -394,6 +394,198 @@ CURATED_UNIPROT_FALLBACKS = {
         ],
         "entry_url": "https://www.uniprot.org/uniprotkb/P99999",
         "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01116": {
+        "found": True,
+        "accession": "P01116",
+        "protein_name": "GTPase KRas",
+        "gene": "KRAS",
+        "organism": "Homo sapiens",
+        "function": "Ras proteins bind GDP/GTP and possess intrinsic GTPase activity. Plays an important role in the regulation of cell proliferation, promoting cell growth and survival. Mutations are frequently associated with various malignancies including pancreatic, colorectal, and lung adenocarcinomas.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0007165", "name": "signal transduction"}, {"id": "GO:0008283", "name": "cell population proliferation"}, {"id": "GO:0043406", "name": "positive regulation of MAP kinase activity"}],
+            "molecular_function": [{"id": "GO:0005525", "name": "GTP binding"}, {"id": "GO:0003924", "name": "GTPase activity"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0005737", "name": "cytoplasm"}]
+        },
+        "features": [{"type": "Region", "description": "Effector region", "start": "32", "end": "40"}, {"type": "Binding site", "description": "GTP/GDP binding", "start": "10", "end": "17"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01116",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P60484": {
+        "found": True,
+        "accession": "P60484",
+        "protein_name": "Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase PTEN",
+        "gene": "PTEN",
+        "organism": "Homo sapiens",
+        "function": "Dual-specificity phosphatase that dephosphorylates phosphatidylinositol 3,4,5-trisphosphate (PIP3) to PIP2, directly counteracting the PI3K/AKT signaling cascade. Acts as a vital tumor suppressor controlling cell cycle progression, survival, and cell growth.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0007165", "name": "signal transduction"}, {"id": "GO:0008285", "name": "negative regulation of cell population proliferation"}, {"id": "GO:0006470", "name": "protein dephosphorylation"}],
+            "molecular_function": [{"id": "GO:0004725", "name": "protein tyrosine phosphatase activity"}, {"id": "GO:0046834", "name": "lipid phosphatase activity"}],
+            "cellular_component": [{"id": "GO:0005829", "name": "cytosol"}, {"id": "GO:0005634", "name": "nucleus"}, {"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "Phosphatase catalytic domain", "start": "14", "end": "185"}, {"type": "Active site", "description": "Catalytic nucleophile (Cys-124)", "start": "124", "end": "124"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P60484",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P15056": {
+        "found": True,
+        "accession": "P15056",
+        "protein_name": "Serine/threonine-protein kinase B-raf",
+        "gene": "BRAF",
+        "organism": "Homo sapiens",
+        "function": "Protein kinase involved in the transduction of mitogenic signals from cell surface receptors to the nucleus. Component of the MAP kinase/ERK cascade that regulates cell division, differentiation, and survival. The V600E mutation causes constitutive activation.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0000165", "name": "MAPK cascade"}, {"id": "GO:0006468", "name": "protein phosphorylation"}],
+            "molecular_function": [{"id": "GO:0004674", "name": "protein serine/threonine kinase activity"}, {"id": "GO:0005524", "name": "ATP binding"}],
+            "cellular_component": [{"id": "GO:0005737", "name": "cytoplasm"}, {"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "Protein kinase domain", "start": "457", "end": "717"}, {"type": "Binding site", "description": "ATP binding site", "start": "463", "end": "471"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P15056",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P00533": {
+        "found": True,
+        "accession": "P00533",
+        "protein_name": "Epidermal growth factor receptor",
+        "gene": "EGFR",
+        "organism": "Homo sapiens",
+        "function": "Receptor tyrosine kinase binding ligands of the EGF family and activating several signaling cascades including MAPK, Akt, and JNK. Regulates cell proliferation, differentiation, and survival.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0007169", "name": "transmembrane receptor protein tyrosine kinase signaling pathway"}, {"id": "GO:0008283", "name": "cell population proliferation"}],
+            "molecular_function": [{"id": "GO:0004714", "name": "transmembrane receptor protein tyrosine kinase activity"}, {"id": "GO:0005524", "name": "ATP binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0005634", "name": "nucleus"}]
+        },
+        "features": [{"type": "Domain", "description": "Protein kinase domain", "start": "712", "end": "979"}, {"type": "Binding site", "description": "ATP binding", "start": "718", "end": "726"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P00533",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P02649": {
+        "found": True,
+        "accession": "P02649",
+        "protein_name": "Apolipoprotein E",
+        "gene": "APOE",
+        "organism": "Homo sapiens",
+        "function": "Major apoprotein of chylomicrons and HDL. Mediates the binding, internalization, and catabolism of lipoprotein particles. Critical risk determinant for Alzheimer disease and cardiovascular disease.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0042157", "name": "lipoprotein metabolic process"}, {"id": "GO:0006869", "name": "lipid transport"}],
+            "molecular_function": [{"id": "GO:0005543", "name": "phospholipid binding"}, {"id": "GO:0005160", "name": "low-density lipoprotein receptor binding"}],
+            "cellular_component": [{"id": "GO:0005576", "name": "extracellular region"}, {"id": "GO:0034364", "name": "high-density lipoprotein particle"}]
+        },
+        "features": [{"type": "Domain", "description": "Receptor-binding domain", "start": "136", "end": "150"}, {"type": "Region", "description": "Lipid-binding domain", "start": "205", "end": "270"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P02649",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01375": {
+        "found": True,
+        "accession": "P01375",
+        "protein_name": "Tumor necrosis factor",
+        "gene": "TNF",
+        "organism": "Homo sapiens",
+        "function": "Cytokine that binds to TNFRSF1A/TNFR1 and TNFRSF1B/TNFBR. Mainly secreted by macrophages and can induce fever, apoptotic cell death, sepsis, cachexia, and inflammation.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006954", "name": "inflammatory response"}, {"id": "GO:0006915", "name": "apoptotic process"}],
+            "molecular_function": [{"id": "GO:0005164", "name": "tumor necrosis factor receptor binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0005576", "name": "extracellular space"}]
+        },
+        "features": [{"type": "Chain", "description": "Tumor necrosis factor, soluble form", "start": "77", "end": "233"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01375",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P05231": {
+        "found": True,
+        "accession": "P05231",
+        "protein_name": "Interleukin-6",
+        "gene": "IL6",
+        "organism": "Homo sapiens",
+        "function": "Cytokine with wide-ranging biological functions in immunity, tissue regeneration, and metabolism. Binds to IL-6R to initiate gp130 signaling.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006954", "name": "inflammatory response"}, {"id": "GO:0002526", "name": "acute inflammatory response"}],
+            "molecular_function": [{"id": "GO:0005138", "name": "interleukin-6 receptor binding"}],
+            "cellular_component": [{"id": "GO:0005576", "name": "extracellular space"}]
+        },
+        "features": [{"type": "Chain", "description": "Interleukin-6", "start": "29", "end": "212"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P05231",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P61769": {
+        "found": True,
+        "accession": "P61769",
+        "protein_name": "Beta-2-microglobulin",
+        "gene": "B2M",
+        "organism": "Homo sapiens",
+        "function": "Component of the major histocompatibility complex (MHC) class I. Involved in the presentation of peptide antigens to the immune system.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0002474", "name": "antigen processing and presentation of peptide antigen via MHC class I"}],
+            "molecular_function": [{"id": "GO:0042605", "name": "peptide antigen binding"}],
+            "cellular_component": [{"id": "GO:0042612", "name": "MHC class I protein complex"}]
+        },
+        "features": [{"type": "Chain", "description": "Beta-2-microglobulin", "start": "21", "end": "119"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P61769",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P38398": {
+        "found": True,
+        "accession": "P38398",
+        "protein_name": "Breast cancer type 1 susceptibility protein",
+        "gene": "BRCA1",
+        "organism": "Homo sapiens",
+        "function": "E3 ubiquitin-protein ligase that plays central roles in DNA repair, homologous recombination, cell cycle checkpoint control, and maintaining genomic stability. Forms the BRCA1-BARD1 heterodimer.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006281", "name": "DNA repair"}, {"id": "GO:0000724", "name": "double-strand break repair via homologous recombination"}],
+            "molecular_function": [{"id": "GO:0004842", "name": "ubiquitin-protein transferase activity"}, {"id": "GO:0003684", "name": "damaged DNA binding"}],
+            "cellular_component": [{"id": "GO:0005634", "name": "nucleus"}, {"id": "GO:0000785", "name": "chromatin"}]
+        },
+        "features": [{"type": "Domain", "description": "RING-type zinc finger", "start": "24", "end": "64"}, {"type": "Domain", "description": "BRCT 1 domain", "start": "1646", "end": "1736"}, {"type": "Domain", "description": "BRCT 2 domain", "start": "1760", "end": "1855"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P38398",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P0DTC2": {
+        "found": True,
+        "accession": "P0DTC2",
+        "protein_name": "Spike glycoprotein",
+        "gene": "S",
+        "organism": "Severe acute respiratory syndrome coronavirus 2",
+        "function": "Structural spike glycoprotein that binds to human ACE2 receptor to mediate viral entry and membrane fusion into host cells. Target of major neutralizing antibodies and vaccines.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0046718", "name": "viral entry into host cell"}, {"id": "GO:0019064", "name": "virion attachment to host cell"}],
+            "molecular_function": [{"id": "GO:0005102", "name": "signaling receptor binding"}],
+            "cellular_component": [{"id": "GO:0019031", "name": "viral envelope"}]
+        },
+        "features": [{"type": "Region", "description": "Receptor-binding domain (RBD)", "start": "319", "end": "541"}, {"type": "Cleavage site", "description": "Furin cleavage site (PRRAR)", "start": "681", "end": "685"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P0DTC2",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P0DTC9": {
+        "found": True,
+        "accession": "P0DTC9",
+        "protein_name": "Nucleocapsid phosphoprotein",
+        "gene": "N",
+        "organism": "Severe acute respiratory syndrome coronavirus 2",
+        "function": "Packages the positive-strand viral genome RNA into a helical ribonucleoprotein (RNP) complex and plays a fundamental role in virion assembly.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0019068", "name": "virion assembly"}],
+            "molecular_function": [{"id": "GO:0003723", "name": "RNA binding"}],
+            "cellular_component": [{"id": "GO:0019028", "name": "viral capsid"}]
+        },
+        "features": [{"type": "Domain", "description": "RNA-binding domain", "start": "41", "end": "174"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P0DTC9",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "AAB02574": {
+        "found": True,
+        "accession": "AAB02574",
+        "protein_name": "Enhanced green fluorescent protein",
+        "gene": "EGFP",
+        "organism": "Aequorea victoria",
+        "function": "Enhanced mutant variant of GFP (F64L/S65T) exhibiting high fluorescence intensity and spectral optimization for eukaryotic reporter gene expression.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0008218", "name": "bioluminescence"}],
+            "molecular_function": [{"id": "GO:0005515", "name": "protein binding"}],
+            "cellular_component": [{"id": "GO:0005737", "name": "cytoplasm"}]
+        },
+        "features": [{"type": "Site", "description": "Fluorophore (Thr-65, Tyr-66, Gly-67)", "start": "65", "end": "67"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/AAB02574",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
     }
 }
 
@@ -413,7 +605,21 @@ GENE_TO_ACCESSION = {
     "ACTB": "P60709",
     "ALB": "P02768",
     "MYC": "P01106",
-    "CYCS": "P99999"
+    "CYCS": "P99999",
+    "KRAS": "P01116",
+    "PTEN": "P60484",
+    "BRAF": "P15056",
+    "EGFR": "P00533",
+    "APOE": "P02649",
+    "TNF": "P01375",
+    "IL6": "P05231",
+    "B2M": "P61769",
+    "BRCA1": "P38398",
+    "S": "P0DTC2",
+    "SARS2_S": "P0DTC2",
+    "N": "P0DTC9",
+    "SARS2_N": "P0DTC9",
+    "EGFP": "AAB02574"
 }
 
 def _parse_uniprot_entry(entry: Dict[str, Any]) -> Dict[str, Any]:

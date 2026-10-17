@@ -186,7 +186,7 @@ def extract_header_hints(header: str) -> Dict[str, str]:
         hints["gene"] = gn_m.group(1).strip().upper()
     else:
         # Check known common symbols in header
-        known_genes = re.search(r"\b(HBB|HBA1|HBA|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|MYC|CYCS|GFP|LYZ|MB|EBNA1|APOE|TNF|IL6|ACE2)\b", header, re.IGNORECASE)
+        known_genes = re.search(r"\b(HBB|HBA1|HBA|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|BRCA2|KRAS|BRAF|PTEN|MYC|CYCS|GFP|EGFP|LYZ|MB|EBNA1|APOE|TNF|IL6|ACE2|B2M|TUBB|CFTR|VEGFA|CDK4|RB1|SARS2)\b", header, re.IGNORECASE)
         if known_genes:
             hints["gene"] = known_genes.group(1).strip().upper()
 

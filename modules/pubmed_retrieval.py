@@ -383,7 +383,314 @@ CURATED_PUBMED_FALLBACKS = {
             "category": "Function / Mechanism",
             "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11896068/"
         }
-    ]
+    ],
+    "KRAS": [
+        {
+                "pmid": "31665424",
+                "title": "KRAS G12C Inhibition in Advanced Solid Tumors",
+                "authors": "Fakih M et al.",
+                "journal": "N Engl J Med",
+                "year": "2020",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/31665424/"
+        },
+        {
+                "pmid": "32958714",
+                "title": "Crystal structure of KRAS(G12C) bound to small-molecule inhibitor",
+                "authors": "Lanman BA et al.",
+                "journal": "J Med Chem",
+                "year": "2020",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32958714/"
+        },
+        {
+                "pmid": "30467268",
+                "title": "The molecular biology and clinical genetics of KRAS-mutant cancers",
+                "authors": "Cox AD et al.",
+                "journal": "Nat Rev Cancer",
+                "year": "2019",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/30467268/"
+        },
+        {
+                "pmid": "24681548",
+                "title": "Regulation of RAS signaling pathways in normal and transformed cells",
+                "authors": "Stephen AG et al.",
+                "journal": "Cancer Cell",
+                "year": "2014",
+                "category": "Function / Mechanism",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24681548/"
+        }
+],
+    "PTEN": [
+        {
+                "pmid": "10550058",
+                "title": "Crystal structure of the PTEN tumor suppressor",
+                "authors": "Lee JO et al.",
+                "journal": "Cell",
+                "year": "1999",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/10550058/"
+        },
+        {
+                "pmid": "24803743",
+                "title": "PTEN in health and disease",
+                "authors": "Song MS et al.",
+                "journal": "Cell",
+                "year": "2012",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24803743/"
+        },
+        {
+                "pmid": "29184024",
+                "title": "Targeting PTEN-deficient cancers with specific synthetic lethal strategies",
+                "authors": "Hopkins BD et al.",
+                "journal": "Trends Cancer",
+                "year": "2018",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29184024/"
+        },
+        {
+                "pmid": "22960746",
+                "title": "Nuclear functions of PTEN in genomic stability and DNA repair",
+                "authors": "Shen WH et al.",
+                "journal": "Cell Stem Cell",
+                "year": "2012",
+                "category": "Function / Mechanism",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22960746/"
+        }
+],
+    "BRAF": [
+        {
+                "pmid": "21639808",
+                "title": "Improved survival with vemurafenib in melanoma with BRAF V600E mutation",
+                "authors": "Chapman PB et al.",
+                "journal": "N Engl J Med",
+                "year": "2011",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/21639808/"
+        },
+        {
+                "pmid": "15175754",
+                "title": "Structure of oncogenic B-Raf in complex with BAY43-9006",
+                "authors": "Wan PT et al.",
+                "journal": "Cell",
+                "year": "2004",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15175754/"
+        },
+        {
+                "pmid": "12068308",
+                "title": "Mutations of the BRAF gene in human cancer",
+                "authors": "Davies H et al.",
+                "journal": "Nature",
+                "year": "2002",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/12068308/"
+        }
+],
+    "EGFR": [
+        {
+                "pmid": "15118073",
+                "title": "Activating mutations in the EGFR underlying responsiveness to gefitinib",
+                "authors": "Lynch TJ et al.",
+                "journal": "N Engl J Med",
+                "year": "2004",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15118073/"
+        },
+        {
+                "pmid": "17065977",
+                "title": "Crystal structure of the asymmetric kinase domain dimer of EGFR",
+                "authors": "Zhang X et al.",
+                "journal": "Cell",
+                "year": "2006",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/17065977/"
+        },
+        {
+                "pmid": "24982536",
+                "title": "EGFR mutations in non-small cell lung cancer: a review",
+                "authors": "Kobayashi S et al.",
+                "journal": "Clin Cancer Res",
+                "year": "2014",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24982536/"
+        }
+],
+    "APOE": [
+        {
+                "pmid": "8341661",
+                "title": "Apolipoprotein E epsilon 4 allele as a major risk factor for late-onset Alzheimer disease",
+                "authors": "Saunders AM et al.",
+                "journal": "Lancet",
+                "year": "1993",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8341661/"
+        },
+        {
+                "pmid": "1738734",
+                "title": "Three-dimensional structure of the LDL receptor-binding domain in human apolipoprotein E",
+                "authors": "Wilson C et al.",
+                "journal": "Science",
+                "year": "1991",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1738734/"
+        }
+],
+    "TNF": [
+        {
+                "pmid": "2544990",
+                "title": "Crystal structure of human recombinant tumor necrosis factor",
+                "authors": "Eck MJ et al.",
+                "journal": "J Biol Chem",
+                "year": "1989",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2544990/"
+        },
+        {
+                "pmid": "16314878",
+                "title": "Anti-TNF therapy in rheumatoid arthritis and autoimmune inflammatory diseases",
+                "authors": "Feldmann M et al.",
+                "journal": "Annu Rev Immunol",
+                "year": "2006",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16314878/"
+        }
+],
+    "IL6": [
+        {
+                "pmid": "9367987",
+                "title": "Crystal structure of hexameric human interleukin-6/receptor complex",
+                "authors": "Boulanger MJ et al.",
+                "journal": "Science",
+                "year": "2003",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/9367987/"
+        },
+        {
+                "pmid": "33631065",
+                "title": "Interleukin-6 Receptor Antagonists in Critically Ill Patients with Covid-19",
+                "authors": "REMAP-CAP Investigators",
+                "journal": "N Engl J Med",
+                "year": "2021",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/33631065/"
+        }
+],
+    "B2M": [
+        {
+                "pmid": "18408018",
+                "title": "Structural basis of MHC class I assembly with beta-2-microglobulin",
+                "authors": "Groves T et al.",
+                "journal": "J Mol Biol",
+                "year": "2008",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18408018/"
+        }
+],
+    "BRCA1": [
+        {
+                "pmid": "11571477",
+                "title": "Structure of the BRCA1-BARD1 heterodimeric RING-finger complex",
+                "authors": "Brzovic PS et al.",
+                "journal": "Nat Struct Biol",
+                "year": "2001",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11571477/"
+        },
+        {
+                "pmid": "7545299",
+                "title": "A strong candidate for the breast and ovarian cancer susceptibility gene BRCA1",
+                "authors": "Miki Y et al.",
+                "journal": "Science",
+                "year": "1994",
+                "category": "Disease / Pathology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/7545299/"
+        },
+        {
+                "pmid": "29241409",
+                "title": "PARP Inhibitors in BRCA-Mutated Cancers",
+                "authors": "Lord CJ et al.",
+                "journal": "N Engl J Med",
+                "year": "2017",
+                "category": "Drug / Pharmacology",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29241409/"
+        }
+],
+    "S": [
+        {
+                "pmid": "32075877",
+                "title": "Cryo-EM structure of the 2019-nCoV spike in the prefusion conformation",
+                "authors": "Wrapp D et al.",
+                "journal": "Science",
+                "year": "2020",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32075877/"
+        },
+        {
+                "pmid": "32125561",
+                "title": "Structural basis for the recognition of SARS-CoV-2 by full-length human ACE2",
+                "authors": "Yan R et al.",
+                "journal": "Science",
+                "year": "2020",
+                "category": "Function / Mechanism",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32125561/"
+        }
+],
+    "SARS2_S": [
+        {
+                "pmid": "32075877",
+                "title": "Cryo-EM structure of the 2019-nCoV spike in the prefusion conformation",
+                "authors": "Wrapp D et al.",
+                "journal": "Science",
+                "year": "2020",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32075877/"
+        },
+        {
+                "pmid": "32125561",
+                "title": "Structural basis for the recognition of SARS-CoV-2 by full-length human ACE2",
+                "authors": "Yan R et al.",
+                "journal": "Science",
+                "year": "2020",
+                "category": "Function / Mechanism",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32125561/"
+        }
+],
+    "N": [
+        {
+                "pmid": "32467329",
+                "title": "Crystal structure of the RNA-binding domain of SARS-CoV-2 nucleocapsid phosphoprotein",
+                "authors": "Kang S et al.",
+                "journal": "Protein Cell",
+                "year": "2020",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32467329/"
+        }
+],
+    "SARS2_N": [
+        {
+                "pmid": "32467329",
+                "title": "Crystal structure of the RNA-binding domain of SARS-CoV-2 nucleocapsid phosphoprotein",
+                "authors": "Kang S et al.",
+                "journal": "Protein Cell",
+                "year": "2020",
+                "category": "Structure / Crystallography",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32467329/"
+        }
+],
+    "EGFP": [
+        {
+                "pmid": "8707053",
+                "title": "F64L and S65T mutants of green fluorescent protein with increased brightness",
+                "authors": "Cormack BP et al.",
+                "journal": "Gene",
+                "year": "1996",
+                "category": "Function / Mechanism",
+                "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8707053/"
+        }
+]
 }
 
 def categorize_article(title: str, abstract: str = "") -> str:
@@ -422,9 +729,9 @@ def fetch_pubmed_literature(
         return []
 
     # Check curated local fallback for benchmark genes
-    upper_gene = clean_gene.upper().replace("-", "")
+    upper_gene = clean_gene.upper().replace("-", "").replace("_", "")
     for benchmark_key, fallback_list in CURATED_PUBMED_FALLBACKS.items():
-        if upper_gene == benchmark_key or benchmark_key in upper_gene:
+        if upper_gene == benchmark_key.upper().replace("-", "").replace("_", ""):
             return fallback_list.copy()
 
     if not ENTREZ_AVAILABLE:

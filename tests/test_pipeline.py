@@ -123,5 +123,26 @@ class TestPipeline(unittest.TestCase):
         self.assertEqual(hits[0]["gene_symbol"], "ACTB")
         self.assertEqual(hits[0]["accession"], "P60709")
 
+    def test_local_benchmark_alignment_kras(self):
+        kras_frag = "ATGACTGAATATAAACTTGTGGTAGTTGGAGCTGGTGGCGTAGGCAAGAGTGCCTTGACGATACAGCTAATTCAGAATCATTTTGTGGACGAATATGATCCAACAATAGAGGATTCCTACAGGAAG"
+        hits = local_benchmark_alignment(kras_frag, "DNA")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["gene_symbol"], "KRAS")
+        self.assertEqual(hits[0]["identity_percent"], 100.0)
+
+    def test_local_benchmark_alignment_pten(self):
+        pten_frag = "MTAIIKEIVSRNKRRYQEDGFDLDLTYIYPNIIAMGFPAERLEGVYRNNIDDVVRFLDSKHKNHYKIYNLCAERHYDTAKFNCRVAQYPFEDHNPPQLELIKPFCEDLDQWLSEDDNHVAAIHCK"
+        hits = local_benchmark_alignment(pten_frag, "Protein")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["gene_symbol"], "PTEN")
+        self.assertEqual(hits[0]["identity_percent"], 100.0)
+
+    def test_local_benchmark_alignment_sars2(self):
+        spike_rbd = "CPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKSTNLVKNKCVNF"
+        hits = local_benchmark_alignment(spike_rbd, "Protein")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["gene_symbol"], "S")
+        self.assertEqual(hits[0]["identity_percent"], 100.0)
+
 if __name__ == "__main__":
     unittest.main()
