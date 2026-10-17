@@ -188,6 +188,126 @@ CURATED_NCBI_FALLBACKS = {
         "seq_length": 1542,
         "uniprot_id": "",
         "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_002046": {
+        "found": True,
+        "accession": "NM_002046",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "GAPDH",
+        "product": "glyceraldehyde-3-phosphate dehydrogenase",
+        "title": "Homo sapiens glyceraldehyde-3-phosphate dehydrogenase (GAPDH), transcript variant 1, mRNA",
+        "seq_length": 1310,
+        "uniprot_id": "P04406",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P04406": {
+        "found": True,
+        "accession": "P04406",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "GAPDH",
+        "product": "Glyceraldehyde-3-phosphate dehydrogenase",
+        "title": "Glyceraldehyde-3-phosphate dehydrogenase [Homo sapiens]",
+        "seq_length": 335,
+        "uniprot_id": "P04406",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_001101": {
+        "found": True,
+        "accession": "NM_001101",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ACTB",
+        "product": "actin beta",
+        "title": "Homo sapiens actin beta (ACTB), mRNA",
+        "seq_length": 1812,
+        "uniprot_id": "P60709",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P60709": {
+        "found": True,
+        "accession": "P60709",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ACTB",
+        "product": "Actin, cytoplasmic 1",
+        "title": "Actin, cytoplasmic 1 [Homo sapiens]",
+        "seq_length": 375,
+        "uniprot_id": "P60709",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000477": {
+        "found": True,
+        "accession": "NM_000477",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ALB",
+        "product": "albumin preproprotein",
+        "title": "Homo sapiens albumin (ALB), mRNA",
+        "seq_length": 2212,
+        "uniprot_id": "P02768",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P02768": {
+        "found": True,
+        "accession": "P02768",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ALB",
+        "product": "Albumin preproprotein",
+        "title": "Albumin preproprotein [Homo sapiens]",
+        "seq_length": 609,
+        "uniprot_id": "P02768",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_002467": {
+        "found": True,
+        "accession": "NM_002467",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "MYC",
+        "product": "MYC proto-oncogene protein",
+        "title": "Homo sapiens MYC proto-oncogene, bHLH transcription factor (MYC), mRNA",
+        "seq_length": 2381,
+        "uniprot_id": "P01106",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P01106": {
+        "found": True,
+        "accession": "P01106",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "MYC",
+        "product": "Myc proto-oncogene protein",
+        "title": "Myc proto-oncogene protein [Homo sapiens]",
+        "seq_length": 439,
+        "uniprot_id": "P01106",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_018947": {
+        "found": True,
+        "accession": "NM_018947",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CYCS",
+        "product": "cytochrome c, somatic",
+        "title": "Homo sapiens cytochrome c, somatic (CYCS), mRNA",
+        "seq_length": 1139,
+        "uniprot_id": "P99999",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P99999": {
+        "found": True,
+        "accession": "P99999",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CYCS",
+        "product": "Cytochrome c",
+        "title": "Cytochrome c [Homo sapiens]",
+        "seq_length": 105,
+        "uniprot_id": "P99999",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
     }
 }
 

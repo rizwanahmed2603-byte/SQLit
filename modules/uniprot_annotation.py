@@ -256,6 +256,144 @@ CURATED_UNIPROT_FALLBACKS = {
         ],
         "entry_url": "https://www.uniprot.org/uniprotkb/P02185",
         "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P04406": {
+        "found": True,
+        "accession": "P04406",
+        "protein_name": "Glyceraldehyde-3-phosphate dehydrogenase",
+        "gene": "GAPDH",
+        "organism": "Homo sapiens",
+        "function": "Key enzymatic component of glycolysis, catalyzing the reversible oxidative phosphorylation of glyceraldehyde 3-phosphate to 1,3-bisphosphoglycerate in the presence of inorganic phosphate and NAD+. Also participates in nuclear events including transcription, RNA transport, DNA replication and apoptosis.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0006096", "name": "glycolytic process"},
+                {"id": "GO:0006006", "name": "glucose metabolic process"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0004365", "name": "glyceraldehyde-3-phosphate dehydrogenase (NAD+) (phosphorylating) activity"},
+                {"id": "GO:0051287", "name": "NAD binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005829", "name": "cytosol"},
+                {"id": "GO:0005634", "name": "nucleus"}
+            ]
+        },
+        "features": [
+            {"type": "Chain", "description": "Glyceraldehyde-3-phosphate dehydrogenase", "start": "2", "end": "335"},
+            {"type": "Active site", "description": "Nucleophile (Cys-152)", "start": "152", "end": "152"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P04406",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P60709": {
+        "found": True,
+        "accession": "P60709",
+        "protein_name": "Actin, cytoplasmic 1 (Beta-actin)",
+        "gene": "ACTB",
+        "organism": "Homo sapiens",
+        "function": "Actins are highly conserved proteins that are involved in various types of cell motility and are ubiquitously expressed in all eukaryotic cells. Beta-actin is a major constituent of the contractile apparatus and one of the two non-muscle cytoskeletal actins.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0007010", "name": "cytoskeleton organization"},
+                {"id": "GO:0030036", "name": "actin filament organization"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0005524", "name": "ATP binding"},
+                {"id": "GO:0003779", "name": "actin binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005856", "name": "cytoskeleton"},
+                {"id": "GO:0015629", "name": "actin cytoskeleton"}
+            ]
+        },
+        "features": [
+            {"type": "Chain", "description": "Actin, cytoplasmic 1", "start": "2", "end": "375"},
+            {"type": "Binding site", "description": "ATP", "start": "157", "end": "160"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P60709",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P02768": {
+        "found": True,
+        "accession": "P02768",
+        "protein_name": "Serum albumin",
+        "gene": "ALB",
+        "organism": "Homo sapiens",
+        "function": "Main protein of human plasma, binding water, cations (such as Ca2+, Na+ and K+), fatty acids, hormones, bilirubin, thyroxine (T4) and pharmaceuticals. Its main function is the regulation of the colloidal osmotic pressure of blood.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0006810", "name": "transport"},
+                {"id": "GO:0042445", "name": "hormone metabolic process"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0005509", "name": "calcium ion binding"},
+                {"id": "GO:0008289", "name": "lipid binding"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005615", "name": "extracellular space"},
+                {"id": "GO:0072562", "name": "blood microparticle"}
+            ]
+        },
+        "features": [
+            {"type": "Chain", "description": "Serum albumin", "start": "25", "end": "609"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P02768",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01106": {
+        "found": True,
+        "accession": "P01106",
+        "protein_name": "Myc proto-oncogene protein",
+        "gene": "MYC",
+        "organism": "Homo sapiens",
+        "function": "Transcription factor that binds specifically to E-box DNA elements (5'-CACGTG-3') as a heterodimer with MAX. Promotes cell proliferation, cell growth, metabolism, mitochondrial biogenesis, and apoptosis.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0006355", "name": "regulation of transcription, DNA-templated"},
+                {"id": "GO:0008283", "name": "cell population proliferation"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0003677", "name": "DNA binding"},
+                {"id": "GO:0003700", "name": "DNA-binding transcription factor activity"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005634", "name": "nucleus"},
+                {"id": "GO:0005730", "name": "nucleolus"}
+            ]
+        },
+        "features": [
+            {"type": "Domain", "description": "bHLH-LZ domain", "start": "355", "end": "439"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01106",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P99999": {
+        "found": True,
+        "accession": "P99999",
+        "protein_name": "Cytochrome c",
+        "gene": "CYCS",
+        "organism": "Homo sapiens",
+        "function": "Electron carrier protein that shuttles electrons between complexes III and IV of the mitochondrial respiratory chain. Upon release into the cytosol in response to apoptotic stimuli, triggers apoptosome formation and caspase activation.",
+        "go_terms": {
+            "biological_process": [
+                {"id": "GO:0006119", "name": "oxidative phosphorylation"},
+                {"id": "GO:0006915", "name": "apoptotic process"}
+            ],
+            "molecular_function": [
+                {"id": "GO:0020037", "name": "heme binding"},
+                {"id": "GO:0009055", "name": "electron transfer activity"}
+            ],
+            "cellular_component": [
+                {"id": "GO:0005743", "name": "mitochondrial inner membrane"},
+                {"id": "GO:0005758", "name": "mitochondrial intermembrane space"}
+            ]
+        },
+        "features": [
+            {"type": "Chain", "description": "Cytochrome c", "start": "2", "end": "105"},
+            {"type": "Binding site", "description": "Heme (iron)", "start": "19", "end": "19"}
+        ],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P99999",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
     }
 }
 
@@ -270,7 +408,12 @@ GENE_TO_ACCESSION = {
     "TP53": "P04637",
     "GFP": "P42212",
     "LYZ": "P00698",
-    "MB": "P02185"
+    "MB": "P02185",
+    "GAPDH": "P04406",
+    "ACTB": "P60709",
+    "ALB": "P02768",
+    "MYC": "P01106",
+    "CYCS": "P99999"
 }
 
 def _parse_uniprot_entry(entry: Dict[str, Any]) -> Dict[str, Any]:

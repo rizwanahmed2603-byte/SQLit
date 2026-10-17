@@ -152,17 +152,22 @@ def extract_header_hints(header: str) -> Dict[str, str]:
     if not header:
         return hints
 
-    # Match Swiss-Prot accession: sp|P01308|
+    # Match Swiss-Prot / UniProt accession: sp|P01308| or standalone UniProt ID
     sp_m = re.search(r"sp\|([A-Z0-9]{6,10})", header)
     if sp_m:
         hints["accession"] = sp_m.group(1)
+    else:
+        uniprot_stand = re.search(r"\b([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})\b", header)
+        if uniprot_stand:
+            hints["accession"] = uniprot_stand.group(1)
 
-    # Match RefSeq accession: NM_000518, NP_000509
-    ref_m = re.search(r"\b([A-Z]{1,2}_\d{5,9})\b", header)
-    if ref_m and not hints["accession"]:
-        hints["accession"] = ref_m.group(1)
+    # Match RefSeq / GenBank / Ensembl accession
+    if not hints["accession"]:
+        ref_m = re.search(r"\b([A-Z]{1,2}_\d{5,9}|[A-Z]{1,3}\d{5,8}|ENS[A-Z]{0,4}[GTP]\d{9,11})\b", header)
+        if ref_m:
+            hints["accession"] = ref_m.group(1)
 
-    # Match Organism: OS=... or [Homo sapiens]
+    # Match Organism: OS=... or [Homo sapiens] or canonical names
     org_os = re.search(r"OS=([^=]+?)(?:\s+[A-Z]{2}=|$)", header)
     if org_os:
         hints["organism"] = org_os.group(1).strip()
@@ -170,11 +175,20 @@ def extract_header_hints(header: str) -> Dict[str, str]:
         org_bracket = re.search(r"\[([A-Za-z0-9_.\s-]+)\]", header)
         if org_bracket:
             hints["organism"] = org_bracket.group(1).strip()
+        else:
+            org_common = re.search(r"\b(Homo sapiens|Mus musculus|Escherichia coli|Aequorea victoria|Gallus gallus|Physeter catodon|Epstein-Barr virus|SARS-CoV-2)\b", header, re.IGNORECASE)
+            if org_common:
+                hints["organism"] = org_common.group(1).strip()
 
-    # Match Gene: GN=HBB or (HBB)
-    gn_m = re.search(r"(?:GN=|\()([A-Za-z0-9_-]{2,12})(?:\)|\s|$)", header)
+    # Match Gene: GN=HBB, gene=HBB, (HBB), or leading gene symbol
+    gn_m = re.search(r"(?:GN=|gene=|\()([A-Za-z0-9_-]{2,12})(?:\)|\s|$)", header, re.IGNORECASE)
     if gn_m:
-        hints["gene"] = gn_m.group(1).strip()
+        hints["gene"] = gn_m.group(1).strip().upper()
+    else:
+        # Check known common symbols in header
+        known_genes = re.search(r"\b(HBB|HBA1|HBA|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|MYC|CYCS|GFP|LYZ|MB|EBNA1|APOE|TNF|IL6|ACE2)\b", header, re.IGNORECASE)
+        if known_genes:
+            hints["gene"] = known_genes.group(1).strip().upper()
 
     return hints
 

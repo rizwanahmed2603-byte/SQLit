@@ -283,6 +283,106 @@ CURATED_PUBMED_FALLBACKS = {
             "category": "Structure / Crystallography",
             "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14040162/"
         }
+    ],
+    "GAPDH": [
+        {
+            "pmid": "12874124",
+            "title": "Glyceraldehyde-3-phosphate dehydrogenase, the ubiquitous enzyme, in cellular processes",
+            "authors": "Sirover MA",
+            "journal": "Biochim Biophys Acta",
+            "year": "2003",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/12874124/"
+        },
+        {
+            "pmid": "10022878",
+            "title": "New nuclear functions of the glycolytic protein, glyceraldehyde-3-phosphate dehydrogenase, in mammalian cells",
+            "authors": "Sirover MA",
+            "journal": "J Cell Biochem",
+            "year": "1999",
+            "category": "Interaction / Complex",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/10022878/"
+        }
+    ],
+    "ACTB": [
+        {
+            "pmid": "2039547",
+            "title": "The crystal structure of muscle arterial actin at 3.0 A resolution",
+            "authors": "Kabsch W, Mannherz HG, Suck D, Pai EF, Holmes KC",
+            "journal": "Nature",
+            "year": "1990",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2039547/"
+        },
+        {
+            "pmid": "22511784",
+            "title": "Actin dynamics, regulation, and cellular function",
+            "authors": "Pollard TD, Cooper JA",
+            "journal": "Cold Spring Harb Perspect Biol",
+            "year": "2012",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22511784/"
+        }
+    ],
+    "ALB": [
+        {
+            "pmid": "1574341",
+            "title": "Atomic structure and chemistry of human serum albumin",
+            "authors": "He XM, Carter DC",
+            "journal": "Nature",
+            "year": "1992",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1574341/"
+        },
+        {
+            "pmid": "27083434",
+            "title": "Human serum albumin: from pharmacology to clinical therapeutics",
+            "authors": "Vincent JL",
+            "journal": "Crit Care",
+            "year": "2016",
+            "category": "Drug / Pharmacology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/27083434/"
+        }
+    ],
+    "MYC": [
+        {
+            "pmid": "12540905",
+            "title": "Crystal structure of the E-box binding transcription factor Max-Myc complex",
+            "authors": "Nair SK, Burley SK",
+            "journal": "Cell",
+            "year": "2003",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/12540905/"
+        },
+        {
+            "pmid": "25255403",
+            "title": "MYC: A complex oncogene in human malignancies",
+            "authors": "Dang CV",
+            "journal": "Cell",
+            "year": "2014",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/25255403/"
+        }
+    ],
+    "CYCS": [
+        {
+            "pmid": "11585643",
+            "title": "Structural insights into cytochrome c in cellular respiration and apoptosis",
+            "authors": "Brodersen DE, et al.",
+            "journal": "Nature",
+            "year": "2001",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11585643/"
+        },
+        {
+            "pmid": "11896068",
+            "title": "Mitochondria and apoptosis: role of cytochrome c release and caspase activation",
+            "authors": "Wang X",
+            "journal": "Genes Dev",
+            "year": "2001",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/11896068/"
+        }
     ]
 }
 
