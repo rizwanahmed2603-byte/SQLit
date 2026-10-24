@@ -586,7 +586,200 @@ CURATED_UNIPROT_FALLBACKS = {
         "features": [{"type": "Site", "description": "Fluorophore (Thr-65, Tyr-66, Gly-67)", "start": "65", "end": "67"}],
         "entry_url": "https://www.uniprot.org/uniprotkb/AAB02574",
         "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P02042": {
+        "found": True,
+        "accession": "P02042",
+        "protein_name": "Hemoglobin subunit delta",
+        "gene": "HBD",
+        "organism": "Homo sapiens",
+        "function": "Delta globin chain of adult hemoglobin A2 (HbA2, alpha-2/delta-2). Plays a physiological role in systemic oxygen transport from lungs to tissues.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0015671", "name": "oxygen transport"}, {"id": "GO:0006810", "name": "transport"}],
+            "molecular_function": [{"id": "GO:0020037", "name": "heme binding"}, {"id": "GO:0019825", "name": "oxygen binding"}],
+            "cellular_component": [{"id": "GO:0005833", "name": "hemoglobin complex"}, {"id": "GO:0005829", "name": "cytosol"}]
+        },
+        "features": [{"type": "Chain", "description": "Hemoglobin subunit delta", "start": "2", "end": "147"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P02042",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P69891": {
+        "found": True,
+        "accession": "P69891",
+        "protein_name": "Hemoglobin subunit gamma-1",
+        "gene": "HBG1",
+        "organism": "Homo sapiens",
+        "function": "Gamma globin chain of fetal hemoglobin F (HbF, alpha-2/gamma-2). Possesses high oxygen affinity ensuring efficient placental transfer of oxygen from maternal to fetal circulation.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0015671", "name": "oxygen transport"}],
+            "molecular_function": [{"id": "GO:0020037", "name": "heme binding"}, {"id": "GO:0019825", "name": "oxygen binding"}],
+            "cellular_component": [{"id": "GO:0005833", "name": "hemoglobin complex"}]
+        },
+        "features": [{"type": "Chain", "description": "Hemoglobin subunit gamma-1", "start": "2", "end": "147"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P69891",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01730": {
+        "found": True,
+        "accession": "P01730",
+        "protein_name": "T-cell surface glycoprotein CD4",
+        "gene": "CD4",
+        "organism": "Homo sapiens",
+        "function": "Integral membrane glycoprotein that acts as a coreceptor with the T-cell receptor (TCR) by binding to MHC class II molecules on antigen-presenting cells. Primary receptor for HIV-1 envelope glycoprotein gp120.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0050852", "name": "T cell receptor signaling pathway"}, {"id": "GO:0006955", "name": "immune response"}],
+            "molecular_function": [{"id": "GO:0042605", "name": "peptide antigen binding"}, {"id": "GO:0005102", "name": "signaling receptor binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0009897", "name": "external side of plasma membrane"}]
+        },
+        "features": [{"type": "Chain", "description": "T-cell surface glycoprotein CD4", "start": "26", "end": "458"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01730",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01732": {
+        "found": True,
+        "accession": "P01732",
+        "protein_name": "T-cell surface glycoprotein CD8 alpha chain",
+        "gene": "CD8A",
+        "organism": "Homo sapiens",
+        "function": "Coreceptor on cytotoxic T-lymphocytes that binds to non-polymorphic regions of MHC class I molecules. Enhances TCR recognition and signal transduction during cytotoxic killing of infected or malignant cells.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0050852", "name": "T cell receptor signaling pathway"}, {"id": "GO:0002250", "name": "adaptive immune response"}],
+            "molecular_function": [{"id": "GO:0042605", "name": "peptide antigen binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Chain", "description": "T-cell surface glycoprotein CD8 alpha chain", "start": "22", "end": "235"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01732",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "Q15116": {
+        "found": True,
+        "accession": "Q15116",
+        "protein_name": "Programmed cell death protein 1 (PD-1)",
+        "gene": "PDCD1",
+        "organism": "Homo sapiens",
+        "function": "Inhibitory immune checkpoint receptor expressed on activated T-cells, B-cells, and myeloid cells. Binding to ligands PD-L1 (CD274) or PD-L2 delivers negative signals that suppress effector T-cell activation and self-tolerance.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0050852", "name": "T cell receptor signaling pathway"}, {"id": "GO:0002250", "name": "adaptive immune response"}],
+            "molecular_function": [{"id": "GO:0005102", "name": "signaling receptor binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "Ig-like V-type domain", "start": "35", "end": "145"}, {"type": "Motif", "description": "ITIM motif", "start": "223", "end": "228"}, {"type": "Motif", "description": "ITSM motif", "start": "246", "end": "251"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/Q15116",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "Q9NZQ7": {
+        "found": True,
+        "accession": "Q9NZQ7",
+        "protein_name": "Programmed cell death 1 ligand 1 (PD-L1)",
+        "gene": "CD274",
+        "organism": "Homo sapiens",
+        "function": "Transmembrane ligand for the immune checkpoint receptor PDCD1 (PD-1). Expressed by antigen-presenting cells and tumor cells to inhibit T-cell proliferation and cytokine secretion, facilitating tumor immune evasion.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0050852", "name": "T cell receptor signaling pathway"}, {"id": "GO:0002250", "name": "adaptive immune response"}],
+            "molecular_function": [{"id": "GO:0005102", "name": "signaling receptor binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "Ig-like V-type domain", "start": "19", "end": "127"}, {"type": "Domain", "description": "Ig-like C2-type domain", "start": "133", "end": "225"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/Q9NZQ7",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P13569": {
+        "found": True,
+        "accession": "P13569",
+        "protein_name": "Cystic fibrosis transmembrane conductance regulator",
+        "gene": "CFTR",
+        "organism": "Homo sapiens",
+        "function": "ATP-binding cassette (ABC) transporter functioning as an epithelial chloride and bicarbonate channel. Crucial for chloride transport across cell membranes. Mutations like Delta-F508 cause cystic fibrosis.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006821", "name": "chloride transport"}, {"id": "GO:0006810", "name": "transport"}],
+            "molecular_function": [{"id": "GO:0005254", "name": "chloride channel activity"}, {"id": "GO:0005524", "name": "ATP binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0016323", "name": "basolateral plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "ABC transporter 1 domain", "start": "434", "end": "586"}, {"type": "Domain", "description": "ABC transporter 2 domain", "start": "1219", "end": "1386"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P13569",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P01130": {
+        "found": True,
+        "accession": "P01130",
+        "protein_name": "Low-density lipoprotein receptor",
+        "gene": "LDLR",
+        "organism": "Homo sapiens",
+        "function": "Cell-surface receptor that binds and internalizes cholesterol-rich low-density lipoprotein (LDL) via clathrin-mediated endocytosis. Mutations cause familial hypercholesterolemia.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006898", "name": "receptor-mediated endocytosis"}, {"id": "GO:0008203", "name": "cholesterol metabolic process"}],
+            "molecular_function": [{"id": "GO:0005041", "name": "low-density lipoprotein particle receptor activity"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}, {"id": "GO:0005768", "name": "endosome"}]
+        },
+        "features": [{"type": "Domain", "description": "LDL-receptor class A 1 domain", "start": "25", "end": "64"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P01130",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "Q99ZW2": {
+        "found": True,
+        "accession": "Q99ZW2",
+        "protein_name": "CRISPR-associated endonuclease Cas9",
+        "gene": "CAS9",
+        "organism": "Streptococcus pyogenes",
+        "function": "RNA-guided DNA endonuclease that generates site-specific double-strand breaks in target genomic DNA guided by crRNA and tracrRNA (or single-guide sgRNA). Foundation of CRISPR gene editing.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0043571", "name": "defense response to virus"}],
+            "molecular_function": [{"id": "GO:0004519", "name": "endodeoxyribonuclease activity"}, {"id": "GO:0003677", "name": "DNA binding"}],
+            "cellular_component": [{"id": "GO:0005737", "name": "cytoplasm"}]
+        },
+        "features": [{"type": "Domain", "description": "RuvC endonuclease domain", "start": "1", "end": "718"}, {"type": "Domain", "description": "HNH endonuclease domain", "start": "775", "end": "908"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/Q99ZW2",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P02769": {
+        "found": True,
+        "accession": "P02769",
+        "protein_name": "Serum albumin (BSA)",
+        "gene": "ALB",
+        "organism": "Bos taurus",
+        "function": "Main protein of bovine plasma. Has a good binding capacity for water, fatty acids, bilirubin, drugs, and hormones. Widely used as a biochemical standard and blocking agent in molecular biology.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006810", "name": "transport"}],
+            "molecular_function": [{"id": "GO:0008289", "name": "lipid binding"}],
+            "cellular_component": [{"id": "GO:0005615", "name": "extracellular space"}]
+        },
+        "features": [{"type": "Chain", "description": "Serum albumin", "start": "25", "end": "607"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P02769",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P61626": {
+        "found": True,
+        "accession": "P61626",
+        "protein_name": "Lysozyme C",
+        "gene": "LYZ",
+        "organism": "Homo sapiens",
+        "function": "Catalyzes the hydrolysis of beta-1,4-glycosidic linkages between N-acetylmuramic acid and N-acetylglucosamine in bacterial peptidoglycan walls. Endogenous bactericidal antimicrobial enzyme.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0019731", "name": "antibacterial humoral response"}],
+            "molecular_function": [{"id": "GO:0003796", "name": "lysozyme activity"}],
+            "cellular_component": [{"id": "GO:0005615", "name": "extracellular space"}]
+        },
+        "features": [{"type": "Chain", "description": "Lysozyme C", "start": "19", "end": "148"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P61626",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "Q9BYF1": {
+        "found": True,
+        "accession": "Q9BYF1",
+        "protein_name": "Angiotensin-converting enzyme 2",
+        "gene": "ACE2",
+        "organism": "Homo sapiens",
+        "function": "Carboxypeptidase which converts angiotensin II to angiotensin 1-7, acting as a crucial counter-regulator of renin-angiotensin system. Functional cellular entry receptor for SARS-CoV-2 and SARS-CoV spike glycoproteins.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0003014", "name": "regulation of blood pressure"}, {"id": "GO:0046718", "name": "viral entry into host cell"}],
+            "molecular_function": [{"id": "GO:0004180", "name": "carboxypeptidase activity"}, {"id": "GO:0005102", "name": "signaling receptor binding"}],
+            "cellular_component": [{"id": "GO:0005886", "name": "plasma membrane"}]
+        },
+        "features": [{"type": "Domain", "description": "Peptidase M2 domain", "start": "19", "end": "611"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/Q9BYF1",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
     }
+
 }
 
 # Gene to accession mapping for fast local resolution
@@ -619,7 +812,21 @@ GENE_TO_ACCESSION = {
     "SARS2_S": "P0DTC2",
     "N": "P0DTC9",
     "SARS2_N": "P0DTC9",
-    "EGFP": "AAB02574"
+    "EGFP": "AAB02574",
+    "HBD": "P02042",
+    "HBG1": "P69891",
+    "CD4": "P01730",
+    "CD8A": "P01732",
+    "PDCD1": "Q15116",
+    "PD1": "Q15116",
+    "PD-1": "Q15116",
+    "CD274": "Q9NZQ7",
+    "PDL1": "Q9NZQ7",
+    "PD-L1": "Q9NZQ7",
+    "CFTR": "P13569",
+    "LDLR": "P01130",
+    "CAS9": "Q99ZW2",
+    "ACE2": "Q9BYF1"
 }
 
 def _parse_uniprot_entry(entry: Dict[str, Any]) -> Dict[str, Any]:

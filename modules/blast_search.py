@@ -475,6 +475,169 @@ BENCHMARK_REFERENCES = [
         "title": "Enhanced green fluorescent protein [Aequorea victoria] >gb|AAB02574.1|",
         "sequence": "MVSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLTYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITLGMDELYK",
         "uniprot_id": "AAB02574"
+    },
+    # Human HBD (Hemoglobin Subunit Delta)
+    {
+        "accession": "NM_000519",
+        "type": "DNA",
+        "gene": "HBD",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens hemoglobin subunit delta (HBD), mRNA",
+        "sequence": "ATGGTGCATCTGACTCCTGAGGAGAAGACTGCCGTCAATGCCCTGTGGGGCAAAGTGAACGTGGATGCAGTTGGTGGTGAGGCCCTGGGCAGACTGCTCGTTGTCTACCCCTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCTCTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTTCTCAGCTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCTCGCAACTTTGGCAAGGAATTCACCCCACAGATGCAGGCTGCCTATCAGAAGGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTACCACTAA",
+        "uniprot_id": "P02042"
+    },
+    {
+        "accession": "P02042",
+        "type": "Protein",
+        "gene": "HBD",
+        "organism": "Homo sapiens",
+        "title": "Hemoglobin subunit delta [Homo sapiens] >sp|P02042|HBD_HUMAN",
+        "sequence": "MVHLTPEEKTAVNALWGKVNVDAVGGEALGRLLVVYPWTQRFFESFGDLSSPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFSQLSELHCDKLHVDPENFRLLGNVLVCVLARNFGKEFTPQMQAAYQKVVAGVANALAHKYH",
+        "uniprot_id": "P02042"
+    },
+    # Human HBG1 (Hemoglobin Subunit Gamma 1 - Fetal Hemoglobin)
+    {
+        "accession": "NM_000559",
+        "type": "DNA",
+        "gene": "HBG1",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens hemoglobin subunit gamma 1 (HBG1), mRNA",
+        "sequence": "ATGGGTCATTTCACAGAGGAGGACAAGGCTACTATCACAAGCCTGTGGGGCAAGGTGAATGTGGAAGATGCTGGAGGAGAAACCCTGGGAAGGCTCCTGGTTGTCTACCCATGGACCCAGAGGTTCTTTGACAGCTTTGGCAACCTGTCCTCTGCCTCTGCCATCATGGGCAACCCCAAAGTCAAGGCACATGGCAAGAAGGTGCTGACTTCCTTGGGAGATGCCATAAAGCACCTGGATGATCTCAAGGGCACCTTTGCCCAGCTGAGTGAACTGCACTGTGACAAGCTGCATGTGGATCCTGAGAACTTCAAGCTCCTGGGAAACGTGCTGGTGACCGTTTTGGCAATCCATTTCGGCAAAGAATTCACCCCTGAGGTGCAGGCTTCCTGGCAGAAGATGGTGACTGGCGTGGCCAGTGCCCTGTCCTCCAGATACCACTGA",
+        "uniprot_id": "P69891"
+    },
+    {
+        "accession": "P69891",
+        "type": "Protein",
+        "gene": "HBG1",
+        "organism": "Homo sapiens",
+        "title": "Hemoglobin subunit gamma-1 [Homo sapiens] >sp|P69891|HBG1_HUMAN",
+        "sequence": "MGHFTEEDKATITSLWGKVNVEDAGGETLGRLLVVYPWTQRFFDSFGNLSSASAIMGNPKVKAHGKKVLTSLGDAIKHLDDLKGTFAQLSELHCDKLHVDPENFKLLGNVLVTVLAIHFGKEFTPEVQASWQKMVTGVASALSSRYH",
+        "uniprot_id": "P69891"
+    },
+    # Human CD4 (T-cell surface glycoprotein CD4)
+    {
+        "accession": "NM_000616",
+        "type": "DNA",
+        "gene": "CD4",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens CD4 molecule (CD4), transcript variant 1, mRNA",
+        "sequence": "ATGAACCGGGGAGTCCCTTTTAGGCACTTGCTTCTGGTGCTGCAACTGGCGCTCCTCCCAGCAGCCACTCAGGGAAAGAAAGTGGTGCTGGGCAAAAAAGGGGATACAGTGGAACTGACCTGTACAGCTTCCCAGAAGAAGAGCATACAATTCCACTGGAAAAACTCCAACCAGATAAAGATTCTGGGAAATCAGGGCTCCTTCTTAACTAAAGGTCCATCCAAGCTGAATGATCGCGCTGACTCAAGAAGAAGCCTTTGGGACCAAGGAAACTTCCCCCTGATCATCAAGAATCTTAAGATAGAAGACTCAGATACTTACATCTGTGAAGTGGAGGACCAGAAGGAGGAGGTGCAATTGCTAGTGTTCGGATTGACTGCCAACTCTGACACCCACCTGCTTCAGGGGCAGAGCCTGACCCTGACCTTGGAGAGCCCCCCTGGTAGTAGCCCCTCAGTGCAATGTAGGAGTCCAAGGGGTAAAAACATACAGGGGGGGAAGACCCTCTCCGTGTCTCAGCTGGAGCTCCAGGATAGTGGCACCTGGACATGCACTGTCTTGCAGAACCAGAAGAAGGTGGAGTTCAAAATAGACATCGTGGTGCTAGCTTTCCAGAAGGCCTCCAGCATAGTCTATAAGAAAGAGGGGGAACAGGTGGAGTTCTCCTTCCCACTCGCCTTTACAGTTGAAAAGCTGACGGGCAGTGGCGAGCTGTGGTGGCAGGCGGAGAGGGCTTCCTCCTCCAAGTCTTGGATCACCTTTGACCTGAAGAACAAGGAAGTGTCTGTAAAACGGGTTACCCAGGACCCTAAGCTCCAGATGGGCAAGAAGCTCCCGCTCCACCTCACCCTGCCCCAGGCCTTGCCTCAGTATGCTGGCTCTGGAAACCTCACCCTGGCCCTTGAAGCGAAAACAGGAAAGTTGCATCAGGAAGTGAACCTGGTGGTGATGAGAGCCACTCAGCTCCAGAAAAATTTGACCTGTGAGGTGTGGGGACCCACCTCCCCTAAGCTGATGCTGAGTTTGAAACTGGAGAACAAGGAGGCAAAGGTCTCGAAGCGGGAGAAGGCGGTGTGGGTGCTGAACCCTGAGGCGGGGATGTGGCAGTGTCTGCTGAGTGACTCGGGACAGGTGCTGCTGGAATCCAACATCAAGGTTCTGCCCACATGGTCCACCCCGGTGCAGCCAATGGCCCTGATTGTGCTGGGGGGCGTCGCCGGCCTCCTGCTTTTCATTGGGCTAGGCATCTTCTTCTGTGTCAGGTGCCGGCACCGAAGGCGCCAAGCAGAGCGGATGTCTCAGATCAAGAGACTCCTCAGTGAGAAGAAGACCTGCCAGTGTCCTCACCGGTTTCAGAAGACATGTAGCCCCATTTAG",
+        "uniprot_id": "P01730"
+    },
+    {
+        "accession": "P01730",
+        "type": "Protein",
+        "gene": "CD4",
+        "organism": "Homo sapiens",
+        "title": "T-cell surface glycoprotein CD4 [Homo sapiens] >sp|P01730|CD4_HUMAN",
+        "sequence": "MNRGVPFRHLLLVLQLALLPAATQGKKVVLGKKGDTVELTCTASQKKSIQFHWKNSNQIKILGNQGSFLTKGPSKLNDRADSRRSLWDQGNFPLIIKNLKIEDSDTYICEVEDQKEEVQLLVFGLTANSDTHLLQGQSLTLTLESPPGSSPSVQCRSPRGKNIQGGKTLSVSQLELQDSGTWTCTVLQNQKKVEFKIDIVVLAFQKASSIVYKKEGEQVEFSFPLAFTVEKLTGSGELWWQAERASSSKSWITFDLKNKEVSVKRVTQDPKLQMGKKLPLHLTLPQALPQYAGSGNLTLALEAKTGKLHQEVNLVVMRATQLQKNLTCEVWGPTSPKLMLSLKLENKEAKVSKREKAVWVLNPEAGMWQCLLSDSGQVLLESNIKVLPTWSTPVQPMALIVLGGVAGLLLFIGLGIFFCVRCRHRRRQAERMSQIKRLLSEKKTCQCPHRFQKTCSPI",
+        "uniprot_id": "P01730"
+    },
+    # Human CD8A (T-cell surface glycoprotein CD8 alpha chain)
+    {
+        "accession": "NM_001768",
+        "type": "DNA",
+        "gene": "CD8A",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens CD8 subunit alpha (CD8A), mRNA",
+        "sequence": "ATGGCCTTACCAGTGACCGCCTTGCTCCTGCCGCTGGCCTTGCTGCTCCACGCCGCCAGGCCGAGCCAGTTCCGGGTGTCGCCGCTGGATCGGACCTGGAACCTGGGCGAGACAGTGGAGCTGAAGTGCCAGGTGCTGCTGTCCAACCCGACGTCGGGCTGCTCGTGGCTCTTCCAGCCGCGCGGCGCCGCCGCCAGTCCCACCTTCCTCCTATACCTCTCCCAAAACAAGCCCAAGGCGGCCGAGGGGCTGGACACCCAGCGGTTCTCGGGCAAGAGGTTGGGGGACACCTTCGTCCTCACCCTGAGCGACTTCCGCCGAGAGAACGAGGGCTACTATTTCTGCTCGGCCCTGAGCAACTCCATCATGTACTTCAGCCACTTCGTGCCGGTCTTCCTGCCAGCGAAGCCCACCACGACGCCAGCGCCGCGACCACCAACACCGGCGCCCACCATCGCGTCGCAGCCCCTGTCCCTGCGCCCAGAGGCGTGCCGGCCAGCGGCGGGGGGCGCAGTGCACACGAGGGGGCTGGACTTCGCCTGTGATATCTACATCTGGGCGCCCCTGGCCGGGACTTGTGGGGTCCTTCTCCTGTCACTGGTTATCACCCTTTACTGCAACCACAGGAACCGAAGACGTGTTTGCAAATGTCCCCGGCCTGTGGTCAAATCGGGAGACAAGCCCAGCCTTTCGGCGAGATACGTCTAA",
+        "uniprot_id": "P01732"
+    },
+    {
+        "accession": "P01732",
+        "type": "Protein",
+        "gene": "CD8A",
+        "organism": "Homo sapiens",
+        "title": "T-cell surface glycoprotein CD8 alpha chain [Homo sapiens] >sp|P01732|CD8A_HUMAN",
+        "sequence": "MALPVTALLLPLALLLHAARPSQFRVSPLDRTWNLGETVELKCQVLLSNPTSGCSWLFQPRGAAASPTFLLYLSQNKPKAAEGLDTQRFSGKRLGDTFVLTLSDFRRENEGYYFCSALSNSIMYFSHFVPVFLPAKPTTTPAPRPPTPAPTIASQPLSLRPEACRPAAGGAVHTRGLDFACDIYIWAPLAGTCGVLLLSLVITLYCNHRNRRRVCKCPRPVVKSGDKPSLSARYV",
+        "uniprot_id": "P01732"
+    },
+    # Human PDCD1 / PD-1
+    {
+        "accession": "NM_005018",
+        "type": "DNA",
+        "gene": "PDCD1",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens programmed cell death 1 (PDCD1), mRNA",
+        "sequence": "ATGCAGATCCCACAGGCGCCCTGGCCAGTCGTCTGGGCGGTGCTACAACTGGGCTGGCGGCCTGGATGGTTCTTAGACTCCCCAGACAGGCCCTGGAACCCCCCCACCTTCTCCCCAGCCCTGCTCGTGGTGACCGAAGGGGACAACGCCACCTTCACCTGCAGCTTCTCCAACACATCGGAGAGCTTCGTGCTAAACTGGTACCGCATGAGCCCCAGCAACCAGACGGACAAGCTGGCCGCCTTCCCCGAGGACCGCAGCCAGCCCGGCCAGGACTGCCGCTTCCGTGTCACACAACTGCCCAACGGGCGTGACTTCCACATGAGCGTGGTCAGGGCCCGGCGCAATGACAGCGGCACCTACCTCTGTGGGGCCATCTCCCTGGCCCCCAAGGCGCAGATCAAAGAGAGCCTGCGGGCAGAGCTCAGGGTGACAGAGAGAAGGGCAGAAGTGCCCACAGCCCACCCCAGCCCCTCACCCAGGCCAGCCGGCCAGTTCCAAACCCTGGTGGTTGGTGTCGTGGGCGGCCTGCTGGGCAGCCTGGTGCTGCTAGTCTGGGTCCTGGCCGTCATCTGCTCCCGGGCCGCACGAGGGACAATAGGAGCCAGGCGCACCGGCCAGCCCCTGAAGGAGGACCCCTCAGCCGTGCCTGTGTTCTCTGTGGACTATGGGGAGCTGGATTTCCAGTGGCGAGAGAAGACCCCGGAGCCCCCCGTGCCCTGTGTCCCTGAGCAGACGGAGTATGCCACCATTGTCTTTCCTAGCGGAATGGGCACCTCATCCCCCGCCCGCAGGGGCTCAGCTGACGGCCCTCGGAGTGCCCAGCCACTGAGGCCTGAGGATGGACACTGCTCTTGGCCCCTCTGA",
+        "uniprot_id": "Q15116"
+    },
+    {
+        "accession": "Q15116",
+        "type": "Protein",
+        "gene": "PDCD1",
+        "organism": "Homo sapiens",
+        "title": "Programmed cell death protein 1 [Homo sapiens] >sp|Q15116|PD1_HUMAN",
+        "sequence": "MQIPQAPWPVVWAVLQLGWRPGWFLDSPDRPWNPPTFSPALLVVTEGDNATFTCSFSNTSESFVLNWYRMSPSNQTDKLAAFPEDRSQPGQDCRFRVTQLPNGRDFHMSVVRARRNDSGTYLCGAISLAPKAQIKESLRAELRVTERRAEVPTAHPSPSPRPAGQFQTLVVGVVGGLLGSLVLLVWVLAVICSRAARGTIGARRTGQPLKEDPSAVPVFSVDYGELDFQWREKTPEPPVPCVPEQTEYATIVFPSGMGTSSPARRGSADGPRSAQPLRPEDGHCSWPL",
+        "uniprot_id": "Q15116"
+    },
+    # Human CD274 / PD-L1
+    {
+        "accession": "NM_014143",
+        "type": "DNA",
+        "gene": "CD274",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens CD274 molecule (CD274), transcript variant 1, mRNA",
+        "sequence": "ATGAGGATATTTGCTGTCTTTATATTCATGACCTACTGGCATTTGCTGAACGCATTTACTGTCACGGTTCCCAAGGACCTATATGTGGTAGAGTATGGTAGCAATATGACAATTGAATGCAAATTCCCAGTAGAAAAACAATTAGACCTGGCTGCACTAATTGTCTATTGGGAAATGGAGGATAAGAACATTATTCAATTTGTGCATGGAGAGGAAGACCTGAAGGTTCAGCATAGTAGCTACAGACAGAGGGCCCGGCTGTTGAAGGACCAGCTCTCCCTGGGAAATGCTGCACTTCAGATCACAGATGTGAAATTGCAGGATGCAGGGGTGTACCGCTGCATGATCAGCTATGGTGGTGCCGACTACAAGCGAATTACTGTGAAAGTCAATGCCCCATACAACAAAATCAACCAAAGAATTTTGGTTGTGGATCCAGTCACCTCTGAACATGAACTGACATGTCAGGCTGAGGGCTACCCCAAGGCCGAAGTCATCTGGACAAGCAGTGACCATCAAGTCCTGAGTGGTAAGACCACCACCACCAATTCCAAGAGAGAGGAGAAGCTTTTCAATGTGACCAGCACACTGAGAATCAACACAACAACTAATGAGATTTTCTACTGCACTTTTAGGAGATTAGATCCTGAGGAAAACCATACAGCTGAATTGGTCATCCCAGAACTACCTCTGGCACATCCTCCAAATGAAAGGACTCACTTGGTAATTCTGGGAGCCATCTTACTTTGCCTTGGAGTAGCCCTCACATTCATCTTCCGTTTAAGAAAAGGGAGAATGATGGATGTGAAAAAATGTGGCATCCAAGATACAAACTCAAAGAAGCAAAGTGATACACATTTGGAGGAGACGTAA",
+        "uniprot_id": "Q9NZQ7"
+    },
+    {
+        "accession": "Q9NZQ7",
+        "type": "Protein",
+        "gene": "CD274",
+        "organism": "Homo sapiens",
+        "title": "Programmed cell death 1 ligand 1 [Homo sapiens] >sp|Q9NZQ7|PDL1_HUMAN",
+        "sequence": "MRIFAVFIFMTYWHLLNAFTVTVPKDLYVVEYGSNMTIECKFPVEKQLDLAALIVYWEMEDKNIIQFVHGEEDLKVQHSSYRQRARLLKDQLSLGNAALQITDVKLQDAGVYRCMISYGGADYKRITVKVNAPYNKINQRILVVDPVTSEHELTCQAEGYPKAEVIWTSSDHQVLSGKTTTTNSKREEKLFNVTSTLRINTTTNEIFYCTFRRLDPEENHTAELVIPELPLAHPPNERTHLVILGAILLCLGVALTFIFRLRKGRMMDVKKCGIQDTNSKKQSDTHLEET",
+        "uniprot_id": "Q9NZQ7"
+    },
+    # Streptococcus pyogenes SpCas9
+    {
+        "accession": "Q99ZW2",
+        "type": "Protein",
+        "gene": "CAS9",
+        "organism": "Streptococcus pyogenes",
+        "title": "CRISPR-associated endonuclease Cas9 [Streptococcus pyogenes] >sp|Q99ZW2|CAS9_STRP1",
+        "sequence": "MDKKYSIGLDIGTNSVGWAVITDEYKVPSKKFKVLGNTDRHSIKKNLIGALLFDSGETAEATRLKRTARRRYTRRKNRICYLQEIFSNEMAKVDDSFFHRLEESFLVEEDKKHERHPIFGNIVDEVAYHEKYPTIYHLRKKLVDSTDKADLRLIYLALAHMIKFRGHFLIEGDLNPDNSDVDKLFIQLVQTYNQLFEENPINASGVDAKAILSARLSKSRRLENLIAQLPGEKKNGLFGNLIALSLGLTPNFKSNFDLAEDAKLQLSKDTYDDDLDNLLAQIGDQYADLFLAAKNLSDAILLSDILRVNTEITKAPLSASMIKRYDEHHQDLTLLKALVRQQLPEKYKEIFFDQSKNGYAGYIDGGASQEEFYKFIKPILEKMDGTEELLVKLNREDLLRKQRTFDNGSIPHQIHLGELHAILRRQEDFYPFLKDNREKIEKILTFRIPYYVGPLARGNSRFAWMTRKSEETITPWNFEEVVDKGASAQSFIERMTNFDKNLPNEKVLPKHSLLYEYFTVYNELTKVKYVTEGMRKPAFLSGEQKKAIVDLLFKTNRKVTVKQLKEDYFKKIECFDSVEISGVEDRFNASLGTYHDLLKIIKDKDFLDNEENEDILEDIVLTLTLFEDREMIEERLKTYAHLFDDKVMKQLKRRRYTGWGRLSRKLINGIRDKQSGKTILDFLKSDGFANRNFMQLIHDDSLTFKEDIQKAQVSGQGDSLHEHIANLAGSPAIKKGILQTVKVVDELVKVMGRHKPENIVIEMARENQTTQKGQKNSRERMKRIEEGIKELGSQILKEHPVENTQLQNEKLYLYYLQNGRDMYVDQELDINRLSDYDVDHIVPQSFLKDDSIDNKVLTRSDKNRGKSDNVPSEEVVKKMKNYWRQLLNAKLITQRKFDNLTKAERGGLSELDKAGFIKRQLVETRQITKHVAQILDSRMNTKYDENDKLIREVKVITLKSKLVSDFRKDFQFYKVREINNYHHAHDAYLNAVVGTALIKKYPKLESEFVYGDYKVYDVRKMIAKSEQEIGKATAKYFFYSNIMNFFKTEITLANGEIRKRPLIETNGETGEIVWDKGRDFATVRKVLSMPQVNIVKKTEVQTGGFSKESILPKRNSDKLIARKKDWDPKKYGGFDSPTVAYSVLVVAKVEKGKSKKLKSVKELLGITIMERSSFEKNPIDFLEAKGYKEVKKDLIIKLPKYSLFELENGRKRMLASAGELQKGNELALPSKYVNFLYLASHYEKLKGSPEDNEQKQLFVEQHKHYLDEIIEQISEFSKRVILADANLDKVLSAYNKHRDKPIREQAENIIHLFTLTNLGAPAAFKYFDTTIDRKRYTSTKEVLDATLIHQSITGLYETRIDLSQLGGD",
+        "uniprot_id": "Q99ZW2"
+    },
+    # Bovine Serum Albumin (BSA)
+    {
+        "accession": "P02769",
+        "type": "Protein",
+        "gene": "ALB",
+        "organism": "Bos taurus",
+        "title": "Serum albumin preproprotein [Bos taurus] >sp|P02769|ALBU_BOVIN",
+        "sequence": "MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLTSSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA",
+        "uniprot_id": "P02769"
+    },
+    # Human Lysozyme (LYZ)
+    {
+        "accession": "P61626",
+        "type": "Protein",
+        "gene": "LYZ",
+        "organism": "Homo sapiens",
+        "title": "Lysozyme C [Homo sapiens] >sp|P61626|LYSC_HUMAN",
+        "sequence": "MKALIVLGLVLLSVTVQGKVFERCELARTLKRLGMDGYRGISLANWMCLAKWESGYNTRATNYNAGDRSTDYGIFQINSRYWCNDGKTPGAVNACHLSCSALLQDNIADAVACAKRVVRDPQGIRAWVAWRNRCQNRDVRQYVQGCGV",
+        "uniprot_id": "P61626"
+    },
+    # Human ACE2 (Angiotensin-converting enzyme 2)
+    {
+        "accession": "NM_021804",
+        "type": "DNA",
+        "gene": "ACE2",
+        "organism": "Homo sapiens",
+        "title": "Homo sapiens angiotensin converting enzyme 2 (ACE2), mRNA",
+        "sequence": "ATGTCAGGCTCTTCCTGGCTCCTTCTCAGCCTTGTTGCTGTAACTGCTGCTCAGTCCACCATTGAGGAACAGGCCAAGACATTTTTGGACAAGTTTAACCACGAAGCCGAAGACCTGTTCTATCAAAGTTCACTTGCTTCTTGGAATTATAACACCAATATTACTGAAGAGAATGTCCAAAACATGAATAATGCTGGGGACAAATGGTCTGCCTTTTTAAAGGAACAGTCCACACTTGCCCAAATGTATCCACTACAAGAAATTCAGAATCTCACAGTCAAGCTTCAGCTGCAGGCTCTTCAGCAAAATGGGTCTTCAGTGCTCTCAGAAGACAAGAGCAAACGGTTGAACACAATTCTAAATACAATGAGCACCATCTACAGTACTGGAAAAGTTTGTAACCCAGATAATCCACAAGAATGCTTATTACTTGAACCAGGTTTGAATGAAATAATGGCAAACAGTTTAGACTACAATGAGAGGCTCTGGGCTTGGGAAAGCTGGAGATCTGAGGTCGGCAAGCAGCTGAGGCCATTATATGAAGAGTATGTGGTCTTGAAAAATGAGATGGCAAGAGCAAATCATTATGAGGACTATGGGGATTATTGGAGAGGAGACTATGAAGTAAATGGGGTAGATGGCTATGACTACAGCCGCGGCCAGTTGATTGAAGATGTGGAACATACCTTTGAAGAGATTAAACCATTATATGAACATCTTCATGCCTATGTGAGGGCAAAGTTGATGAATGCCTATCCTTCCTATATCAGTCCAATTGGATGCCTCCCTGCTCATTTGCTTGGTGATATGTGGGGTAGATTTTGGACAAATCTGTACTCTTTGACAGTTCCTTTTGGACAGAAACCAAACATAGATGTTACTGATGCAATGGTGGACCAGGCCTGGGATGCACAGAGAATATTCAAGGAGGCTGAGAAGTTCTTTGTATCTGTTGGTCTTCCTAATATGACTCAAGGATTCTGGGAAAATTCCATGCTAACCGACCCAGGAAATGTTCAGAAAGCAGTCTGCCATCCCACAGCTTGGGACCTGGGGAAGGGCGACTTCAGGATCCTTATGTGCACAAAGGTGACAATGGACGACTTCCTGACAGCTCATCATGAGATGGGGCATATCCAGTATGATATGGCATATGCTGCACAACCTTTTCTGCTAAGAAATGGAGCTAATGAAGGATTCCATGAAGCTGTTGGGGAAATCATGTCACTTTCTGCAGCCACACCTAAGCATTTAAAATCCATTGGTCTTCTGTCACCCGATTTTCAAGAAGACAATGAAACAGAAATAAACTTCCTGCTCAAACAAGCACTCACGATTGTTGGGACTCTGCCATTTACTTACATGTTAGAGAAGTGGAGGTGGATGGTCTTTAAAGGGGAAATTCCCAAAGACCAGTGGATGAAAAAGTGGTGGGAGATGAAGCGAGAGATAGTTGGGGTGGTGGAACCTGTGCCCCATGATGAAACATACTGTGACCCCGCATCTCTGTTCCATGTTTCTAATGATTACTCATTCATTCGATATTACACAAGGACCCTTTACCAATTCCAGTTTCAAGAAGCACTTTGTCAAGCAGCTAAACATGAAGGCCCTCTGCACAAATGTGACATCTCAAACTCTACAGAAGCTGGACAGAAACTGTTCAATATGCTGAGGCTTGGAAAATCAGAACCCTGGACCCTAGCATTGGAAAATGTTGTAGGAGCAAAGAACATGAATGTAAGGCCACTGCTCAACTACTTTGAGCCCTTATTTACCTGGCTGAAAGACCAGAACAAGAATTCTTTTGTGGGATGGAGTACCGACTGGAGTCCATATGCAGACCAAAGCATCAAAGTGAGGATAAGCCTAAAATCAGCTCTTGGAGATAAAGCATATGAATGGAACGACAATGAAATGTACCTGTTCCGATCATCTGTTGCATATGCTATGAGGCAGTACTTTTTAAAAGTAAAAAATCAGATGATTCTTTTTGGGGAGGAGGATGTGCGAGTGGCTAATTTGAAACCAAGAATCTCCTTTAATTTCTTTGTCACTGCACCTAAAAATGTGTCTGATATCATTCCTAGAACTGAAGTTGAAAAGGCCATCAGGATGTCCCGGAGCCGTATCAATGATGCTTTCCGTCTGAATGACAACAGCCTAGAGTTTCTGGGGATACAGCCAACACTTGGACCTCCTAACCAGCCCCCTGTTTCCATATGGCTGATTGTTTTTGGAGTTGTGATGGGAGTGATAGTGGTTGGCATTGTCATCCTGATCTTCACTGGGATCAGAGATCGGAAGAAGAAAAATAAAGCAAGAAGTGGAGAAAATCCTTATGCCTCCATCGATATTAGCAAAGGAGAAAATAATCCAGGATTCCAAAACACTGATGATGTTCAGACCTCCTTTTAG",
+        "uniprot_id": "Q9BYF1"
+    },
+    {
+        "accession": "Q9BYF1",
+        "type": "Protein",
+        "gene": "ACE2",
+        "organism": "Homo sapiens",
+        "title": "Angiotensin-converting enzyme 2 [Homo sapiens] >sp|Q9BYF1|ACE2_HUMAN",
+        "sequence": "MSSSSWLLLSLVAVTAAQSTIEEQAKTFLDKFNHEAEDLFYQSSLASWNYNTNITEENVQNMNNAGDKWSAFLKEQSTLAQMYPLQEIQNLTVKLQLQALQQNGSSVLSEDKSKRLNTILNTMSTIYSTGKVCNPDNPQECLLLEPGLNEIMANSLDYNERLWAWESWRSEVGKQLRPLYEEYVVLKNEMARANHYEDYGDYWRGDYEVNGVDGYDYSRGQLIEDVEHTFEEIKPLYEHLHAYVRAKLMNAYPSYISPIGCLPAHLLGDMWGRFWTNLYSLTVPFGQKPNIDVTDAMVDQAWDAQRIFKEAEKFFVSVGLPNMTQGFWENSMLTDPGNVQKAVCHPTAWDLGKGDFRILMCTKVTMDDFLTAHHEMGHIQYDMAYAAQPFLLRNGANEGFHEAVGEIMSLSAATPKHLKSIGLLSPDFQEDNETEINFLLKQALTIVGTLPFTYMLEKWRWMVFRGEIPKEQWMKKWWEMKREIVGVVEPVPHDETYCDPASLFHVSNDYSFIRYYTRTLYQFQFQEALCQAAKHEGPLHKCDISNSTEAGQKLFNMLRLGKSEPWTLALENVVGAKNMNVRPLLNYFEPLFTWLKDQNKNSFVGWSTDWSPYADQSIKVRISLKSALGDKAYEWNDNEMYLFRSSVAYAMRQYFLKVKNQMILFGEEDVRVANLKPRISFNFFVTAPKNVSDIIPRTEVEKAIRMSRSRINDAFRLNDNSLEFLGIQPTLGPPNQPPVSIWLIVFGVVMGVIVVGIVILIFTGIRDRKKKNKARSGENPYASIDISKGENNPGFQNTDDVQTSF",
+        "uniprot_id": "Q9BYF1"
     }
 ]
 
@@ -622,11 +785,53 @@ def parse_blast_xml(xml_handle, query_length: int, e_value_cutoff: float = 1e-5)
 
     return final_hits
 
+CODON_TABLE = {
+    'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
+    'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
+    'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K',
+    'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',
+    'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L',
+    'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
+    'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q',
+    'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
+    'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V',
+    'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
+    'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E',
+    'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
+    'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S',
+    'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
+    'TAC':'Y', 'TAT':'Y', 'TAA':'*', 'TAG':'*',
+    'TGC':'C', 'TGT':'C', 'TGA':'*', 'TGG':'W',
+}
+
+def _translate_dna(dna_seq: str, frame: int = 0) -> str:
+    """Translates nucleotide sequence starting from specified reading frame."""
+    pep = []
+    for i in range(frame, len(dna_seq) - 2, 3):
+        codon = dna_seq[i:i+3]
+        pep.append(CODON_TABLE.get(codon, 'X'))
+    return "".join(pep).rstrip('*')
+
+def _get_kmers(seq: str, k: int) -> set:
+    """Generates set of unique k-mers for fast candidate screening."""
+    if len(seq) < k:
+        return {seq}
+    return {seq[i:i+k] for i in range(len(seq) - k + 1)}
+
+# Pre-compute k-mers for benchmark references
+for _ref in BENCHMARK_REFERENCES:
+    _seq = _ref["sequence"].upper()
+    _k = 7 if _ref.get("type") in ("DNA", "RNA") else 4
+    _ref["_kmers"] = _get_kmers(_seq, _k)
+
 def local_benchmark_alignment(sequence: str, seq_type: str) -> List[Dict[str, Any]]:
     """
     Multi-organism local reference aligner using Biopython PairwiseAligner with local Smith-Waterman.
-    Enables rapid (<0.05s) identification for common reference sequences, full transcripts,
-    and sub-sequence fragments/primers, with forward and reverse-complement strand support.
+    Features:
+    - Sub-millisecond k-mer pre-screening
+    - Forward and reverse-complement strand alignment
+    - 6-frame translation (BLASTX mode) for nucleotide queries against protein references
+    - Sub-sequence / primer fragment recognition
     """
     if not BIOPYTHON_AVAILABLE:
         return []
@@ -656,9 +861,13 @@ def local_benchmark_alignment(sequence: str, seq_type: str) -> List[Dict[str, An
             if rc_query != norm_query:
                 queries_to_test.append((rc_query, True))
 
+        # Determine nucleotide vs protein k-mer screening
+        q_k = 7 if seq_type in ("DNA", "RNA") else 4
+        q_kmers = _get_kmers(norm_query, q_k)
+
+        # 1. Direct alignment (Nucleotide vs Nucleotide, Protein vs Protein)
         for ref in BENCHMARK_REFERENCES:
             ref_type = ref.get("type", "DNA")
-            # Compare nucleotide with nucleotide, protein with protein
             if (seq_type in ("DNA", "RNA") and ref_type not in ("DNA", "RNA")) or (seq_type == "Protein" and ref_type != "Protein"):
                 continue
 
@@ -666,6 +875,11 @@ def local_benchmark_alignment(sequence: str, seq_type: str) -> List[Dict[str, An
             if ref_type == "RNA":
                 ref_seq = ref_seq.replace("U", "T")
             ref_len = len(ref_seq)
+
+            # Fast k-mer screen: skip references with zero k-mer overlap if query length >= 25
+            if q_len >= 25 and ref_len >= 25 and "_kmers" in ref:
+                if len(q_kmers & ref["_kmers"]) == 0:
+                    continue
 
             best_match_for_ref = None
 
@@ -676,15 +890,11 @@ def local_benchmark_alignment(sequence: str, seq_type: str) -> List[Dict[str, An
                 if max_score_possible <= 0:
                     continue
 
-                # Local identity percentage relative to query length (or min dimension)
                 identity = round((score / max_score_possible) * 100, 2)
                 identity = max(0.0, min(100.0, identity))
-
-                # Query coverage
                 cov = 100.0 if q_len <= ref_len else round((ref_len / q_len) * 100, 2)
 
-                # High confidence match threshold:
-                # Either identity >= 75% for full queries, or >= 80% for fragments
+                # High confidence match threshold
                 if (identity >= 75.0 and cov >= 50.0) or (identity >= 80.0 and min_dim >= 20):
                     bit_score = round(score * 1.5, 1)
                     e_val = 0.0 if identity >= 95.0 else (1e-15 if identity >= 85.0 else 1e-6)
@@ -714,6 +924,77 @@ def local_benchmark_alignment(sequence: str, seq_type: str) -> List[Dict[str, An
 
             if best_match_for_ref:
                 hits.append(best_match_for_ref)
+
+        # 2. Six-frame translation (BLASTX mode) for nucleotide queries against protein references
+        if seq_type in ("DNA", "RNA") and (not hits or hits[0]["identity_percent"] < 85.0):
+            # Generate translated peptides for 3 forward frames and 3 reverse-complement frames
+            translated_frames = []
+            for frame_idx in range(3):
+                f_pep = _translate_dna(norm_query, frame_idx)
+                if len(f_pep) >= 12:
+                    translated_frames.append((f_pep, f"+{frame_idx+1}", False))
+            if len(queries_to_test) > 1:
+                rc_str = queries_to_test[1][0]
+                for frame_idx in range(3):
+                    r_pep = _translate_dna(rc_str, frame_idx)
+                    if len(r_pep) >= 12:
+                        translated_frames.append((r_pep, f"-{frame_idx+1}", True))
+
+            for pep_seq, frame_label, is_rc in translated_frames:
+                pep_kmers = _get_kmers(pep_seq, 4)
+                p_len = len(pep_seq)
+
+                for ref in BENCHMARK_REFERENCES:
+                    if ref.get("type") != "Protein":
+                        continue
+                    ref_seq = ref["sequence"].upper()
+                    ref_len = len(ref_seq)
+
+                    # K-mer screening for translated peptide
+                    if p_len >= 20 and ref_len >= 20 and "_kmers" in ref:
+                        if len(pep_kmers & ref["_kmers"]) < 2:
+                            continue
+
+                    score = aligner.score(pep_seq, ref_seq)
+                    min_dim = min(p_len, ref_len)
+                    max_score_possible = 2.0 * min_dim
+                    if max_score_possible <= 0:
+                        continue
+
+                    identity = round((score / max_score_possible) * 100, 2)
+                    identity = max(0.0, min(100.0, identity))
+                    cov = 100.0 if p_len <= ref_len else round((ref_len / p_len) * 100, 2)
+
+                    if (identity >= 75.0 and cov >= 45.0) or (identity >= 80.0 and min_dim >= 15):
+                        bit_score = round(score * 1.5, 1)
+                        e_val = 0.0 if identity >= 95.0 else (1e-15 if identity >= 85.0 else 1e-6)
+
+                        hit_info = {
+                            "accession": ref["accession"],
+                            "organism": ref["organism"],
+                            "gene_symbol": ref["gene"],
+                            "uniprot_id": ref.get("uniprot_id", ""),
+                            "title": ref["title"] + f" (Translated Frame {frame_label} BLASTX Match)",
+                            "definition": ref["title"],
+                            "e_value": e_val,
+                            "identity_percent": identity,
+                            "bit_score": bit_score,
+                            "alignment_length": min_dim,
+                            "query_coverage": cov,
+                            "query_start": 1,
+                            "query_end": q_len,
+                            "sbjct_start": 1,
+                            "sbjct_end": ref_len,
+                            "source": "Local Reference Aligner (BLASTX)",
+                            "is_rc": is_rc,
+                            "score": score
+                        }
+                        # Check if this reference is already in hits with a lower score
+                        existing = [h for h in hits if h["accession"] == ref["accession"]]
+                        if not existing or existing[0]["score"] < score:
+                            if existing:
+                                hits.remove(existing[0])
+                            hits.append(hit_info)
 
         hits.sort(key=lambda h: (-h["identity_percent"], -h["query_coverage"], -h["bit_score"]))
         for rank, h in enumerate(hits, start=1):
@@ -767,8 +1048,8 @@ def execute_blast(
             "organism": org,
             "gene_symbol": gene_sym,
             "uniprot_id": acc if re.match(r"^[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$", acc) else "",
-            "title": f"Candidate biological homolog ({acc})" + (f" [{org}]" if org else ""),
-            "definition": f"Candidate biological homolog ({acc})",
+            "title": f"Candidate biological homolog ({acc}" + (f" - {gene_sym}" if gene_sym else "") + ")" + (f" [{org}]" if org else ""),
+            "definition": f"Candidate biological homolog ({acc}" + (f" - {gene_sym}" if gene_sym else "") + ")",
             "e_value": 0.0,
             "identity_percent": 100.0,
             "bit_score": round(q_len * 1.5, 1),

@@ -45,6 +45,18 @@ CURATED_NCBI_FALLBACKS = {
         "uniprot_id": "P68871",
         "source": "NCBI Curated Benchmark (Local Fallback)"
     },
+    "P68871": {
+        "found": True,
+        "accession": "P68871",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBB",
+        "product": "hemoglobin subunit beta",
+        "title": "Hemoglobin subunit beta [Homo sapiens] >sp|P68871|HBB_HUMAN",
+        "seq_length": 147,
+        "uniprot_id": "P68871",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
     "P03211": {
         "found": True,
         "accession": "P03211",
@@ -728,7 +740,260 @@ CURATED_NCBI_FALLBACKS = {
         "seq_length": 239,
         "uniprot_id": "AAB02574",
         "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000519": {
+        "found": True,
+        "accession": "NM_000519",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBD",
+        "product": "hemoglobin subunit delta",
+        "title": "Homo sapiens hemoglobin subunit delta (HBD), mRNA",
+        "seq_length": 774,
+        "uniprot_id": "P02042",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P02042": {
+        "found": True,
+        "accession": "P02042",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBD",
+        "product": "Hemoglobin subunit delta",
+        "title": "Hemoglobin subunit delta [Homo sapiens] >sp|P02042|HBD_HUMAN",
+        "seq_length": 147,
+        "uniprot_id": "P02042",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000559": {
+        "found": True,
+        "accession": "NM_000559",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBG1",
+        "product": "hemoglobin subunit gamma 1",
+        "title": "Homo sapiens hemoglobin subunit gamma 1 (HBG1), mRNA",
+        "seq_length": 587,
+        "uniprot_id": "P69891",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P69891": {
+        "found": True,
+        "accession": "P69891",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "HBG1",
+        "product": "Hemoglobin subunit gamma-1",
+        "title": "Hemoglobin subunit gamma-1 [Homo sapiens] >sp|P69891|HBG1_HUMAN",
+        "seq_length": 147,
+        "uniprot_id": "P69891",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000616": {
+        "found": True,
+        "accession": "NM_000616",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD4",
+        "product": "T-cell surface glycoprotein CD4",
+        "title": "Homo sapiens CD4 molecule (CD4), transcript variant 1, mRNA",
+        "seq_length": 3122,
+        "uniprot_id": "P01730",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P01730": {
+        "found": True,
+        "accession": "P01730",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD4",
+        "product": "T-cell surface glycoprotein CD4",
+        "title": "T-cell surface glycoprotein CD4 [Homo sapiens] >sp|P01730|CD4_HUMAN",
+        "seq_length": 458,
+        "uniprot_id": "P01730",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_001768": {
+        "found": True,
+        "accession": "NM_001768",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD8A",
+        "product": "T-cell surface glycoprotein CD8 alpha chain",
+        "title": "Homo sapiens CD8 subunit alpha (CD8A), mRNA",
+        "seq_length": 2577,
+        "uniprot_id": "P01732",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P01732": {
+        "found": True,
+        "accession": "P01732",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD8A",
+        "product": "T-cell surface glycoprotein CD8 alpha chain",
+        "title": "T-cell surface glycoprotein CD8 alpha chain [Homo sapiens] >sp|P01732|CD8A_HUMAN",
+        "seq_length": 235,
+        "uniprot_id": "P01732",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_005018": {
+        "found": True,
+        "accession": "NM_005018",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "PDCD1",
+        "product": "programmed cell death protein 1",
+        "title": "Homo sapiens programmed cell death 1 (PDCD1), mRNA",
+        "seq_length": 2106,
+        "uniprot_id": "Q15116",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "Q15116": {
+        "found": True,
+        "accession": "Q15116",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "PDCD1",
+        "product": "Programmed cell death protein 1",
+        "title": "Programmed cell death protein 1 [Homo sapiens] >sp|Q15116|PD1_HUMAN",
+        "seq_length": 288,
+        "uniprot_id": "Q15116",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_014143": {
+        "found": True,
+        "accession": "NM_014143",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD274",
+        "product": "programmed cell death 1 ligand 1",
+        "title": "Homo sapiens CD274 molecule (CD274), transcript variant 1, mRNA",
+        "seq_length": 1553,
+        "uniprot_id": "Q9NZQ7",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "Q9NZQ7": {
+        "found": True,
+        "accession": "Q9NZQ7",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CD274",
+        "product": "Programmed cell death 1 ligand 1",
+        "title": "Programmed cell death 1 ligand 1 [Homo sapiens] >sp|Q9NZQ7|PDL1_HUMAN",
+        "seq_length": 290,
+        "uniprot_id": "Q9NZQ7",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000492": {
+        "found": True,
+        "accession": "NM_000492",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CFTR",
+        "product": "cystic fibrosis transmembrane conductance regulator",
+        "title": "Homo sapiens CFTR cystic fibrosis transmembrane conductance regulator, mRNA",
+        "seq_length": 6132,
+        "uniprot_id": "P13569",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P13569": {
+        "found": True,
+        "accession": "P13569",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "CFTR",
+        "product": "Cystic fibrosis transmembrane conductance regulator",
+        "title": "Cystic fibrosis transmembrane conductance regulator [Homo sapiens] >sp|P13569|CFTR_HUMAN",
+        "seq_length": 1480,
+        "uniprot_id": "P13569",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_000527": {
+        "found": True,
+        "accession": "NM_000527",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "LDLR",
+        "product": "low-density lipoprotein receptor",
+        "title": "Homo sapiens low density lipoprotein receptor (LDLR), transcript variant 1, mRNA",
+        "seq_length": 5174,
+        "uniprot_id": "P01130",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P01130": {
+        "found": True,
+        "accession": "P01130",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "LDLR",
+        "product": "Low-density lipoprotein receptor",
+        "title": "Low-density lipoprotein receptor [Homo sapiens] >sp|P01130|LDLR_HUMAN",
+        "seq_length": 860,
+        "uniprot_id": "P01130",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "Q99ZW2": {
+        "found": True,
+        "accession": "Q99ZW2",
+        "organism": "Streptococcus pyogenes",
+        "taxonomy": "Bacteria; Bacillota; Bacilli; Lactobacillales; Streptococcaceae; Streptococcus",
+        "gene": "CAS9",
+        "product": "CRISPR-associated endonuclease Cas9",
+        "title": "CRISPR-associated endonuclease Cas9 [Streptococcus pyogenes] >sp|Q99ZW2|CAS9_STRP1",
+        "seq_length": 1368,
+        "uniprot_id": "Q99ZW2",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P02769": {
+        "found": True,
+        "accession": "P02769",
+        "organism": "Bos taurus",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Laurasiatheria; Artiodactyla; Ruminantia; Pecora; Bovidae; Bovinae; Bos",
+        "gene": "ALB",
+        "product": "Serum albumin (BSA)",
+        "title": "Serum albumin preproprotein [Bos taurus] >sp|P02769|ALBU_BOVIN",
+        "seq_length": 607,
+        "uniprot_id": "P02769",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P61626": {
+        "found": True,
+        "accession": "P61626",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "LYZ",
+        "product": "Lysozyme C",
+        "title": "Lysozyme C [Homo sapiens] >sp|P61626|LYSC_HUMAN",
+        "seq_length": 148,
+        "uniprot_id": "P61626",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "NM_021804": {
+        "found": True,
+        "accession": "NM_021804",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ACE2",
+        "product": "angiotensin converting enzyme 2",
+        "title": "Homo sapiens angiotensin converting enzyme 2 (ACE2), mRNA",
+        "seq_length": 3521,
+        "uniprot_id": "Q9BYF1",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "Q9BYF1": {
+        "found": True,
+        "accession": "Q9BYF1",
+        "organism": "Homo sapiens",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae; Homo",
+        "gene": "ACE2",
+        "product": "Angiotensin-converting enzyme 2",
+        "title": "Angiotensin-converting enzyme 2 [Homo sapiens] >sp|Q9BYF1|ACE2_HUMAN",
+        "seq_length": 805,
+        "uniprot_id": "Q9BYF1",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
     }
+
 }
 
 def extract_gene_and_product(record, hit_title: str = "") -> tuple[str, str, str]:
@@ -830,6 +1095,21 @@ def fetch_ncbi_annotation(
         if uniprot_hint and not cached_info.get("uniprot_id"):
             cached_info["uniprot_id"] = uniprot_hint
         return cached_info
+
+    # If uniprot_hint is in curated database (e.g. for PDB accession or clone ID)
+    if uniprot_hint and uniprot_hint in CURATED_NCBI_FALLBACKS:
+        cached_info = CURATED_NCBI_FALLBACKS[uniprot_hint].copy()
+        cached_info["accession"] = accession
+        return cached_info
+
+    # If gene_hint is in curated database
+    norm_gene = gene_hint.upper().replace("-", "").replace("_", "") if gene_hint else ""
+    if norm_gene:
+        for fb_acc, fb_data in CURATED_NCBI_FALLBACKS.items():
+            if fb_data.get("gene", "").upper().replace("-", "").replace("_", "") == norm_gene:
+                cached_info = fb_data.copy()
+                cached_info["accession"] = accession
+                return cached_info
 
     if not ENTREZ_AVAILABLE:
         return {

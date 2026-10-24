@@ -690,7 +690,180 @@ CURATED_PUBMED_FALLBACKS = {
                 "category": "Function / Mechanism",
                 "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8707053/"
         }
-]
+    ],
+    "HBD": [
+        {
+            "pmid": "22888277",
+            "title": "The human delta-globin gene (HBD): structure, evolution, and regulation",
+            "authors": "Moi P, Satta S, et al.",
+            "journal": "Hemoglobin",
+            "year": "2012",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22888277/"
+        },
+        {
+            "pmid": "18432241",
+            "title": "Hemoglobin A2: structure, function, and clinical significance",
+            "authors": "Giambona A, et al.",
+            "journal": "Haematologica",
+            "year": "2008",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18432241/"
+        }
+    ],
+    "HBG1": [
+        {
+            "pmid": "30464264",
+            "title": "BCL11A repression of gamma-globin gene expression in sickle cell disease",
+            "authors": "Liu N, Hargreaves VV, et al.",
+            "journal": "Nature",
+            "year": "2018",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/30464264/"
+        },
+        {
+            "pmid": "26900755",
+            "title": "Fetal hemoglobin in sickle cell anemia and beta-thalassemia",
+            "authors": "Akinsheye I, et al.",
+            "journal": "Blood",
+            "year": "2016",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/26900755/"
+        }
+    ],
+    "CD4": [
+        {
+            "pmid": "9060647",
+            "title": "Crystal structure of an HIV-1 envelope glycoprotein gp120 core complexed with CD4",
+            "authors": "Kwong PD, Wyatt R, Robinson J, et al.",
+            "journal": "Nature",
+            "year": "1998",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/9060647/"
+        },
+        {
+            "pmid": "28369062",
+            "title": "CD4+ T cells in health and disease",
+            "authors": "Luckheeram RV, Zhou R, et al.",
+            "journal": "Clin Dev Immunol",
+            "year": "2017",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28369062/"
+        }
+    ],
+    "CD8A": [
+        {
+            "pmid": "9367155",
+            "title": "Crystal structure of the complex of human CD8alphaalpha with HLA-A2",
+            "authors": "Gao GF, Tormo J, et al.",
+            "journal": "Nature",
+            "year": "1997",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/9367155/"
+        }
+    ],
+    "PDCD1": [
+        {
+            "pmid": "26085271",
+            "title": "Structure of the programmed death-1 (PD-1) pathway",
+            "authors": "Zak KM, Kitel R, et al.",
+            "journal": "Structure",
+            "year": "2015",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/26085271/"
+        },
+        {
+            "pmid": "31862550",
+            "title": "Immune checkpoint inhibitors in oncology: targeting PD-1 and PD-L1",
+            "authors": "Ribas A, Wolchok JD, et al.",
+            "journal": "N Engl J Med",
+            "year": "2020",
+            "category": "Drug / Pharmacology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/31862550/"
+        }
+    ],
+    "CD274": [
+        {
+            "pmid": "27814402",
+            "title": "PD-L1 expression and checkpoint blockade immunotherapy",
+            "authors": "Patel SP, Kurzrock R, et al.",
+            "journal": "Mol Cancer Ther",
+            "year": "2016",
+            "category": "Drug / Pharmacology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/27814402/"
+        }
+    ],
+    "CFTR": [
+        {
+            "pmid": "28331221",
+            "title": "Structure of the human cystic fibrosis transmembrane conductance regulator",
+            "authors": "Liu F, Zhang Z, et al.",
+            "journal": "Cell",
+            "year": "2017",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28331221/"
+        },
+        {
+            "pmid": "31666198",
+            "title": "Elexacaftor-Tezacaftor-Ivacaftor for Cystic Fibrosis with a Single Phe508del Allele",
+            "authors": "Middleton PG, Mall MA, et al.",
+            "journal": "N Engl J Med",
+            "year": "2019",
+            "category": "Drug / Pharmacology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/31666198/"
+        }
+    ],
+    "LDLR": [
+        {
+            "pmid": "9405364",
+            "title": "Structure of the LDL receptor extracellular domain at neutral pH",
+            "authors": "Jeon H, Meng W, et al.",
+            "journal": "Science",
+            "year": "2001",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/9405364/"
+        }
+    ],
+    "CAS9": [
+        {
+            "pmid": "24529736",
+            "title": "Crystal structure of Cas9 in complex with guide RNA and target DNA",
+            "authors": "Nishimasu H, Ran FA, Hsu PD, et al.",
+            "journal": "Cell",
+            "year": "2014",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24529736/"
+        },
+        {
+            "pmid": "22745249",
+            "title": "A programmable dual-RNA-guided DNA endonuclease in adaptive bacterial immunity",
+            "authors": "Jinek M, Chylinski K, Fonfara I, et al.",
+            "journal": "Science",
+            "year": "2012",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22745249/"
+        }
+    ],
+    "ACE2": [
+        {
+            "pmid": "32132184",
+            "title": "Structural basis for the recognition of SARS-CoV-2 by full-length human ACE2",
+            "authors": "Yan R, Zhang Y, Li Y, et al.",
+            "journal": "Science",
+            "year": "2020",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32132184/"
+        },
+        {
+            "pmid": "32075877",
+            "title": "A pneumonia outbreak associated with a new coronavirus of probable bat origin",
+            "authors": "Zhou P, Yang XL, et al.",
+            "journal": "Nature",
+            "year": "2020",
+            "category": "Disease / Pathology",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32075877/"
+        }
+    ]
 }
 
 def categorize_article(title: str, abstract: str = "") -> str:

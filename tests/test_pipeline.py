@@ -144,5 +144,95 @@ class TestPipeline(unittest.TestCase):
         self.assertEqual(hits[0]["gene_symbol"], "S")
         self.assertEqual(hits[0]["identity_percent"], 100.0)
 
+    def test_local_benchmark_alignment_hbd(self):
+        hbd_seq = "ATGGTGCATCTGACTCCTGAGGAGAAGACTGCCGTCAATGCCCTGTGGGGCAAAGTGAACGTGGATGCAGTTGGTGGTGAGGCCCTGGGCAGACTGCTCGTTGTCTACCCCTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCTCTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTTCTCAGCTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCTCGCAACTTTGGCAAGGAATTCACCCCACAGATGCAGGCTGCCTATCAGAAGGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTACCACTAA"
+        hits = local_benchmark_alignment(hbd_seq, "DNA")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["accession"], "NM_000519")
+        self.assertEqual(hits[0]["gene_symbol"], "HBD")
+        self.assertEqual(hits[0]["identity_percent"], 100.0)
+
+    def test_local_benchmark_alignment_cd4(self):
+        cd4_seq = "MNRGVPFRHLLLVLQLALLPAATQGKKVVLGKKGDTVELTCTASQKKSIQFHWKNSNQIKILGNQGSFLTKGPSKLNDRADSRRSLWDQGNFPLIIKNLKIEDSDTYICEVEDQKEEVQLLVFGLTANSDTHLLQGQSLTLTLESPPGSSPSVQCRSPRGKNIQGGKTLSVSQLELQDSGTWTCTVLQNQKKVEFKIDIVVLAFQKASSIVYKKEGEQVEFSFPLAFTVEKLTGSGELWWQAERASSSKSWITFDLKNKEVSVKRVTQDPKLQMGKKLPLHLTLPQALPQYAGSGNLTLALEAKTGKLHQEVNLVVMRATQLQKNLTCEVWGPTSPKLMLSLKLENKEAKVSKREKAVWVLNPEAGMWQCLLSDSGQVLLESNIKVLPTWSTPVQPMALIVLGGVAGLLLFIGLGIFFCVRCRHRRRQAERMSQIKRLLSEKKTCQCPHRFQKTCSPI"
+        hits = local_benchmark_alignment(cd4_seq, "Protein")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["accession"], "P01730")
+        self.assertEqual(hits[0]["gene_symbol"], "CD4")
+
+    def test_blastx_translation_matching(self):
+        # Coding DNA for SpCas9 N-terminal domain (MDKKYSIGLDIGTNSVGWAVITDEYKVPSKKFKVLG...)
+        cas9_dna = "ATGGATAAGAAATACTCAATAGGCTTAGATATCGGCACAAATAGCGTCGGATGGGCGGTGATCACTGATGAATATAAGGTTCCGTCTAAAAAGTTCAAGGTTCTGGGAAATACAGACCGCCACAGTATCAAAAAAAATCTTATAGGGGCTCTTTTATTTGACAGTGGAGAGACAGCGGAAGCGACTCGTCTCAAACGGACAGCTCGTAGAAGGTATACACGTCGGAAGAATCGTATTTGTTATCTACAGGAGATTTTTTCAAATGAGATGGCGAAAGTAGATGATAGTTTCTTTCATCGACTTGAAGAGTCTTTTTTGGTGGAAGAAGACAAGAAGCATGAACGTCATCCTATTTTTGGAAATATAGTAGATGAAGTTGCTTATCATGAGAAATATCCAACTATCTATCATCTGCGAAAAAAATTGGTAGATTCTACTGATAAAGCGGATTTGCGCTTAATCTATTTGGCCTTAGCGCATATGATTAAGTTTCGTGGTCATTTTTTGATTGAGGGAGATTTAAATCCTGATAATAGTGATGTGGACAAACTATTTATCCAGTTGGTACAAACCTACAATCAATTATTTGAAGAAAACCCTATTAACGCAAGTGGAGTAGATGCTAAAGCGATTCTTTCTGCACGATTGAGTAAATCAAGACGATTAGAAAATCTCATTGCTCAGCTCCCCGGTGAGAAGAAAAATGGCTTATTTGGGAATCTCATTGCTTTGTCATTGGGTTTGACCCCTAATTTTAAATCAAATTTTGATTTGGCAGAAGATGCTAAATTACAGCTTTCAAAAGATACTTACGATGATGATTTAGATAATTTATTGGCGCAAATTGGAGATCAATATGCTGATTTGTTTTTGGCAGCTAAGAATTTATCAGATGCTATTTTACTTTCAGATATCCTAAGAGTAAATACTGAAATAACTAAGGCTCCCCTATCAGCTTCAATGATTAAACGCTACGATGAACATCATCAAGACTTGACTCTTTTAAAAGCTTTAGTTCGACAACAACTTCCAGAAAAGTATAAAGAAATCTTTTTTGATCAATCAAAAAACGGATATGCAGGTTATATT"
+        hits = local_benchmark_alignment(cas9_dna, "DNA")
+        self.assertGreaterEqual(len(hits), 1)
+        self.assertEqual(hits[0]["accession"], "Q99ZW2")
+        self.assertEqual(hits[0]["gene_symbol"], "CAS9")
+        self.assertIn("BLASTX", hits[0]["title"])
+
+    def test_hbd_pubmed_literature(self):
+        articles = fetch_pubmed_literature("HBD", "Homo sapiens")
+        self.assertGreaterEqual(len(articles), 1)
+        self.assertIn("HBD", articles[0]["title"])
+
+    def test_cd4_uniprot_annotation(self):
+        res = fetch_uniprot_annotation("CD4", uniprot_id="P01730")
+        self.assertTrue(res.get("found", False))
+        self.assertEqual(res.get("accession"), "P01730")
+        self.assertIn("CD4", res.get("protein_name", ""))
+
+    def test_end_to_end_database_formats(self):
+        from modules.validation import validate_and_analyze
+        from modules.blast_search import execute_blast
+
+        # 1. GenBank Flat file
+        gb = """LOCUS       NM_000518               628 bp    mRNA    linear   PRI 01-FEB-2024
+DEFINITION  Homo sapiens hemoglobin subunit beta (HBB), mRNA.
+ACCESSION   NM_000518
+ORIGIN      
+        1 acatttgctt ctgacacaac tgtgttcact agcaacctca aacagacacc atggtgcacc
+       61 tgactcctga ggagaagtct gccgttactg ccctgtgggg caaggtgaac gtggatgaag
+//"""
+        v_gb = validate_and_analyze(gb)
+        b_gb = execute_blast(v_gb["sequence"], v_gb["type"], hints=v_gb["hints"])
+        self.assertTrue(b_gb["success"])
+        self.assertGreaterEqual(len(b_gb["hits"]), 1)
+        self.assertIn("HBB", b_gb["hits"][0]["title"])
+
+        # 2. UniProt Flat file
+        up = """ID   HBB_HUMAN               Reviewed;         147 AA.
+AC   P68871;
+DE   RecName: Full=Hemoglobin subunit beta;
+GN   Name=HBB;
+OS   Homo sapiens (Human).
+SQ   SEQUENCE   147 AA;  15998 MW;  E479DE988CBEE2DA CRC64;
+     MVHLTPEEKS AVTALWGKVN VDEVGGEALG RLLVVYPWTQ RFFESFGDLS TPDAVMGNPK
+     VKAHGKKVLG AFSDGLAHLD NLKGTFATLS ELHCDKLHVD PENFRLLGNV LVCVLAHHFG
+//"""
+        v_up = validate_and_analyze(up)
+        b_up = execute_blast(v_up["sequence"], v_up["type"], hints=v_up["hints"])
+        self.assertTrue(b_up["success"])
+        self.assertEqual(b_up["hits"][0]["accession"], "P68871")
+
+        # 3. 3-Letter peptide
+        pep = "Met-Val-His-Leu-Thr-Pro-Glu-Glu-Lys-Ser-Ala-Val-Thr-Ala-Leu"
+        v_pep = validate_and_analyze(pep)
+        b_pep = execute_blast(v_pep["sequence"], v_pep["type"], hints=v_pep["hints"])
+        self.assertTrue(b_pep["success"])
+        self.assertGreaterEqual(len(b_pep["hits"]), 1)
+        self.assertEqual(b_pep["hits"][0]["gene_symbol"], "HBB")
+
+        # 4. PDB FASTA with taxonomy ID
+        pdb = ">4HHB_1|Chains A, C|Hemoglobin subunit alpha|Homo sapiens (9606)\nVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR"
+        v_pdb = validate_and_analyze(pdb)
+        b_pdb = execute_blast(v_pdb["sequence"], v_pdb["type"], hints=v_pdb["hints"])
+        self.assertTrue(b_pdb["success"])
+        self.assertEqual(b_pdb["hits"][0]["gene_symbol"], "HBA1")
+
+        # 5. Raw HBD CDS
+        hbd_cds = "ATGGTGCATCTGACTCCTGAGGAGAAGACTGCCGTCAATGCCCTGTGGGGCAAAGTGAACGTGGATGCAGTTGGTGGTGAGGCCCTGGGCAGACTGCTCGTTGTCTACCCCTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCTCTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTTCTCAGCTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCTCGCAACTTTGGCAAGGAATTCACCCCACAGATGCAGGCTGCCTATCAGAAGGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTACCACTAA"
+        v_hbd = validate_and_analyze(hbd_cds)
+        b_hbd = execute_blast(v_hbd["sequence"], v_hbd["type"], hints=v_hbd["hints"])
+        self.assertTrue(b_hbd["success"])
+        self.assertEqual(b_hbd["hits"][0]["gene_symbol"], "HBD")
+
 if __name__ == "__main__":
     unittest.main()
