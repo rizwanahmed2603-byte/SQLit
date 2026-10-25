@@ -1,0 +1,12 @@
+venv
+.venv
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+.pytest_cache
+data/seqlit_cache.db
+data/matplotlib
+reports/*.html
+.DS_Store

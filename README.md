@@ -162,6 +162,22 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+---
+
+## 🚀 Free Web Deployment (Live Website with Free Domain)
+
+SeqLit is pre-configured with a [`Procfile`](Procfile), [`render.yaml`](render.yaml), and a multi-platform [`Dockerfile`](Dockerfile) for instant 1-click cloud deployment with a free public domain and automatic HTTPS:
+
+| Platform | Free Domain Example | Auto-Deploy on Push | Free Tier Specs | Setup Time |
+|---|---|---|---|---|
+| **[Render](https://render.com)** *(Recommended)* | `https://seqlit.onrender.com` | ✅ Yes (GitHub) | Free Web Service | 2 minutes |
+| **[Hugging Face Spaces](https://huggingface.co/spaces)** | `https://<user>-seqlit.hf.space` | ✅ Yes (Git / Docker) | 2 vCPU, 16 GB RAM | 2 minutes |
+| **[Koyeb](https://koyeb.com)** | `https://seqlit.koyeb.app` | ✅ Yes (GitHub) | Free Eco nano instance | 2 minutes |
+
+👉 See the complete step-by-step walkthrough in [**`DEPLOYMENT.md`**](DEPLOYMENT.md).
+
+---
+
 ### 2. Run the Application
 Use the provided `run.sh` script (which automatically clears stale ports and sets the macOS Python SSL certificate bundle):
 ```bash
