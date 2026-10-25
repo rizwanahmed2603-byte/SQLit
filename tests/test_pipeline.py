@@ -234,5 +234,14 @@ SQ   SEQUENCE   147 AA;  15998 MW;  E479DE988CBEE2DA CRC64;
         self.assertTrue(b_hbd["success"])
         self.assertEqual(b_hbd["hits"][0]["gene_symbol"], "HBD")
 
+        # 6. Swiss-Model model.pdb (Triosephosphate Isomerase)
+        tpi_seq = "RKFFVGGNWKMNGDKKSLGELIHTLNGAKLSADTEVVCGAPSIYLDFARQKLDAKIGVAAQNCYKVPKGAFTGEISPAMIKDIGAAWVILGHSERRHVFGESDELIGQKVAHALAEGLGVIACIGEKLDEREAGITEKVVFEQTKAIADNVKDWSKVVLAYEPVWAIGTGKTATPQQAQEVHEKLRGWLKSHVSDAVAQSTRIIYGGSVTGGNCKELASQHDVDGFLVGGASLKPEFVDIINAKH"
+        v_tpi = validate_and_analyze(tpi_seq)
+        b_tpi = execute_blast(v_tpi["sequence"], v_tpi["type"], hints=v_tpi["hints"])
+        self.assertTrue(b_tpi["success"])
+        self.assertEqual(b_tpi["hits"][0]["accession"], "1TPH")
+        self.assertEqual(b_tpi["hits"][0]["gene_symbol"], "TPI1")
+        self.assertEqual(b_tpi["hits"][0]["identity_percent"], 100.0)
+
 if __name__ == "__main__":
     unittest.main()

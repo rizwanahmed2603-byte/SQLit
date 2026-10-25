@@ -992,8 +992,31 @@ CURATED_NCBI_FALLBACKS = {
         "seq_length": 805,
         "uniprot_id": "Q9BYF1",
         "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "1TPH": {
+        "found": True,
+        "accession": "1TPH",
+        "organism": "Gallus gallus",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda; Coelurosauria; Aves; Neognathae; Galloanserae; Galliformes; Phasianidae; Phasianinae; Gallus",
+        "gene": "TPI1",
+        "product": "triosephosphate isomerase",
+        "title": "Crystal structure of triosephosphate isomerase [Gallus gallus] >pdb|1TPH|A",
+        "seq_length": 245,
+        "uniprot_id": "P00940",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
+    },
+    "P00940": {
+        "found": True,
+        "accession": "P00940",
+        "organism": "Gallus gallus",
+        "taxonomy": "Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda; Coelurosauria; Aves; Neognathae; Galloanserae; Galliformes; Phasianidae; Phasianinae; Gallus",
+        "gene": "TPI1",
+        "product": "Triosephosphate isomerase",
+        "title": "Triosephosphate isomerase [Gallus gallus] >sp|P00940|TPIS_CHICK",
+        "seq_length": 245,
+        "uniprot_id": "P00940",
+        "source": "NCBI Curated Benchmark (Local Fallback)"
     }
-
 }
 
 def extract_gene_and_product(record, hit_title: str = "") -> tuple[str, str, str]:

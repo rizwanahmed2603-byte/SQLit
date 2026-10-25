@@ -778,8 +778,23 @@ CURATED_UNIPROT_FALLBACKS = {
         "features": [{"type": "Domain", "description": "Peptidase M2 domain", "start": "19", "end": "611"}],
         "entry_url": "https://www.uniprot.org/uniprotkb/Q9BYF1",
         "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
+    },
+    "P00940": {
+        "found": True,
+        "accession": "P00940",
+        "protein_name": "Triosephosphate isomerase",
+        "gene": "TPI1",
+        "organism": "Gallus gallus",
+        "function": "Triosephosphate isomerase (TIM) is an extraordinarily efficient glycolytic enzyme that catalyzes the reversible interconversion of the triose phosphate isomers dihydroxyacetone phosphate and D-glyceraldehyde 3-phosphate. Essential for efficient energy production in glycolysis and gluconeogenesis.",
+        "go_terms": {
+            "biological_process": [{"id": "GO:0006096", "name": "glycolytic process"}, {"id": "GO:0006094", "name": "gluconeogenesis"}],
+            "molecular_function": [{"id": "GO:0004807", "name": "triose-phosphate isomerase activity"}],
+            "cellular_component": [{"id": "GO:0005737", "name": "cytoplasm"}]
+        },
+        "features": [{"type": "Active site", "description": "Proton donor (Glu-165)", "start": "165", "end": "165"}, {"type": "Active site", "description": "Proton acceptor (His-95)", "start": "95", "end": "95"}],
+        "entry_url": "https://www.uniprot.org/uniprotkb/P00940",
+        "source": "UniProtKB / Swiss-Prot (Curated Benchmark)"
     }
-
 }
 
 # Gene to accession mapping for fast local resolution
@@ -826,7 +841,9 @@ GENE_TO_ACCESSION = {
     "CFTR": "P13569",
     "LDLR": "P01130",
     "CAS9": "Q99ZW2",
-    "ACE2": "Q9BYF1"
+    "ACE2": "Q9BYF1",
+    "TPI1": "P00940",
+    "1TPH": "P00940"
 }
 
 def _parse_uniprot_entry(entry: Dict[str, Any]) -> Dict[str, Any]:

@@ -863,6 +863,37 @@ CURATED_PUBMED_FALLBACKS = {
             "category": "Disease / Pathology",
             "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32075877/"
         }
+    ],
+    "TPI1": [
+        {
+            "pmid": "2245780",
+            "title": "Crystal structure of chicken triosephosphate isomerase with phosphoglycolohydroxamate at 1.9 A resolution",
+            "authors": "Davenport RC, Bash PA, et al.",
+            "journal": "Biochemistry",
+            "year": "1991",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2245780/"
+        },
+        {
+            "pmid": "2189945",
+            "title": "Triosephosphate isomerase: a fitting companion to the catalytic constant",
+            "authors": "Knowles JR, et al.",
+            "journal": "Nature",
+            "year": "1991",
+            "category": "Function / Mechanism",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2189945/"
+        }
+    ],
+    "1TPH": [
+        {
+            "pmid": "2245780",
+            "title": "Crystal structure of chicken triosephosphate isomerase with phosphoglycolohydroxamate at 1.9 A resolution",
+            "authors": "Davenport RC, Bash PA, et al.",
+            "journal": "Biochemistry",
+            "year": "1991",
+            "category": "Structure / Crystallography",
+            "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2245780/"
+        }
     ]
 }
 
