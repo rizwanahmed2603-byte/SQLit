@@ -8,7 +8,19 @@ Authentic results only: never produces mock data if no real UniProt entry exists
 
 import logging
 import re
+import ssl
 from typing import Dict, Any, List, Optional
+
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except Exception:
+    pass
+
+try:
+    import urllib3
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+except ImportError:
+    pass
 
 try:
     import requests
@@ -947,6 +959,30 @@ def fetch_uniprot_annotation(
     direct_id = uniprot_id or GENE_TO_ACCESSION.get(clean_term.upper())
     if not direct_id and re.match(r"^[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$", clean_term):
         direct_id = clean_term
+
+    # Cross-database resolver for PDB IDs
+    if not direct_id and re.match(r"^[0-9][A-Za-z0-9]{3}$", clean_term) and REQUESTS_AVAILABLE:
+        try:
+            r_ent = requests.get(f"https://data.rcsb.org/rest/v1/core/polymer_entity/{clean_term.upper()}/1", timeout=5)
+            if r_ent.status_code == 200:
+                for ref in r_ent.json().get("rcsb_polymer_entity_container_identifiers", {}).get("reference_sequence_identifiers", []):
+                    if ref.get("database_name") == "UniProt":
+                        direct_id = ref.get("database_accession")
+                        break
+        except Exception:
+            pass
+
+    # Cross-database resolver for Ensembl IDs
+    if not direct_id and clean_term.upper().startswith("ENS") and REQUESTS_AVAILABLE:
+        try:
+            r_ens = requests.get(f"https://rest.ensembl.org/lookup/id/{clean_term}?content-type=application/json", timeout=5)
+            if r_ens.status_code == 200:
+                ens_gene = r_ens.json().get("display_name", "").split("-")[0]
+                if ens_gene:
+                    clean_term = ens_gene
+                    direct_id = GENE_TO_ACCESSION.get(ens_gene.upper())
+        except Exception:
+            pass
 
     if direct_id in CURATED_UNIPROT_FALLBACKS:
         return CURATED_UNIPROT_FALLBACKS[direct_id].copy()

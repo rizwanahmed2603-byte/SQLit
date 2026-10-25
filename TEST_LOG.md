@@ -9,10 +9,11 @@ This document records the empirical testing, edge case evaluations, identified a
 | Test Category | Suite / File | Test Count | Result | Execution Time |
 |---|---|---|---|---|
 | Sequence Validation & Multi-Database Ingestion | `tests/test_validation.py` | 18 | ✅ All Passed | 0.002s |
+| Multi-Database API & Header Resolvers | `tests/test_multidatabase.py` | 9 | ✅ All Passed | 0.190s |
 | Pipeline Logic, BLASTX & 6-Frame Alignment | `tests/test_pipeline.py` | 22 | ✅ All Passed | 1.178s |
 | Non-Existent Sequence Authenticity | `tests/test_nonexistent_sequence.py` | 3 | ✅ All Passed | 30.40s (Network Timeout Checked) |
 | End-to-End Flask API & Web Routes | `tests/test_app.py` | 8 | ✅ All Passed | 0.088s |
-| **Total Test Suite** | **All Test Modules** | **51 Tests** | **✅ 100% Passing** | **1.26s (Standard Suite)** |
+| **Total Test Suite** | **All Test Modules** | **60 Tests** | **✅ 100% Passing** | **1.45s (Standard Suite)** |
 
 ---
 

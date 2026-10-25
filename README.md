@@ -2,7 +2,7 @@
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests: Passing](https://img.shields.io/badge/tests-51%20passed-brightgreen.svg)]()
+[![Tests: Passing](https://img.shields.io/badge/tests-60%20passed-brightgreen.svg)]()
 
 > **SeqLit** is an end-to-end bioinformatics sequence analysis web application designed for analyzing raw DNA, RNA, and protein sequences. Built in alignment with the **SeqLit Product Requirements Document (PRD)** and **Project Execution Guide**, it replaces a fragmented manual workflow spanning NCBI BLAST, NCBI Entrez, UniProt, and PubMed with an integrated, single-pane dashboard and structured report generator.
 

@@ -254,12 +254,19 @@ def calculate_stats(seq: str, seq_type: str) -> Dict[str, Any]:
 
 def extract_header_hints(header: str) -> Dict[str, str]:
     """
-    Extracts biological hints (accession, gene symbol, organism) from sequence headers
+    Extracts biological hints (accession, gene symbol, organism, description) from sequence headers
     across NCBI, UniProt, PDB, Ensembl, EMBL, and DDBJ formats.
     """
-    hints = {"accession": "", "gene": "", "organism": ""}
+    hints = {"accession": "", "gene": "", "organism": "", "description": ""}
     if not header:
         return hints
+
+    # Clean description from header: remove tags like >sp|P12345|... OS=... GN=...
+    clean_desc = re.sub(r"^(?:[a-z]{2,4}\|[^|]+\|)+", "", header)
+    clean_desc = re.sub(r"(?:OS|OX|GN|PE|SV)=[^=]+?(?=\s+[A-Z]{2}=|$)", "", clean_desc)
+    clean_desc = re.sub(r"\[[^\]]+\]", "", clean_desc)
+    clean_desc = re.sub(r"gene:[^\s]+|cdna:[^\s]+|chromosome:[^\s]+", "", clean_desc)
+    hints["description"] = re.sub(r"\s+", " ", clean_desc).strip()
 
     # 1. Match Swiss-Prot / UniProt accession: sp|P01308| or tr|...| or standalone UniProt ID
     sp_m = re.search(r"(?:sp|tr)\|([A-Z0-9]{6,10})", header)
@@ -276,15 +283,15 @@ def extract_header_hints(header: str) -> Dict[str, str]:
         if ens_m:
             hints["accession"] = ens_m.group(1)
 
-    # 3. Match RefSeq / GenBank / PDB accession
+    # 3. Match RefSeq / GenBank / DDBJ accession
     if not hints["accession"]:
         ref_m = re.search(r"\b([A-Z]{1,2}_\d{5,9}|[A-Z]{1,3}\d{5,8}|[A-Z]{4}\d{8})\b", header)
         if ref_m:
             hints["accession"] = ref_m.group(1)
 
-    # 4. Match PDB Structure ID: e.g. >4HHB_1, >1A3N:A, >101M, >pdb|4HHB|A
+    # 4. Match PDB Structure ID: e.g. >4HHB_1, >1A3N:A, >101M, >pdb|4HHB|A, >1TPH
     if not hints["accession"]:
-        pdb_m = re.search(r"\b([0-9][A-Za-z0-9]{3})(?:_[A-Za-z0-9]+|:[A-Za-z0-9]+)?\b", header)
+        pdb_m = re.search(r"(?:pdb\||\b)([0-9][A-Za-z0-9]{3})(?:_[A-Za-z0-9]+|:[A-Za-z0-9]+)?\b", header)
         if pdb_m:
             hints["accession"] = pdb_m.group(1).upper()
 
@@ -301,7 +308,7 @@ def extract_header_hints(header: str) -> Dict[str, str]:
                 hints["organism"] = cand_org
         if not hints["organism"]:
             org_common = re.search(
-                r"\b(Homo sapiens|Mus musculus|Rattus norvegicus|Escherichia coli|Aequorea victoria|Gallus gallus|Physeter catodon|Epstein-Barr virus|Human gammaherpesvirus 4|SARS-CoV-2|Severe acute respiratory syndrome coronavirus 2|Bos taurus|Streptococcus pyogenes)\b",
+                r"\b(Homo sapiens|Mus musculus|Rattus norvegicus|Escherichia coli|Aequorea victoria|Gallus gallus|Physeter catodon|Epstein-Barr virus|Human gammaherpesvirus 4|SARS-CoV-2|Severe acute respiratory syndrome coronavirus 2|Bos taurus|Streptococcus pyogenes|Saccharomyces cerevisiae|Danio rerio|Drosophila melanogaster|Caenorhabditis elegans|Arabidopsis thaliana)\b",
                 header,
                 re.IGNORECASE
             )
@@ -309,14 +316,14 @@ def extract_header_hints(header: str) -> Dict[str, str]:
                 hints["organism"] = org_common.group(1).strip()
 
     # 6. Match Gene:
-    # Explicit gene flags: GN=HBB, gene=HBB, gene_symbol:HBB
-    gn_explicit = re.search(r"(?:GN=|gene=|gene_symbol:)\s*([A-Za-z0-9_-]{2,12})\b", header, re.IGNORECASE)
+    # Explicit gene flags: GN=HBB, gene=HBB, gene_symbol:HBB, /gene="HBB"
+    gn_explicit = re.search(r"(?:GN=|gene=|gene_symbol:|\/gene=)\s*\"?([A-Za-z0-9_-]{2,12})\"?\b", header, re.IGNORECASE)
     if gn_explicit:
         hints["gene"] = gn_explicit.group(1).strip().upper()
     else:
         # Check known canonical genes first
         known_genes = re.search(
-            r"\b(HBB|HBA1|HBA|HBD|HBG1|HBG2|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|BRCA2|KRAS|BRAF|PTEN|MYC|CYCS|GFP|EGFP|LYZ|MB|EBNA1|APOE|TNF|IL6|ACE2|B2M|TUBB|CFTR|LDLR|CD4|CD8A|PDCD1|CD274|CTLA4|CAS9|SARS2)\b",
+            r"\b(HBB|HBA1|HBA2|HBA|HBD|HBG1|HBG2|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|BRCA2|KRAS|NRAS|HRAS|BRAF|PTEN|MYC|CYCS|GFP|EGFP|LYZ|MB|EBNA1|APOE|TNF|IL6|IL2|IL1B|IFNG|ACE2|B2M|TUBB|CFTR|LDLR|CD4|CD8A|PDCD1|CD274|CTLA4|CAS9|SARS2|TPI1|SOD1|UBB|RHO|VEGFA|ERBB2|CD19|MS4A1|CD3E|COL1A1|VIM|LDHA|PGK1|ENO1|ALDOA)\b",
             header,
             re.IGNORECASE
         )
@@ -341,6 +348,16 @@ def extract_header_hints(header: str) -> Dict[str, str]:
             hints["gene"] = "HBD"
         elif "GAMMA CHAIN" in header_upper or "HEMOGLOBIN SUBUNIT GAMMA" in header_upper:
             hints["gene"] = "HBG1"
+        elif "TRIOSEPHOSPHATE ISOMERASE" in header_upper or "TIM" in header_upper.split():
+            hints["gene"] = "TPI1"
+        elif "SUPEROXIDE DISMUTASE" in header_upper:
+            hints["gene"] = "SOD1"
+        elif "UBIQUITIN" in header_upper:
+            hints["gene"] = "UBB"
+        elif "MYOGLOBIN" in header_upper:
+            hints["gene"] = "MB"
+        elif "LYSOZYME" in header_upper:
+            hints["gene"] = "LYZ"
         else:
             known_genes = re.search(
                 r"\b(HBB|HBA1|HBA|HBD|HBG1|HBG2|INS|TP53|GAPDH|ACTB|ALB|EGFR|BRCA1|BRCA2|KRAS|BRAF|PTEN|MYC|CYCS|GFP|EGFP|LYZ|MB|EBNA1|APOE|TNF|IL6|ACE2|B2M|TUBB|CFTR|LDLR|CD4|CD8A|PDCD1|CD274|CTLA4|CAS9|SARS2)\b",
