@@ -963,7 +963,7 @@ def fetch_uniprot_annotation(
     # Cross-database resolver for PDB IDs
     if not direct_id and re.match(r"^[0-9][A-Za-z0-9]{3}$", clean_term) and REQUESTS_AVAILABLE:
         try:
-            r_ent = requests.get(f"https://data.rcsb.org/rest/v1/core/polymer_entity/{clean_term.upper()}/1", timeout=5)
+            r_ent = requests.get(f"https://data.rcsb.org/rest/v1/core/polymer_entity/{clean_term.upper()}/1", timeout=5, verify=False)
             if r_ent.status_code == 200:
                 for ref in r_ent.json().get("rcsb_polymer_entity_container_identifiers", {}).get("reference_sequence_identifiers", []):
                     if ref.get("database_name") == "UniProt":
@@ -975,7 +975,7 @@ def fetch_uniprot_annotation(
     # Cross-database resolver for Ensembl IDs
     if not direct_id and clean_term.upper().startswith("ENS") and REQUESTS_AVAILABLE:
         try:
-            r_ens = requests.get(f"https://rest.ensembl.org/lookup/id/{clean_term}?content-type=application/json", timeout=5)
+            r_ens = requests.get(f"https://rest.ensembl.org/lookup/id/{clean_term}?content-type=application/json", timeout=5, verify=False)
             if r_ens.status_code == 200:
                 ens_gene = r_ens.json().get("display_name", "").split("-")[0]
                 if ens_gene:

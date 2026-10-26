@@ -181,7 +181,13 @@ def detect_sequence_type(seq: str) -> str:
         return "Invalid"
 
     # 3. DNA detection: ATCGN or degenerate DNA
-    if unique_chars.issubset(DNA_CHARS) or unique_chars.issubset(DNA_DEGENERATE):
+    # Note: If no canonical DNA bases (A, T, C, G) are present at all, homopolymeric
+    # or oligomeric amino acids (e.g. Poly-M, Poly-R, Poly-K, Poly-S, Poly-W, Poly-Y)
+    # MUST NOT be misclassified as DNA just because IUPAC degenerate nucleic acid codes overlap.
+    has_canonical_dna = bool(unique_chars & set("ATCG"))
+    if unique_chars.issubset(DNA_CHARS):
+        return "DNA"
+    if has_canonical_dna and unique_chars.issubset(DNA_DEGENERATE):
         return "DNA"
 
     # 4. If both T and U are present (e.g. Threonine + Selenocysteine in protein)

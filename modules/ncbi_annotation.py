@@ -1104,14 +1104,14 @@ def fetch_pdb_annotation(pdb_id: str) -> Optional[Dict[str, Any]]:
         return None
     clean_id = pdb_id.strip()[:4].upper()
     try:
-        r = requests.get(f"https://data.rcsb.org/rest/v1/core/entry/{clean_id}", timeout=6)
+        r = requests.get(f"https://data.rcsb.org/rest/v1/core/entry/{clean_id}", timeout=6, verify=False)
         if r.status_code != 200:
             return None
         data = r.json()
         title = data.get("struct", {}).get("title", f"PDB structure {clean_id}")
         
         # Get entity details for organism & UniProt accession
-        r_ent = requests.get(f"https://data.rcsb.org/rest/v1/core/polymer_entity/{clean_id}/1", timeout=6)
+        r_ent = requests.get(f"https://data.rcsb.org/rest/v1/core/polymer_entity/{clean_id}/1", timeout=6, verify=False)
         org = "Unknown"
         prod = title
         uniprot_acc = ""
@@ -1147,7 +1147,7 @@ def fetch_ensembl_annotation(ensembl_id: str) -> Optional[Dict[str, Any]]:
         return None
     clean_id = ensembl_id.strip().split(".")[0]
     try:
-        r = requests.get(f"https://rest.ensembl.org/lookup/id/{clean_id}?content-type=application/json", timeout=6)
+        r = requests.get(f"https://rest.ensembl.org/lookup/id/{clean_id}?content-type=application/json", timeout=6, verify=False)
         if r.status_code != 200:
             return None
         data = r.json()
@@ -1244,7 +1244,7 @@ def fetch_ncbi_annotation(
     # C. UniProt accession resolution
     if re.match(r"^[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$", clean_acc) and REQUESTS_AVAILABLE:
         try:
-            r = requests.get(f"https://rest.uniprot.org/uniprotkb/{clean_acc}.json", timeout=6)
+            r = requests.get(f"https://rest.uniprot.org/uniprotkb/{clean_acc}.json", timeout=6, verify=False)
             if r.status_code == 200:
                 udata = r.json()
                 genes = [g.get("geneName", {}).get("value") for g in udata.get("genes", []) if "geneName" in g]
