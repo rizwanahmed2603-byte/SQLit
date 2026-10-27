@@ -285,8 +285,8 @@ def analyze_sequence():
             "active_hit_rank": 1
         }
 
-        # Cache only if search ran successfully
-        if blast_res.get("success"):
+        # Cache only if search ran successfully, did not timeout, and yielded validated positive hits
+        if blast_res.get("success") and not blast_res.get("timeout") and len(blast_res.get("hits", [])) > 0:
             set_cached_result(clean_seq, seq_type, full_analysis)
 
         return jsonify({"success": True, "cached": False, "data": full_analysis})
